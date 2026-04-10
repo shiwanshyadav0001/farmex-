@@ -804,49 +804,37 @@ def build_disease_guidance(label: str, language: str = "en") -> Dict[str, str]:
 def detect_plant_disease_from_image(contents: bytes, crop_name: str = "", language: str = "en") -> Dict[str, Any]:
     """
     AI-powered plant disease detection from image using Groq Vision API.
-    This cloud-first approach avoids heavy local dependencies like torch/transformers.
     """
     try:
         import base64
         import json
-        
-        gemini_key = GEMINI_API_KEY
-
-        base64_image = base64.b64encode(contents).decode('utf-8')
-        # Google AI API URL (v1 stable)
-        url = f"https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash:generateContent?key={gemini_key}"
-        
-        prompt = f"Identify the plant disease in this image of a {crop_name}. Return ONLY JSON: {{'disease_name', 'confidence', 'treatment', 'prevention', 'severity'}}."
-
+        groq_key = os.getenv("GROQ_API_KEY", "").strip()
+        if not groq_key:
+             raise ValueError("GROQ_API_KEY missing.")
+        base64_image = base64.b64encode(contents).decode("utf-8")
+        url = "https://api.groq.com/openai/v1/chat/completions"
+        headers = {"Authorization": f"Bearer {groq_key}"}
+        prompt = f"Identify disease in {crop_name}. Return JSON with fields: disease_name, confidence, treatment, prevention, severity."
         payload = {
-            "contents": [{
-                "parts": [
-                    {"text": prompt},
-                    {"inline_data": {"mime_type": "image/jpeg", "data": base64_image}}
-                ]
-            }]
+            "model": "llama-3.2-11b-vision-preview",
+            "messages": [{"role": "user", "content": [
+                {"type": "text", "text": prompt},
+                {"type": "image_url", "image_url": {"url": f"data:image/jpeg;base64,{base64_image}"}}
+            ]}],
+            "response_format": {"type": "json_object"}
         }
-
-        logger.info(f"Analyzing {crop_name} with Gemini AI...")
-        response = requests.post(url, json=payload, timeout=25)
+        logger.info(f"Analyzing {crop_name} with Groq Vision...")
+        response = requests.post(url, headers=headers, json=payload, timeout=25)
         response.raise_for_status()
-        
-        data = response.json()
-        raw_text = data['candidates'][0]['content']['parts'][0]['text']
-        if "{" in raw_text:
-            raw_text = raw_text[raw_text.find("{"):raw_text.rfind("}")+1]
-        
-        parsed = json.loads(raw_text)
-
+        parsed = json.loads(response.json()["choices"][0]["message"]["content"])
         return {
             "disease_name": translate_backend_text(parsed.get("disease_name", "Unknown"), language),
             "confidence": parsed.get("confidence", "95%"),
             "treatment": translate_backend_text(parsed.get("treatment", "Consult an expert."), language),
-            "prevention": translate_backend_text(parsed.get("prevention", "Maintain crop health."), language),
+            "prevention": translate_backend_text(parsed.get("prevention", "Maintain health."), language),
             "severity": translate_backend_text(parsed.get("severity", "Medium"), language),
-            "source": "gemini-vision-ai"
+            "source": "groq-vision-ai"
         }
-
     except Exception as exc:
         logger.error(f"Detection error: {exc}")
         return {
@@ -857,7 +845,6 @@ def detect_plant_disease_from_image(contents: bytes, crop_name: str = "", langua
             "severity": translate_backend_text("Unknown", language),
             "source": "groq-error"
         }
-
 def get_weather_data(location: str) -> Dict[str, Any]:
     """Fetch weather data from OpenWeatherMap API"""
     if not OPENWEATHERMAP_API_KEY or OPENWEATHERMAP_API_KEY == "203c8deff1623b1499e57e75045":
