@@ -196,7 +196,7 @@ function Dashboard() {
           <RevealOnScroll direction="up" stagger={0.15}>
             <div className="mb-6 flex flex-wrap items-center gap-4">
               <motion.div
-                className="inline-flex items-center gap-2 rounded-full border border-emerald-200 dark:border-emerald-800/50 bg-white dark:bg-slate-900/80 dark:bg-slate-900/80 backdrop-blur-sm px-4 py-2 text-sm font-medium text-emerald-800 dark:text-emerald-300 shadow-sm"
+                className="inline-flex items-center gap-2 rounded-full border border-emerald-200 dark:border-emerald-800/50 bg-white dark:bg-slate-900/80 backdrop-blur-sm px-4 py-2 text-sm font-medium text-emerald-800 dark:text-emerald-300 shadow-sm"
                 whileHover={{ scale: 1.05 }}
               >
                 <Tractor className="h-4 w-4 text-emerald-600 dark:text-emerald-400" />
@@ -219,7 +219,7 @@ function Dashboard() {
               <div className="grid items-start gap-6 lg:grid-cols-2">
                 {/* ═══ CROP DISTRIBUTION REDESIGN ═══ */}
                 <TiltCard maxTilt={3} className="rounded-[32px] relative z-20 shadow-2xl min-h-[350px]">
-                  <div className="rounded-[32px] border border-emerald-100/50 dark:border-slate-800 bg-white dark:bg-slate-900/80 dark:bg-slate-900/80 backdrop-blur-md p-6 shadow-xl overflow-hidden relative">
+                  <div className="rounded-[32px] border border-emerald-100/50 dark:border-slate-800 bg-white dark:bg-slate-900/80 backdrop-blur-md p-6 shadow-xl overflow-hidden relative">
                     <h2 className="text-xl font-black text-slate-900 dark:text-slate-50 mb-6 flex items-center gap-2">
                       <Sprout className="h-5 w-5 text-emerald-500" />
                       {t('Crop Distribution')}
@@ -302,7 +302,7 @@ function Dashboard() {
 
                 {/* ═══ FARM ACREAGE REDESIGN ═══ */}
                 <TiltCard maxTilt={3} className="rounded-[32px] relative z-20 shadow-2xl min-h-[350px]">
-                  <div className="rounded-[32px] border border-emerald-100/50 dark:border-slate-800 bg-white dark:bg-slate-900/80 dark:bg-slate-900/80 backdrop-blur-md p-6 shadow-xl overflow-hidden">
+                  <div className="rounded-[32px] border border-emerald-100/50 dark:border-slate-800 bg-white dark:bg-slate-900/80 backdrop-blur-md p-6 shadow-xl overflow-hidden">
                     <h2 className="text-xl font-black text-slate-900 dark:text-slate-50 mb-6 flex items-center gap-2">
                       <Tractor className="h-5 w-5 text-emerald-500" />
                       {t('Acreage Analysis')}
@@ -429,7 +429,7 @@ function Dashboard() {
               {farms.length === 0 && (
                 <RevealOnScroll direction="right" delay={0.3}>
                   <TiltCard maxTilt={10}>
-                    <div className="rounded-[24px] border border-emerald-100 dark:border-slate-800 bg-white dark:bg-slate-900/90 dark:bg-slate-900/90 backdrop-blur-sm p-5 shadow-xl">
+                    <div className="rounded-[24px] border border-emerald-100 dark:border-slate-800 bg-white dark:bg-slate-900/90 backdrop-blur-sm p-5 shadow-xl">
                       <h2 className="text-xl font-bold text-slate-900 dark:text-slate-50">{t('Core Platform Coverage')}</h2>
                       <div className="mt-5 space-y-3">
                         {[
@@ -469,7 +469,7 @@ function Dashboard() {
                 ].map((stat, i) => (
                   <motion.div
                     key={stat.label}
-                    className="rounded-xl border border-emerald-100 dark:border-slate-800 bg-white dark:bg-slate-900/70 dark:bg-slate-900/70 backdrop-blur-sm p-3 text-center"
+                    className="rounded-xl border border-emerald-100 dark:border-slate-800 bg-white dark:bg-slate-900/70 backdrop-blur-sm p-3 text-center"
                     initial={{ opacity: 0, y: 30, scale: 0.95 }}
                     animate={{ opacity: 1, y: 0, scale: 1 }}
                     transition={{ delay: 0.6 + i * 0.1, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
@@ -512,7 +512,7 @@ function Dashboard() {
               <RevealOnScroll key={feature.title} direction="depth" delay={i * 0.1} className={colSpan}>
                 <Link to={feature.path} className="block h-full group">
                   <TiltCard maxTilt={10} glareColor={feature.glow} className="h-full">
-                    <div className="flex flex-col h-full rounded-[32px] border border-white/40 dark:border-white/5 bg-white dark:bg-slate-900/40 dark:bg-white dark:bg-slate-900/[0.03] backdrop-blur-xl p-8 shadow-[0_8px_32px_0_rgba(31,38,135,0.07)] transition-all group-hover:shadow-[0_8px_32px_0_rgba(16,185,129,0.15)] group-hover:bg-white dark:bg-slate-900/60 dark:group-hover:bg-white dark:bg-slate-900/[0.06] overflow-hidden relative">
+                    <div className="flex flex-col h-full rounded-[32px] border border-white/40 dark:border-white/5 bg-white dark:bg-slate-900/40 backdrop-blur-xl p-8 shadow-[0_8px_32px_0_rgba(31,38,135,0.07)] transition-all group-hover:shadow-[0_8px_32px_0_rgba(16,185,129,0.15)] group-hover:bg-white dark:bg-slate-900/60 dark:group-hover:bg-slate-900/60 overflow-hidden relative">
                       {/* Background glow */}
                       <div className={`absolute -right-8 -top-8 w-32 h-32 rounded-full blur-[60px] opacity-20 bg-gradient-to-br ${feature.accent}`} />
                       
@@ -557,7 +557,7 @@ function Dashboard() {
       {/* ═══ QUICK ACCESS SECTION ═══ */}
       <section className="mx-auto max-w-7xl px-6 pb-10 sm:px-8">
         <RevealOnScroll direction="up" delay={0.2}>
-          <div className="rounded-[24px] border border-emerald-100 dark:border-slate-800 bg-white dark:bg-slate-900/90 dark:bg-slate-900/90 backdrop-blur-sm p-6 shadow-sm relative overflow-hidden">
+          <div className="rounded-[24px] border border-emerald-100 dark:border-slate-800 bg-white dark:bg-slate-900/90 backdrop-blur-sm p-6 shadow-sm relative overflow-hidden">
             {/* Subtle gradient overlay for depth */}
             <div className="absolute inset-0 opacity-20 pointer-events-none bg-gradient-to-br from-emerald-400/10 via-transparent to-cyan-400/10 rounded-[24px]" />
 

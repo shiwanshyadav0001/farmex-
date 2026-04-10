@@ -110,7 +110,7 @@ function ExpenseCalculator() {
                   required
                   data-testid="expense-farm-select"
                 >
-                  <option value="">Choose a farm</option>
+                  <option value="">{t('Choose a farm')}</option>
                   {farms.map((farm) => (
                     <option key={farm.id} value={farm.id}>
                       {farm.user_name} - {farm.location}
@@ -158,7 +158,7 @@ function ExpenseCalculator() {
               </div>
 
               <div>
-                <label className="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300 dark:text-gray-200">Expected Yield (quintals)</label>
+                <label className="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300 dark:text-gray-200">{t('Expected Yield (quintals)')}</label>
                 <input
                   type="number"
                   step="0.1"

@@ -195,7 +195,7 @@ function VoiceAssistant() {
           <LiveFeatureScene type="voice" languageLabel={languageCodes[language]} isListening={isListening} chatCount={chatHistory.length} />
         </div>
 
-        <div className="card border-0 shadow-2xl bg-white dark:bg-slate-900/80 dark:bg-slate-900/80 backdrop-blur-xl">
+        <div className="card border-0 shadow-2xl bg-white dark:bg-slate-900/80 backdrop-blur-xl">
           <div className="mb-6 flex items-center gap-2 px-4 py-2 bg-pink-50 dark:bg-pink-900/20 rounded-full border border-pink-100 dark:border-pink-900/30 w-fit">
             <span className="w-2 h-2 rounded-full bg-pink-500 animate-pulse" />
             <span className="text-sm font-bold text-pink-700 dark:text-pink-400 uppercase tracking-tight">{languageCodes[language]} Mode</span>

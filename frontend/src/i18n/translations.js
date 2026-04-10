@@ -137,6 +137,50 @@ const phraseMap = {
   'Financial Analysis': { hi: 'वित्तीय विश्लेषण', mr: 'आर्थिक विश्लेषण' },
   'Enter crop name (e.g., Rice, Wheat, Corn)': { hi: 'फसल का नाम दर्ज करें', mr: 'पिकाचे नाव टाका' },
 
+
+  'Smart Irrigation Planner': { hi: 'स्मार्ट सिंचाई योजनाकार', mr: 'स्मार्ट सिंचन नियोजक' },
+  'Water flow, rainfall risk, and crop scheduling are visualized in motion instead of static cards.': { hi: 'स्थिर कार्ड के बजाय पानी का प्रवाह, वर्षा जोखिम और फसल शेड्यूलिंग को गति में देखा जाता है।', mr: 'पाण्याचा प्रवाह, पावसाचा धोका आणि पीक वेळापत्रक स्थिर कार्डांऐवजी गतीमध्ये दृश्यमान केले जाते.' },
+  'Irrigation Parameters': { hi: 'सिंचाई पैरामीटर', mr: 'सिंचन मापदंड' },
+  'Choose a farm': { hi: 'एक फार्म चुनें', mr: 'एक शेत निवडा' },
+  'Crop Type': { hi: 'फसल का प्रकार', mr: 'पिकाचा प्रकार' },
+  'Enter crop type (e.g., Rice, Wheat, Corn)': { hi: 'फसल का प्रकार दर्ज करें', mr: 'पिकाचा प्रकार टाका' },
+  'Generate a real irrigation schedule': { hi: 'एक वास्तविक सिंचाई अनुसूची तैयार करें', mr: 'निश्चित सिंचन वेळापत्रक तयार करा' },
+  'Select the farm and crop first. This panel will turn into a day-by-day water plan with timing, quantity, and rainfall pressure.': { hi: 'पहले फार्म और फसल चुनें। यह पैनल समय, मात्रा और वर्षा के दबाव के साथ दिन-प्रतिदिन की जल योजना में बदल जाएगा।', mr: 'प्रथम शेत आणि पीक निवडा. हे पॅनेल वेळ, प्रमाण आणि पावसाच्या दाबासह दैनंदिन पाणी योजनेत बदलेल.' },
+  
+  'Disease Detection': { hi: 'रोग का पता लगाना', mr: 'रोग शोधणे' },
+  'The uploaded leaf becomes the live scene, with a moving scan beam and result-aware status overlay.': { hi: 'अपलोड की गई पत्ती एक लाइव दृश्य बन जाती है, जिसमें एक स्कैन बीम और परिणाम-जागरूक स्थिति होती है।', mr: 'अपलोड केलेले पान लाइव्ह दृश्य बनते, ज्यामध्ये हलणारे स्कॅन बीम आणि निकालाची स्थिती असते.' },
+  'Upload Plant Image': { hi: 'पौधे की छवि अपलोड करें', mr: 'रोप प्रतिमा अपलोड करा' },
+  'Detection Results': { hi: 'पहचान परिणाम', mr: 'तपासणी परिणाम' },
+  'Click to upload image': { hi: 'छवि अपलोड करने के लिए क्लिक करें', mr: 'प्रतिमा अपलोड करण्यासाठी क्लिक करा' },
+  'PNG, JPG, WEBP up to 10MB': { hi: 'PNG, JPG, WEBP 10MB तक', mr: 'PNG, JPG, WEBP 10MB पर्यंत' },
+  'Detect Disease': { hi: 'रोग का पता लगाएं', mr: 'रोग शोधा' },
+  'Scan the leaf, not just upload it': { hi: 'पत्ती को स्कैन करें, सिर्फ अपलोड न करें', mr: 'पानाला स्कॅन करा, फक्त अपलोड करू नका' },
+  'Add a plant image to see the diagnosis, confidence, severity, treatment, and prevention guidance in a more useful clinical layout.': { hi: 'एक उपयोगी नैदानिक लेआउट में निदान, चिंता, गंभीरता, उपचार और रोकथाम मार्गदर्शन देखने के लिए एक पौधे की छवि जोड़ें।', mr: 'निदान, चिंता, तीव्रता, उपचार आणि प्रतिबंध मार्गदर्शन अधिक उपयुक्त क्लिनिकल लेआउटमध्ये पाहण्यासाठी रोपाची प्रतिमा जोडा.' },
+  
+  'Trend motion should feel like price momentum, not just a decorated heading.': { hi: 'प्रवृत्ति गति मूल्य गति की तरह लगनी चाहिए, न कि केवल एक सजा हुआ शीर्षक।', mr: 'ट्रेंड गती म्हणजे किमतीची गती वाटायला हवी, फक्त सजवलेले शीर्षक नाही.' },
+  'Market Analysis': { hi: 'बाजार विश्लेषण', mr: 'बाजार विश्लेषण' },
+  'Enter your location': { hi: 'अपना स्थान दर्ज करें', mr: 'आपले ठिकाण प्रविष्ट करा' },
+  'Popular Crops:': { hi: 'लोकप्रिय फसलें:', mr: 'लोकप्रिय पिके:' },
+  'Predict Prices': { hi: 'कीमतों की भविष्यवाणी करें', mr: 'किमतीचा अंदाज घ्या' },
+  'Price Forecast': { hi: 'कीमत का अनुमान', mr: 'किंमत अंदाज' },
+  'Turn inputs into a live price outlook': { hi: 'इनपुट को लाइव मूल्य दृष्टिकोण में बदलें', mr: 'इनपुट्सला लाइव्ह किंमत दृष्टिकोनात बदला' },
+  'Enter a crop and location to see current range, monthly direction, demand factors, and the best selling recommendation.': { hi: 'वर्तमान सीमा, मासिक दिशा, मांग कारक और सबसे अच्छी बिक्री सिफारिश देखने के लिए एक फसल और स्थान दर्ज करें।', mr: 'सध्याची श्रेणी, मासिक दिशा, मागणीचे घटक आणि सर्वोत्तम विक्री शिफारस पाहण्यासाठी पीक आणि ठिकाण प्रविष्ट करा.' },
+  
+  'Turn costs into a profit view': { hi: 'लागता को लाभ दृश्य में बदलें', mr: 'खर्चाला नफ्याच्या दृश्यात बदला' },
+  'Enter expenses and expected yield to see revenue, margin, ROI, break-even, and action recommendations in a clearer finance layout.': { hi: 'राजस्व, मार्जिन, ROI, ब्रेक-ईवन और स्पष्ट वित्त लेआउट में कार्रवाई की सिफारिशें देखने के लिए खर्च और अपेक्षित उपज दर्ज करें।', mr: 'महसूल, मार्जिन, ROI, ब्रेक-इव्हन आणि स्पष्ट वित्त लेआउटमध्ये कृती शिफारसी पाहण्यासाठी खर्च आणि अपेक्षित उत्पन्न प्रविष्ट करा.' },
+  'Seed Cost (Rs)': { hi: 'बीज की लागत (रु)', mr: 'बियाणे खर्च (रु)' },
+  'Fertilizer Cost (Rs)': { hi: 'उर्वरक की लागत (रु)', mr: 'खते खर्च (रु)' },
+  'Pesticide Cost (Rs)': { hi: 'कीटनाशक की लागत (रु)', mr: 'कीटकनाशक खर्च (रु)' },
+  'Labor Cost (Rs)': { hi: 'श्रम की लागत (रु)', mr: 'मजुरी खर्च (रु)' },
+  'Irrigation Cost (Rs)': { hi: 'सिंचाई की लागत (रु)', mr: 'सिंचन खर्च (रु)' },
+  'Other Costs (Rs)': { hi: 'अन्य लागतें (रु)', mr: 'इतर खर्च (रु)' },
+  'Expected Yield (quintals)': { hi: 'अपेक्षित उपज (क्विंटल)', mr: 'अपेक्षित उत्पन्न (क्विंटल)' },
+  'Calculate Expense': { hi: 'खर्च की गणना करें', mr: 'खर्चाची गणना करा' },
+  'Total Cost': { hi: 'कुल लागत', mr: 'एकुण खर्च' },
+  'Area (acres)': { hi: 'क्षेत्रफल (एकड़)', mr: 'क्षेत्रफळ (एकर)' },
+  'Cost per Acre': { hi: 'प्रति एकड़ लागत', mr: 'प्रति एकर खर्च' },
+  'Calculate': { hi: 'गणना करें', mr: 'गणना करा' }
+
 };
 
 const optionMap = {

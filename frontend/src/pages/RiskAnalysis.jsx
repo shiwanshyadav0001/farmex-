@@ -100,7 +100,7 @@ function RiskAnalysis() {
                   required
                   data-testid="risk-farm-select"
                 >
-                  <option value="">Choose a farm</option>
+                  <option value="">{t('Choose a farm')}</option>
                   {farms.map((farm) => (
                     <option key={farm.id} value={farm.id}>
                       {farm.user_name} - {farm.location} ({farm.total_area} acres)

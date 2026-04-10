@@ -56,7 +56,7 @@ function MarketPrice() {
 
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
           <div className="card fade-in">
-            <h2 className="mb-6 text-2xl font-bold text-gray-800 dark:text-gray-200 dark:text-gray-100">Market Analysis</h2>
+            <h2 className="mb-6 text-2xl font-bold text-gray-800 dark:text-gray-200 dark:text-gray-100">{t('Market Analysis')}</h2>
             <form onSubmit={handleSubmit} className="space-y-5">
               <div>
                 <label className="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300 dark:text-gray-200">{t('Crop Name')}</label>
@@ -83,7 +83,7 @@ function MarketPrice() {
                   type="text"
                   value={formData.location}
                   onChange={(e) => setFormData({ ...formData, location: e.target.value })}
-                  placeholder="Enter your location"
+                  placeholder={t('Enter your location')}
                   className="input-field"
                   required
                   data-testid="market-location-input"
@@ -91,7 +91,7 @@ function MarketPrice() {
               </div>
 
               <div className="rounded-lg border border-blue-200 dark:border-blue-800/50 bg-blue-50 dark:bg-blue-900/20 p-4">
-                <h3 className="mb-2 text-sm font-semibold text-gray-800 dark:text-gray-200 dark:text-gray-100">Popular Crops:</h3>
+                <h3 className="mb-2 text-sm font-semibold text-gray-800 dark:text-gray-200 dark:text-gray-100">{t('Popular Crops:')}</h3>
                 <div className="flex flex-wrap gap-2">
                   {popularCrops.map((crop) => (
                     <button
@@ -121,16 +121,14 @@ function MarketPrice() {
                   </>
                 ) : (
                   <>
-                    <TrendingUp className="h-5 w-5" />
-                    Predict Prices
-                  </>
+                    <TrendingUp className="h-5 w-5" />{t('Predict Prices')}</>
                 )}
               </button>
             </form>
           </div>
 
           <div className="card fade-in" data-testid="market-prediction-display">
-            <h2 className="mb-6 text-2xl font-bold text-gray-800 dark:text-gray-200 dark:text-gray-100">Price Forecast</h2>
+            <h2 className="mb-6 text-2xl font-bold text-gray-800 dark:text-gray-200 dark:text-gray-100">{t('Price Forecast')}</h2>
             {loading ? (
               <div className="flex flex-col items-center justify-center py-16">
                 <Loader className="mb-4 h-16 w-16 animate-spin text-purple-600" />

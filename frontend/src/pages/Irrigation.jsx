@@ -70,7 +70,7 @@ function Irrigation() {
 
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
           <div className="card fade-in">
-            <h2 className="mb-6 text-2xl font-bold text-gray-800 dark:text-gray-200 dark:text-gray-100">Irrigation Parameters</h2>
+            <h2 className="mb-6 text-2xl font-bold text-gray-800 dark:text-gray-200 dark:text-gray-100">{t('Irrigation Parameters')}</h2>
             <form onSubmit={handleSubmit} className="space-y-5">
               <div>
                 <label className="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300 dark:text-gray-200">{t('Select Farm')}</label>
@@ -81,7 +81,7 @@ function Irrigation() {
                   required
                   data-testid="irrigation-farm-select"
                 >
-                  <option value="">Choose a farm</option>
+                  <option value="">{t('Choose a farm')}</option>
                   {farms.map((farm) => (
                     <option key={farm.id} value={farm.id}>
                       {farm.user_name} - {farm.location}
@@ -91,12 +91,12 @@ function Irrigation() {
               </div>
 
               <div>
-                <label className="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300 dark:text-gray-200">Crop Type</label>
+                <label className="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300 dark:text-gray-200">{t('Crop Type')}</label>
                 <input
                   type="text"
                   value={formData.crop_type}
                   onChange={(e) => setFormData({ ...formData, crop_type: e.target.value })}
-                  placeholder="Enter crop type (e.g., Rice, Wheat, Corn)"
+                  placeholder={t('Enter crop type (e.g., Rice, Wheat, Corn)')}
                   className="input-field"
                   required
                   data-testid="irrigation-crop-input"
