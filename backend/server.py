@@ -811,17 +811,21 @@ def detect_plant_disease_from_image(contents: bytes, crop_name: str = "", langua
         from PIL import Image
         import io
         
-        # 0. Pre-process image to ensure standard format (JPEG)
-        # This helps avoid IncompleteRead errors with unusual formats like .webp
+        # 0. Aggressive image optimization
+        # Resize to 224x224 (model's native size) to minimize payload and fix IncompleteRead errors
         img = Image.open(io.BytesIO(contents)).convert("RGB")
+        img = img.resize((224, 224), Image.Resampling.LANCZOS)
         out_buf = io.BytesIO()
-        img.save(out_buf, format="JPEG", quality=85)
+        img.save(out_buf, format="JPEG", quality=70) # Lower quality to keep file size ultra-small
         processed_contents = out_buf.getvalue()
+        
+        logger.info(f"Optimized image for AI: {len(processed_contents)} bytes")
 
         # 1. Prepare Request
         url = f"https://api-inference.huggingface.co/models/{PLANT_DISEASE_MODEL}"
         headers = {
             "Content-Type": "application/octet-stream",
+            "X-Wait-For-Model": "true", # Tell HF to wait if model is loading
             "Accept": "application/json"
         }
         
