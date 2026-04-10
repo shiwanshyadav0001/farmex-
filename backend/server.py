@@ -692,7 +692,6 @@ def load_plant_disease_model():
         PLANT_MODEL = AutoModelForImageClassification.from_pretrained(PLANT_DISEASE_MODEL)
         PLANT_MODEL.eval()
         logger.info("Loaded local plant disease model: %s", PLANT_DISEASE_MODEL)
-        return PLANT_PROCESSOR, PLANT_MODEL
     except Exception as exc:
         PLANT_MODEL_LOAD_ERROR = str(exc)
         logger.error("Failed to load local plant disease model %s: %s", PLANT_DISEASE_MODEL, exc)
@@ -808,127 +807,56 @@ def detect_plant_disease_from_image(contents: bytes, crop_name: str = "", langua
     This cloud-first approach avoids heavy local dependencies like torch/transformers.
     """
     try:
-        from PIL import Image
-        import io
+        import base64
+        import json
         
-        # 0. Aggressive image optimization
-        # Resize to 224x224 (model's native size) to minimize payload and fix IncompleteRead errors
-        img = Image.open(io.BytesIO(contents)).convert("RGB")
-        img = img.resize((224, 224), Image.Resampling.LANCZOS)
-        out_buf = io.BytesIO()
-        img.save(out_buf, format="JPEG", quality=70) # Lower quality to keep file size ultra-small
-        processed_contents = out_buf.getvalue()
-        
-        logger.info(f"Optimized image for AI: {len(processed_contents)} bytes")
+        gemini_key = os.getenv("GEMINI_API_KEY", "").strip()
+        if not gemini_key:
+             raise ValueError("GEMINI_API_KEY missing.")
 
-        # 1. Prepare Request
-        url = f"https://router.huggingface.co/hf-inference/models/{PLANT_DISEASE_MODEL}"
-        headers = {
-            "Content-Type": "application/octet-stream",
-            "X-Wait-For-Model": "true", # Tell HF to wait if model is loading
-            "Accept": "application/json"
+        base64_image = base64.b64encode(contents).decode('utf-8')
+        url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key={gemini_key}"
+        
+        prompt = f"Identify the plant disease in this image of a {crop_name}. Return ONLY JSON: {{'disease_name', 'confidence', 'treatment', 'prevention', 'severity'}}."
+
+        payload = {
+            "contents": [{
+                "parts": [
+                    {"text": prompt},
+                    {"inline_data": {"mime_type": "image/jpeg", "data": base64_image}}
+                ]
+            }]
         }
+
+        logger.info(f"Analyzing {crop_name} with Gemini AI...")
+        response = requests.post(url, json=payload, timeout=25)
+        response.raise_for_status()
         
-        # Use existing HUGGINGFACE_API_TOKEN if configured in .env
-        hf_token = os.getenv("HUGGINGFACE_API_TOKEN") or os.getenv("HF_TOKEN")
-        if hf_token:
-            headers["Authorization"] = f"Bearer {hf_token}"
-
-        # 2. Call HuggingFace Inference API with Retries
-        last_exc = None
-        for attempt in range(3):
-            try:
-                logger.info(f"HF API Attempt {attempt+1} for model: {PLANT_DISEASE_MODEL}")
-                response = requests.post(url, headers=headers, data=processed_contents, timeout=45)
-                
-                # Handle model loading state (503 Service Unavailable)
-                if response.status_code == 503:
-                    logger.warning(f"HF model loading (attempt {attempt+1})...")
-                    if attempt < 2:
-                        continue # Retry
-                    
-                    return {
-                        "disease_name": translate_backend_text("AI model is starting up", language),
-                        "confidence": "...",
-                        "treatment": translate_backend_text("The detection system is warming up. Please try again in 30 seconds.", language),
-                        "prevention": translate_backend_text("This happens occasionally on the first request of the day.", language),
-                        "severity": translate_backend_text("Low", language),
-                        "source": "hf-cloud-api-warming"
-                    }
-
-                response.raise_for_status()
-                predictions = response.json()
-                break # Success!
-            except Exception as e:
-                last_exc = e
-                logger.warning(f"HF API Attempt {attempt+1} failed: {e}")
-                if attempt < 2:
-                    time.sleep(1) # Wait before retry
-                    continue
-                raise last_exc
-
-        if not isinstance(predictions, list) or not predictions:
-            raise ValueError("Invalid response format from HF API")
-
-        # 2. Match with requested crop if provided
-        requested_crop = canonicalize_crop_name(crop_name)
-        top_prediction = None
-
-        if requested_crop:
-            # Filter predictions that mention the requested crop
-            crop_matches = [
-                p for p in predictions 
-                if requested_crop in extract_crop_from_label(p.get("label", "")).lower()
-            ]
-            if crop_matches:
-                top_prediction = max(crop_matches, key=lambda x: x.get("score", 0))
-            else:
-                top_prediction = predictions[0]
-        else:
-            top_prediction = predictions[0]
-
-        label = top_prediction.get("label", "Unknown")
-        score = top_prediction.get("score", 0)
+        data = response.json()
+        raw_text = data['candidates'][0]['content']['parts'][0]['text']
+        if "{" in raw_text:
+            raw_text = raw_text[raw_text.find("{"):raw_text.rfind("}")+1]
         
-        # 3. Build guidance based on the identified label
-        guidance = build_disease_guidance(label, language)
-        
-        # Apply confidence-based filter
-        if score < 0.35:
-            return {
-                "disease_name": translate_backend_text("Image unclear or unsupported plant sample", language),
-                "confidence": f"{round(score * 100, 1)}%",
-                "treatment": translate_backend_text("Upload a close, well-lit leaf image with a plain background.", language),
-                "prevention": translate_backend_text("Use one leaf per photo and make sure the affected area is visible.", language),
-                "severity": translate_backend_text("Unknown", language),
-                "source": "hf-cloud-api-low-confidence"
-            }
+        parsed = json.loads(raw_text)
 
-        # 4. Final response construction
         return {
-            "disease_name": normalize_disease_label(label),
-            "confidence": f"{round(score * 100, 1)}%",
-            "treatment": guidance["treatment"],
-            "prevention": guidance["prevention"],
-            "severity": translate_backend_text(guidance.get("severity", "Medium"), language),
-            "source": "hf-cloud-api"
+            "disease_name": translate_backend_text(parsed.get("disease_name", "Unknown"), language),
+            "confidence": parsed.get("confidence", "95%"),
+            "treatment": translate_backend_text(parsed.get("treatment", "Consult an expert."), language),
+            "prevention": translate_backend_text(parsed.get("prevention", "Maintain crop health."), language),
+            "severity": translate_backend_text(parsed.get("severity", "Medium"), language),
+            "source": "gemini-vision-ai"
         }
 
     except Exception as exc:
-        error_msg = str(exc)
-        if hasattr(exc, 'response') and exc.response is not None:
-            try:
-                error_msg = f"{exc.response.status_code}: {exc.response.text}"
-            except:
-                pass
-        logger.error(f"Cloud disease detection failed: {error_msg}")
+        logger.error(f"Gemini error: {exc}")
         return {
             "disease_name": translate_backend_text("Detection system unavailable", language),
             "confidence": "0%",
-            "treatment": translate_backend_text(f"API Error: {error_msg}. Please ensure your HuggingFace API Token is correct.", language),
-            "prevention": translate_backend_text("Consult a local agricultural expert for confirmed diagnosis.", language),
+            "treatment": translate_backend_text(f"Engine fail: {str(exc)}", language),
+            "prevention": translate_backend_text("Check your GEMINI_API_KEY in Render settings.", language),
             "severity": translate_backend_text("Unknown", language),
-            "source": "fallback-api-error"
+            "source": "gemini-error"
         }
 
 def get_weather_data(location: str) -> Dict[str, Any]:
