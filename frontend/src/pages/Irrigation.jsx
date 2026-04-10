@@ -68,10 +68,10 @@ function Irrigation() {
 
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
           <div className="card fade-in">
-            <h2 className="mb-6 text-2xl font-bold text-gray-800 dark:text-gray-100">Irrigation Parameters</h2>
+            <h2 className="mb-6 text-2xl font-bold text-gray-800 dark:text-gray-200 dark:text-gray-100">Irrigation Parameters</h2>
             <form onSubmit={handleSubmit} className="space-y-5">
               <div>
-                <label className="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-200">Select Farm</label>
+                <label className="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300 dark:text-gray-200">Select Farm</label>
                 <select
                   value={formData.farm_id}
                   onChange={(e) => setFormData({ ...formData, farm_id: e.target.value })}
@@ -89,7 +89,7 @@ function Irrigation() {
               </div>
 
               <div>
-                <label className="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-200">Crop Type</label>
+                <label className="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300 dark:text-gray-200">Crop Type</label>
                 <input
                   type="text"
                   value={formData.crop_type}
@@ -125,11 +125,11 @@ function Irrigation() {
           </div>
 
           <div className="card fade-in" data-testid="irrigation-plan-display">
-            <h2 className="mb-6 text-2xl font-bold text-gray-800 dark:text-gray-100">Irrigation Schedule</h2>
+            <h2 className="mb-6 text-2xl font-bold text-gray-800 dark:text-gray-200 dark:text-gray-100">Irrigation Schedule</h2>
             {loading ? (
               <div className="flex flex-col items-center justify-center py-16">
                 <Loader className="mb-4 h-16 w-16 animate-spin text-cyan-600" />
-                <p className="text-gray-600 dark:text-gray-300">Creating optimal irrigation schedule...</p>
+                <p className="text-gray-600 dark:text-gray-400 dark:text-gray-300">Creating optimal irrigation schedule...</p>
               </div>
             ) : irrigationPlan ? (
               <div className="space-y-6">
@@ -160,13 +160,13 @@ function Irrigation() {
                         <div
                           key={`${day.date}-${index}`}
                           className={`rounded-[28px] border p-5 shadow-[0_18px_55px_rgba(15,23,42,0.08)] ${
-                            day.irrigate ? 'border-cyan-200 bg-white' : 'border-slate-200 bg-slate-50'
+                            day.irrigate ? 'border-cyan-200 bg-white dark:bg-slate-900' : 'border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800'
                           }`}
                         >
                           <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
                             <div className="max-w-xl">
                               <StatusBadge tone={day.irrigate ? 'cyan' : 'slate'}>{day.irrigate ? 'Irrigate' : 'Hold water'}</StatusBadge>
-                              <h3 className="mt-3 text-2xl font-black text-slate-900">{day.date}</h3>
+                              <h3 className="mt-3 text-2xl font-black text-slate-900 dark:text-slate-50">{day.date}</h3>
                               <p className="mt-3 text-sm leading-7 text-slate-600">{day.notes || 'Monitor field moisture and adjust only if real rainfall differs from forecast.'}</p>
                             </div>
                             <div className="grid min-w-[230px] grid-cols-2 gap-3">
@@ -188,9 +188,9 @@ function Irrigation() {
                   <FeaturePanel tone="cyan" title="7-day rainfall pressure" subtitle="The planner uses this forecast to reduce overwatering and react to incoming rain.">
                     <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-4">
                       {irrigationPlan.weather_forecast.slice(0, 8).map((day, index) => (
-                        <div key={index} className="rounded-2xl border border-cyan-100 bg-white px-4 py-4">
+                        <div key={index} className="rounded-2xl border border-cyan-100 bg-white dark:bg-slate-900 px-4 py-4">
                           <div className="flex items-center justify-between">
-                            <div className="text-sm font-bold text-slate-900">{day.date}</div>
+                            <div className="text-sm font-bold text-slate-900 dark:text-slate-50">{day.date}</div>
                             <Waves className="h-4 w-4 text-cyan-600" />
                           </div>
                           <div className="mt-3 h-2 overflow-hidden rounded-full bg-slate-100">

@@ -8,10 +8,10 @@ import { useTranslation } from '@/i18n';
 const WeatherSceneFX = lazy(() => import('@/components/3d/WeatherSceneFX'));
 
 const surfaceClassName =
-  'relative overflow-hidden rounded-[30px] border border-white/10 bg-white/10 shadow-[0_30px_90px_rgba(2,6,23,0.28)] backdrop-blur-2xl';
+  'relative overflow-hidden rounded-[30px] border border-white/10 bg-white dark:bg-slate-900/10 shadow-[0_30px_90px_rgba(2,6,23,0.28)] backdrop-blur-2xl';
 
 function Weather() {
-  const { t } = useTranslation();
+  const { t, language } = useTranslation();
   const [location, setLocation] = useState('');
   const [currentWeather, setCurrentWeather] = useState(null);
   const [forecast, setForecast] = useState([]);
@@ -97,7 +97,7 @@ function Weather() {
       return {
         page: 'from-slate-950 via-slate-900 to-blue-950',
         accent: 'from-blue-400 via-indigo-200 to-slate-100',
-        chip: 'bg-blue-500/15 text-blue-100 border-blue-300/20',
+        chip: 'bg-blue-50 dark:bg-blue-900/200/15 text-blue-100 border-blue-300/20',
       };
     }
 
@@ -113,14 +113,14 @@ function Weather() {
       return {
         page: 'from-slate-950 via-slate-800 to-emerald-950',
         accent: 'from-slate-100 via-emerald-100 to-cyan-100',
-        chip: 'bg-white/10 text-slate-100 border-white/10',
+        chip: 'bg-white dark:bg-slate-900/10 text-slate-100 border-white/10',
       };
     }
 
     return {
       page: 'from-[#04120d] via-[#0a2a1d] to-[#0f4c37]',
       accent: 'from-lime-200 via-white to-emerald-100',
-      chip: 'bg-emerald-500/15 text-emerald-100 border-emerald-300/20',
+      chip: 'bg-emerald-50 dark:bg-emerald-900/200/15 text-emerald-100 border-emerald-300/20',
     };
   }, [weatherDescription]);
 
@@ -146,7 +146,7 @@ function Weather() {
                   <CloudRain className="h-4 w-4" />
                   {t('Atmospheric Weather Intelligence')}
                 </span>
-                <span className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-white/75">
+                <span className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white dark:bg-slate-900/5 px-4 py-2 text-sm text-white/75">
                   <MapPin className="h-4 w-4" />
                   {searchedLocation || detectedLocation || location || t('Choose a location')}
                 </span>
@@ -189,7 +189,7 @@ function Weather() {
                     <button
                       type="button"
                       onClick={() => fetchWeather(detectedLocation, { fromAutoLocation: true })}
-                      className="mt-3 inline-flex items-center gap-2 rounded-full border border-emerald-300/15 bg-white/5 px-3 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-emerald-100 transition hover:bg-white/10"
+                      className="mt-3 inline-flex items-center gap-2 rounded-full border border-emerald-300/15 bg-white dark:bg-slate-900/5 px-3 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-emerald-100 transition hover:bg-white dark:bg-slate-900/10"
                     >
                       <MapPin className="h-3.5 w-3.5" />
                       {t('Back to current location')}
@@ -329,7 +329,7 @@ function Weather() {
                 <div className="text-xs uppercase tracking-[0.24em] text-white/45">{t('Forecast Window')}</div>
                 <h2 className="mt-2 text-2xl font-bold text-white">{t('7-Day Forecast')}</h2>
               </div>
-              <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-white/70">
+              <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white dark:bg-slate-900/5 px-4 py-2 text-sm text-white/70">
                 <Waves className="h-4 w-4" />
                 {t('Animated atmosphere follows live condition data')}
               </div>

@@ -44,7 +44,7 @@ const slides = [
             'Automated Irrigation Planning', 'AI Disease Detection',
             'Pest Advisory & Mitigation', 'Dynamic Farming Calendar'
           ].map((feat, i) => (
-            <div key={i} className="flex items-center gap-3 bg-white/5 p-4 rounded-2xl border border-white/10">
+            <div key={i} className="flex items-center gap-3 bg-white dark:bg-slate-900/5 p-4 rounded-2xl border border-white/10">
               <Zap className="text-amber-400 h-6 w-6" />
               <span className="text-xl font-bold">{feat}</span>
             </div>
@@ -133,17 +133,17 @@ const slides = [
     title: 'Impact & Benefits',
     content: (
       <div className="grid grid-cols-3 gap-8">
-        <div className="bg-white/5 p-6 rounded-[32px] border border-white/10">
+        <div className="bg-white dark:bg-slate-900/5 p-6 rounded-[32px] border border-white/10">
           <Award className="text-amber-400 h-10 w-10 mb-4" />
           <h3 className="text-2xl font-black mb-4">Social</h3>
           <p className="text-slate-400 text-lg leading-relaxed">Digital empowerment, multilingual support, and accessibility for low-literacy users.</p>
         </div>
-        <div className="bg-white/5 p-6 rounded-[32px] border border-white/10">
+        <div className="bg-white dark:bg-slate-900/5 p-6 rounded-[32px] border border-white/10">
           <Zap className="text-emerald-400 h-10 w-10 mb-4" />
           <h3 className="text-2xl font-black mb-4">Environmental</h3>
           <p className="text-slate-400 text-lg leading-relaxed">Water conservation through smart irrigation and reduced resource wastage.</p>
         </div>
-        <div className="bg-white/5 p-6 rounded-[32px] border border-white/10">
+        <div className="bg-white dark:bg-slate-900/5 p-6 rounded-[32px] border border-white/10">
           <Target className="text-blue-400 h-10 w-10 mb-4" />
           <h3 className="text-2xl font-black mb-4">Economic</h3>
           <p className="text-slate-400 text-lg leading-relaxed">Increased farmer income through better market timing and yield optimization.</p>
@@ -189,7 +189,7 @@ export default function PitchDeck() {
     <div className="pitch-deck-container min-h-screen p-8 flex flex-col items-center justify-center">
       {/* Presentation Controls */}
       <div className="print-controls fixed top-6 right-6 z-50 flex gap-4">
-        <MagneticButton onClick={() => window.print()} className="bg-white/10 hover:bg-white/20 p-4 rounded-full text-white backdrop-blur-xl border border-white/20">
+        <MagneticButton onClick={() => window.print()} className="bg-white dark:bg-slate-900/10 hover:bg-white dark:bg-slate-900/20 p-4 rounded-full text-white backdrop-blur-xl border border-white/20">
           <Printer className="h-6 w-6" />
         </MagneticButton>
       </div>
@@ -198,7 +198,7 @@ export default function PitchDeck() {
         {/* Header Overlay (Same as PDF) */}
         <div className="absolute top-0 left-0 right-0 p-10 flex justify-between items-center z-10 slide-header">
           <div className="flex items-center gap-4">
-            <div className="bg-white p-2 rounded-full">
+            <div className="bg-white dark:bg-slate-900 p-2 rounded-full">
                <img src="https://upload.wikimedia.org/wikipedia/en/2/2e/Shree_L._R._Tiwari_College_of_Engineering_Logo.png" alt="Logo" className="h-12 w-12 object-contain" />
             </div>
             <div>
@@ -247,10 +247,10 @@ export default function PitchDeck() {
 
       {/* Navigation Buttons */}
       <div className="print-controls mt-10 flex gap-8">
-        <MagneticButton onClick={prevSlide} className="bg-white/5 hover:bg-emerald-500/20 p-6 rounded-full text-white border border-white/10 transition-colors">
+        <MagneticButton onClick={prevSlide} className="bg-white dark:bg-slate-900/5 hover:bg-emerald-50 dark:bg-emerald-900/200/20 p-6 rounded-full text-white border border-white/10 transition-colors">
           <ChevronLeft className="h-8 w-8" />
         </MagneticButton>
-        <MagneticButton onClick={nextSlide} className="bg-emerald-500 p-6 rounded-full text-white shadow-[0_0_30px_rgba(16,185,129,0.5)] transform hover:scale-110 transition-transform">
+        <MagneticButton onClick={nextSlide} className="bg-emerald-50 dark:bg-emerald-900/200 p-6 rounded-full text-white shadow-[0_0_30px_rgba(16,185,129,0.5)] transform hover:scale-110 transition-transform">
           <ChevronRight className="h-8 w-8" />
         </MagneticButton>
       </div>

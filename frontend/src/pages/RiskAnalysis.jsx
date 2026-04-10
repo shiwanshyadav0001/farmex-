@@ -26,7 +26,7 @@ function RiskList({ title, items, tone }) {
     <FeaturePanel tone={tone} title={title}>
       <div className="space-y-3">
         {items.map((item, index) => (
-          <div key={`${title}-${index}`} className="rounded-2xl border border-slate-200 bg-white px-4 py-4 text-sm leading-7 text-slate-700">
+          <div key={`${title}-${index}`} className="rounded-2xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 px-4 py-4 text-sm leading-7 text-slate-700 dark:text-slate-300">
             <ResultRenderer data={item} />
           </div>
         ))}
@@ -87,10 +87,10 @@ function RiskAnalysis() {
 
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
           <div className="card fade-in">
-            <h2 className="mb-6 text-2xl font-bold text-gray-800 dark:text-gray-100">Select Farm</h2>
+            <h2 className="mb-6 text-2xl font-bold text-gray-800 dark:text-gray-200 dark:text-gray-100">Select Farm</h2>
             <form onSubmit={handleSubmit} className="space-y-5">
               <div>
-                <label className="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-200">Farm</label>
+                <label className="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300 dark:text-gray-200">Farm</label>
                 <select
                   value={selectedFarmId}
                   onChange={(e) => setSelectedFarmId(e.target.value)}
@@ -133,11 +133,11 @@ function RiskAnalysis() {
           </div>
 
           <div className="card fade-in" data-testid="risk-analysis-display">
-            <h2 className="mb-6 text-2xl font-bold text-gray-800 dark:text-gray-100">Risk Assessment</h2>
+            <h2 className="mb-6 text-2xl font-bold text-gray-800 dark:text-gray-200 dark:text-gray-100">Risk Assessment</h2>
             {loading ? (
               <div className="flex flex-col items-center justify-center py-16">
                 <AlertTriangle className="mb-4 h-16 w-16 animate-pulse text-orange-600" />
-                <p className="text-gray-600 dark:text-gray-300">Performing comprehensive risk analysis...</p>
+                <p className="text-gray-600 dark:text-gray-400 dark:text-gray-300">Performing comprehensive risk analysis...</p>
               </div>
             ) : riskAnalysis ? (
               <div className="space-y-6">

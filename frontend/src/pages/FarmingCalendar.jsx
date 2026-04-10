@@ -30,7 +30,7 @@ function FarmingCalendar() {
     setCalendar(null);
 
     try {
-      const response = await axios.post(`${API}/calendar/generate`, formData);
+      const response = await axios.post(`${API}/calendar/generate`, { ...formData, language });
       setCalendar(response.data);
     } catch (err) {
       setError('Failed to generate farming calendar. Please try again.');
@@ -51,10 +51,10 @@ function FarmingCalendar() {
 
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
           <div className="card fade-in">
-            <h2 className="mb-6 text-2xl font-bold text-gray-800 dark:text-gray-100">Calendar Parameters</h2>
+            <h2 className="mb-6 text-2xl font-bold text-gray-800 dark:text-gray-200 dark:text-gray-100">Calendar Parameters</h2>
             <form onSubmit={handleSubmit} className="space-y-5">
               <div>
-                <label className="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-200">Crop Name</label>
+                <label className="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300 dark:text-gray-200">Crop Name</label>
                 <input
                   type="text"
                   value={formData.crop_name}
@@ -67,7 +67,7 @@ function FarmingCalendar() {
               </div>
 
               <div>
-                <label className="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-200">Planting Date</label>
+                <label className="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300 dark:text-gray-200">Planting Date</label>
                 <input
                   type="date"
                   value={formData.planting_date}
@@ -79,7 +79,7 @@ function FarmingCalendar() {
               </div>
 
               <div>
-                <label className="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-200">Farm Area (acres)</label>
+                <label className="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300 dark:text-gray-200">Farm Area (acres)</label>
                 <input
                   type="number"
                   step="0.1"
@@ -107,11 +107,11 @@ function FarmingCalendar() {
           </div>
 
           <div className="card fade-in" data-testid="farming-calendar-display">
-            <h2 className="mb-6 text-2xl font-bold text-gray-800 dark:text-gray-100">Activity Timeline</h2>
+            <h2 className="mb-6 text-2xl font-bold text-gray-800 dark:text-gray-200 dark:text-gray-100">Activity Timeline</h2>
             {loading ? (
               <div className="flex flex-col items-center justify-center py-16">
                 <Clock className="mb-4 h-16 w-16 animate-pulse text-indigo-600" />
-                <p className="text-gray-600 dark:text-gray-300">Creating your farming calendar...</p>
+                <p className="text-gray-600 dark:text-gray-400 dark:text-gray-300">Creating your farming calendar...</p>
               </div>
             ) : calendar ? (
               <div className="space-y-6">
@@ -140,10 +140,10 @@ function FarmingCalendar() {
                     <FeaturePanel tone="violet" title="Farming timeline" subtitle="Tasks are laid out as milestones instead of a generic JSON block.">
                       <div className="space-y-4">
                         {activities.map((item, index) => (
-                          <div key={`${item.date}-${item.activity}-${index}`} className="grid gap-4 rounded-[26px] border border-violet-100 bg-white p-5 md:grid-cols-[120px_1fr_auto] md:items-start">
-                            <div className="text-sm font-bold text-slate-900">{item.date}</div>
+                          <div key={`${item.date}-${item.activity}-${index}`} className="grid gap-4 rounded-[26px] border border-violet-100 bg-white dark:bg-slate-900 p-5 md:grid-cols-[120px_1fr_auto] md:items-start">
+                            <div className="text-sm font-bold text-slate-900 dark:text-slate-50">{item.date}</div>
                             <div>
-                              <h3 className="text-lg font-black text-slate-900">{item.activity}</h3>
+                              <h3 className="text-lg font-black text-slate-900 dark:text-slate-50">{item.activity}</h3>
                               <ResultRenderer data={item.description} />
                             </div>
                             <div className="md:justify-self-end">

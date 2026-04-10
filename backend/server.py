@@ -130,6 +130,7 @@ class CropRecommendationRequest(BaseModel):
     season: str  # Summer, Winter, Monsoon, Spring
     area: float
     preferences: Optional[str] = None
+    language: str = "en"
 
 class DiseaseDetectionResponse(BaseModel):
     disease_name: str
@@ -158,18 +159,22 @@ CROP_ALIASES = {
 class MarketPriceRequest(BaseModel):
     crop_name: str
     location: str
+    language: str = "en"
 
 class IrrigationRequest(BaseModel):
     farm_id: str
     crop_type: str
+    language: str = "en"
 
 class CalendarRequest(BaseModel):
     crop_name: str
     planting_date: str
     area: float
+    language: str = "en"
 
 class RiskAnalysisRequest(BaseModel):
     farm_id: str
+    language: str = "en"
 
 class ExpenseRequest(BaseModel):
     farm_id: str
@@ -181,6 +186,7 @@ class ExpenseRequest(BaseModel):
     other_costs: float
     expected_yield: float  # in quintals
     crop_name: str
+    language: str = "en"
 
 class ChatRequest(BaseModel):
     message: str
@@ -1000,6 +1006,7 @@ async def recommend_crops(request: CropRecommendationRequest):
                 "area": request.area,
                 "preferences": request.preferences or "",
                 "date": current_date,
+                "language": request.language,
             },
         )
         cached_recommendation = await safe_find_one("crop_recommendations", {"cache_key": cache_key})
@@ -1023,12 +1030,15 @@ Season: {request.season}
 Available Area: {request.area} acres
 Current Weather: Temperature {weather_data['temp']}°C, Humidity {weather_data['humidity']}%
 Additional Preferences: {request.preferences or 'None'}
+Language: {request.language}
 
 Please provide:
 1. Top 3-5 recommended crops
 2. Brief reason for each recommendation
 3. Expected yield estimates
 4. Key growing tips
+
+Ensure all generated response texts (like reason, growing_tips, name, and yield_estimate) are entirely translated to {request.language} language.
 
 Format your response as structured JSON with fields: crops (array of objects with name, reason, yield_estimate, growing_tips)"""
 
@@ -1077,6 +1087,7 @@ async def create_irrigation_plan(request: IrrigationRequest):
                 "soil_type": farm_doc["soil_type"],
                 "total_area": farm_doc["total_area"],
                 "current_date": current_date,
+                "language": request.language,
             },
         )
         cached_plan = await safe_find_one("irrigation_schedules", {"cache_key": cache_key})
@@ -1099,12 +1110,15 @@ Soil Type: {farm_doc['soil_type']}
 Area: {farm_doc['total_area']} acres
 Current Weather: Temp {weather_data['temp']}°C, Humidity {weather_data['humidity']}%
 7-Day Forecast: {forecast_data[:3]}
+Language: {request.language}
 
 Provide:
 1. Daily irrigation schedule (yes/no)
 2. Water quantity per session (liters/acre)
 3. Best time of day
 4. Special considerations
+
+Ensure all generated response texts (like notes, time) are entirely translated to {request.language} language.
 
 Format as JSON with fields: schedule (array of day objects with date, irrigate, water_quantity, time, notes)"""
         user_message = UserMessage(text=prompt)
@@ -1183,6 +1197,7 @@ async def predict_market_price(request: MarketPriceRequest):
                 "crop_name": request.crop_name,
                 "location": request.location,
                 "current_month": current_month,
+                "language": request.language,
             },
         )
         cached_prediction = await safe_find_one("price_predictions", {"cache_key": cache_key})
@@ -1201,6 +1216,7 @@ async def predict_market_price(request: MarketPriceRequest):
 Crop: {request.crop_name}
 Location: {request.location}
 Current Date: {datetime.now().strftime("%B %Y")}
+Language: {request.language}
 
 Provide:
 1. Current estimated price range (per quintal)
@@ -1208,6 +1224,8 @@ Provide:
 3. Market trend analysis (rising/stable/falling)
 4. Factors affecting price
 5. Best time to sell recommendation
+
+Ensure all generated response texts (like trend, factors, recommendation, price_range) are entirely translated to {request.language} language.
 
 Format as JSON with fields: current_price_range, forecast (array of month objects), trend, factors, recommendation"""
 
@@ -1235,12 +1253,12 @@ Format as JSON with fields: current_price_range, forecast (array of month object
 
 # 6. SOIL & RAINFALL INSIGHTS
 @api_router.get("/soil/insights")
-async def get_soil_insights(location: str):
+async def get_soil_insights(location: str, language: str = "en"):
     """Get geo-based soil and rainfall insights"""
     try:
         weather_data = get_weather_data(location)
         current_date = datetime.now(timezone.utc).strftime("%Y-%m-%d")
-        cache_key = build_cache_key("soil_insights", {"location": location, "date": current_date})
+        cache_key = build_cache_key("soil_insights", {"location": location, "date": current_date, "language": language})
         cached_insights = await safe_find_one("soil_insights", {"cache_key": cache_key})
         if cached_insights:
             return {
@@ -1258,6 +1276,7 @@ async def get_soil_insights(location: str):
 
 Location: {location}
 Current Humidity: {weather_data['humidity']}%
+Language: {language}
 
 Provide:
 1. Typical soil types in this region
@@ -1266,6 +1285,8 @@ Provide:
 4. Monsoon/rainy season timing
 5. Water retention capacity
 6. Irrigation requirements
+
+Ensure all generated response texts (like characteristics, rainfall_pattern, etc) are entirely translated to {language} language.
 
 Format as JSON with fields: soil_types, characteristics, rainfall_pattern, monsoon_months, water_retention, irrigation_needs"""
 
@@ -1300,6 +1321,7 @@ async def generate_farming_calendar(request: CalendarRequest):
                 "crop_name": request.crop_name,
                 "planting_date": request.planting_date,
                 "area": request.area,
+                "language": request.language,
             },
         )
         cached_calendar = await safe_find_one("farming_calendars", {"cache_key": cache_key})
@@ -1318,6 +1340,7 @@ async def generate_farming_calendar(request: CalendarRequest):
 Crop: {request.crop_name}
 Planting Date: {request.planting_date}
 Area: {request.area} acres
+Language: {request.language}
 
 Provide a detailed timeline with:
 1. Preparation activities (before planting)
@@ -1325,6 +1348,8 @@ Provide a detailed timeline with:
 3. Growth stage activities (fertilization, irrigation, pest control)
 4. Harvest timing
 5. Post-harvest activities
+
+Ensure all generated response texts (like activity, description, priority) are entirely translated to {request.language} language.
 
 Format as JSON with fields: activities (array of objects with date, activity, description, priority)"""
 
@@ -1373,6 +1398,7 @@ async def analyze_risks(request: RiskAnalysisRequest):
                 "current_crops": farm_doc["current_crops"],
                 "total_area": farm_doc["total_area"],
                 "current_date": current_date,
+                "language": request.language,
             },
         )
         cached_risk = await safe_find_one("risk_analyses", {"cache_key": cache_key})
@@ -1395,6 +1421,7 @@ Current Crops: {', '.join(farm_doc['current_crops'])}
 Area: {farm_doc['total_area']} acres
 Weather: {weather_data}
 Forecast: {forecast_data[:3]}
+Language: {request.language}
 
 Analyze and provide:
 1. Weather-related risks (drought, flood, frost, extreme heat)
@@ -1403,6 +1430,8 @@ Analyze and provide:
 4. Operational risks
 5. Risk mitigation strategies
 6. Overall risk score (Low/Medium/High)
+
+Ensure all generated response texts (like risks, mitigation_strategies, overall_risk_score) are entirely translated to {request.language} language.
 
 Format as JSON with fields: weather_risks, disease_risks, market_risks, operational_risks, mitigation_strategies, overall_risk_score"""
 
@@ -1476,6 +1505,7 @@ async def calculate_expense_profit(request: ExpenseRequest):
                 "irrigation_cost": request.irrigation_cost,
                 "other_costs": request.other_costs,
                 "expected_yield": request.expected_yield,
+                "language": request.language,
             },
         )
         cached_expense = await safe_find_one("expenses", {"cache_key": cache_key})
@@ -1502,6 +1532,7 @@ Total Expenses: ₹{total_expenses:,.2f}
 - Other: ₹{request.other_costs:,.2f}
 
 Expected Yield: {request.expected_yield} quintals
+Language: {request.language}
 
 Provide:
 1. Estimated market price per quintal
@@ -1511,6 +1542,8 @@ Provide:
 5. ROI (Return on Investment)
 6. Break-even analysis
 7. Financial recommendations
+
+Ensure all generated response texts (like recommendations, analysis strings) are entirely translated to {request.language} language.
 
 Format as JSON with fields: price_per_quintal, total_revenue, profit, profit_margin, roi, breakeven_yield, recommendations"""
 

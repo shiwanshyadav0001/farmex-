@@ -40,10 +40,10 @@ function SoilInsights() {
 
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
           <div className="card fade-in">
-            <h2 className="mb-6 text-2xl font-bold text-gray-800 dark:text-gray-100">Location Analysis</h2>
+            <h2 className="mb-6 text-2xl font-bold text-gray-800 dark:text-gray-200 dark:text-gray-100">Location Analysis</h2>
             <form onSubmit={handleSubmit} className="space-y-5">
               <div>
-                <label className="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-200">Location</label>
+                <label className="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300 dark:text-gray-200">Location</label>
                 <input
                   type="text"
                   value={location}
@@ -92,11 +92,11 @@ function SoilInsights() {
           </div>
 
           <div className="card fade-in" data-testid="soil-insights-display">
-            <h2 className="mb-6 text-2xl font-bold text-gray-800 dark:text-gray-100">Regional Insights</h2>
+            <h2 className="mb-6 text-2xl font-bold text-gray-800 dark:text-gray-200 dark:text-gray-100">Regional Insights</h2>
             {loading ? (
               <div className="flex flex-col items-center justify-center py-16">
                 <Map className="mb-4 h-16 w-16 animate-pulse text-amber-600" />
-                <p className="text-gray-600 dark:text-gray-300">Gathering geo-based insights...</p>
+                <p className="text-gray-600 dark:text-gray-400 dark:text-gray-300">Gathering geo-based insights...</p>
               </div>
             ) : insights ? (
               <div className="space-y-6">

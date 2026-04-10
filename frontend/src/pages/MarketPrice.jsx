@@ -54,10 +54,10 @@ function MarketPrice() {
 
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
           <div className="card fade-in">
-            <h2 className="mb-6 text-2xl font-bold text-gray-800 dark:text-gray-100">Market Analysis</h2>
+            <h2 className="mb-6 text-2xl font-bold text-gray-800 dark:text-gray-200 dark:text-gray-100">Market Analysis</h2>
             <form onSubmit={handleSubmit} className="space-y-5">
               <div>
-                <label className="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-200">Crop Name</label>
+                <label className="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300 dark:text-gray-200">Crop Name</label>
                 <input
                   type="text"
                   value={formData.crop_name}
@@ -76,7 +76,7 @@ function MarketPrice() {
               </div>
 
               <div>
-                <label className="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-200">Location</label>
+                <label className="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300 dark:text-gray-200">Location</label>
                 <input
                   type="text"
                   value={formData.location}
@@ -88,15 +88,15 @@ function MarketPrice() {
                 />
               </div>
 
-              <div className="rounded-lg border border-blue-200 bg-blue-50 p-4">
-                <h3 className="mb-2 text-sm font-semibold text-gray-800 dark:text-gray-100">Popular Crops:</h3>
+              <div className="rounded-lg border border-blue-200 dark:border-blue-800/50 bg-blue-50 dark:bg-blue-900/20 p-4">
+                <h3 className="mb-2 text-sm font-semibold text-gray-800 dark:text-gray-200 dark:text-gray-100">Popular Crops:</h3>
                 <div className="flex flex-wrap gap-2">
                   {popularCrops.map((crop) => (
                     <button
                       key={crop}
                       type="button"
                       onClick={() => setFormData({ ...formData, crop_name: crop })}
-                      className="rounded-full border border-blue-300 bg-white px-3 py-1 text-sm text-gray-700 transition-colors hover:bg-blue-100"
+                      className="rounded-full border border-blue-300 bg-white dark:bg-slate-900 px-3 py-1 text-sm text-gray-700 dark:text-gray-300 transition-colors hover:bg-blue-100"
                     >
                       {crop}
                     </button>
@@ -128,11 +128,11 @@ function MarketPrice() {
           </div>
 
           <div className="card fade-in" data-testid="market-prediction-display">
-            <h2 className="mb-6 text-2xl font-bold text-gray-800 dark:text-gray-100">Price Forecast</h2>
+            <h2 className="mb-6 text-2xl font-bold text-gray-800 dark:text-gray-200 dark:text-gray-100">Price Forecast</h2>
             {loading ? (
               <div className="flex flex-col items-center justify-center py-16">
                 <Loader className="mb-4 h-16 w-16 animate-spin text-purple-600" />
-                <p className="text-gray-600 dark:text-gray-300">Analyzing market trends...</p>
+                <p className="text-gray-600 dark:text-gray-400 dark:text-gray-300">Analyzing market trends...</p>
               </div>
             ) : prediction ? (
               <div className="space-y-6">
@@ -162,10 +162,10 @@ function MarketPrice() {
                       <FeaturePanel tone="violet" title="3-month forecast track" subtitle="Each month is shown as a forward-looking price pulse rather than plain JSON text.">
                         <div className="grid gap-4 md:grid-cols-3">
                           {forecast.map((item, index) => (
-                            <div key={`${item.month}-${index}`} className="rounded-[28px] border border-violet-100 bg-white p-5 shadow-[0_18px_55px_rgba(15,23,42,0.08)]">
+                            <div key={`${item.month}-${index}`} className="rounded-[28px] border border-violet-100 bg-white dark:bg-slate-900 p-5 shadow-[0_18px_55px_rgba(15,23,42,0.08)]">
                               <StatusBadge tone={trendTone(item.trend)}>{item.trend || 'stable'}</StatusBadge>
-                              <h3 className="mt-3 text-2xl font-black text-slate-900">{item.month}</h3>
-                              <div className="mt-3 text-lg font-bold text-slate-700">{renderValue(item.price_range) || '--'}</div>
+                              <h3 className="mt-3 text-2xl font-black text-slate-900 dark:text-slate-50">{item.month}</h3>
+                              <div className="mt-3 text-lg font-bold text-slate-700 dark:text-slate-300">{renderValue(item.price_range) || '--'}</div>
                             </div>
                           ))}
                         </div>
@@ -197,7 +197,7 @@ function MarketPrice() {
                 )}
 
                 <FeaturePanel tone="amber" title="Planning note" subtitle="Market prices remain estimates, but the UI now presents them in a clearer decision-ready format.">
-                  <p className="text-sm leading-7 text-slate-700">Actual mandi prices can still vary by week, trader demand, arrivals, and weather-linked supply changes.</p>
+                  <p className="text-sm leading-7 text-slate-700 dark:text-slate-300">Actual mandi prices can still vary by week, trader demand, arrivals, and weather-linked supply changes.</p>
                 </FeaturePanel>
               </div>
             ) : (

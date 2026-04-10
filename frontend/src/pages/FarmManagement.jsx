@@ -39,7 +39,7 @@ function MapResizer() {
 }
 
 function FarmManagement() {
-  const { t, translateOption } = useTranslation();
+  const { t, translateOption, language } = useTranslation();
   const [farms, setFarms] = useState([]);
   const [showForm, setShowForm] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -123,19 +123,19 @@ function FarmManagement() {
 
         {showForm && (
           <div className="card mb-8 fade-in" data-testid="farm-form">
-            <h2 className="mb-6 text-2xl font-bold text-gray-800 dark:text-gray-100">{t('Create New Farm')}</h2>
+            <h2 className="mb-6 text-2xl font-bold text-gray-800 dark:text-gray-200 dark:text-gray-100">{t('Create New Farm')}</h2>
             <form onSubmit={handleSubmit} className="space-y-5">
               <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
                 <div>
-                  <label className="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-200">{t('Farm Owner Name')}</label>
+                  <label className="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300 dark:text-gray-200">{t('Farm Owner Name')}</label>
                   <input type="text" value={formData.user_name} onChange={(event) => setFormData({ ...formData, user_name: event.target.value })} placeholder={t('Enter owner name')} className="input-field" required data-testid="farm-owner-input" />
                 </div>
                 <div>
-                  <label className="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-200">{t('Location')}</label>
+                  <label className="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300 dark:text-gray-200">{t('Location')}</label>
                   <input type="text" value={formData.location} onChange={(event) => setFormData({ ...formData, location: event.target.value })} placeholder={t('Enter location')} className="input-field" required data-testid="farm-location-input" />
                 </div>
                 <div>
-                  <label className="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-200">{t('Soil Type')}</label>
+                  <label className="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300 dark:text-gray-200">{t('Soil Type')}</label>
                   <select value={formData.soil_type} onChange={(event) => setFormData({ ...formData, soil_type: event.target.value })} className="select-field" data-testid="farm-soil-type-select">
                     {soilTypes.map((item) => (
                       <option key={item} value={item}>{translateOption(item)}</option>
@@ -143,13 +143,13 @@ function FarmManagement() {
                   </select>
                 </div>
                 <div>
-                  <label className="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-200">{t('Total Area (acres)')}</label>
+                  <label className="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300 dark:text-gray-200">{t('Total Area (acres)')}</label>
                   <input type="number" step="0.1" value={formData.total_area} onChange={(event) => setFormData({ ...formData, total_area: event.target.value })} placeholder="0.0" className="input-field" required data-testid="farm-area-input" />
                 </div>
               </div>
 
               <div className="mt-4">
-                <label className="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-200">{t('Pinpoint Farm Location (Click to adjust)')}</label>
+                <label className="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300 dark:text-gray-200">{t('Pinpoint Farm Location (Click to adjust)')}</label>
                 <div className="h-[250px] w-full rounded-lg overflow-hidden border border-gray-300 dark:border-slate-600">
                   <MapContainer center={mapPosition} zoom={4} scrollWheelZoom={true} style={{ height: '100%', width: '100%', zIndex: 0 }}>
                     <MapResizer />
@@ -163,7 +163,7 @@ function FarmManagement() {
               </div>
 
               <div>
-                <label className="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-200">{t('Current Crops (comma-separated)')}</label>
+                <label className="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300 dark:text-gray-200">{t('Current Crops (comma-separated)')}</label>
                 <input type="text" value={formData.current_crops} onChange={(event) => setFormData({ ...formData, current_crops: event.target.value })} placeholder={t('e.g., Rice, Wheat, Corn')} className="input-field" data-testid="farm-crops-input" />
               </div>
 
@@ -192,7 +192,7 @@ function FarmManagement() {
         )}
 
         <div className="fade-in" data-testid="farms-list">
-          <h2 className="mb-6 text-2xl font-bold text-gray-800 dark:text-gray-100">{t('Your Farms')}</h2>
+          <h2 className="mb-6 text-2xl font-bold text-gray-800 dark:text-gray-200 dark:text-gray-100">{t('Your Farms')}</h2>
           {loading && !showForm ? (
             <div className="flex items-center justify-center py-16">
               <Loader className="h-12 w-12 animate-spin text-teal-600" />
@@ -211,19 +211,19 @@ function FarmManagement() {
                       <Tractor className="h-6 w-6 text-white" />
                     </div>
                   </div>
-                  <h3 className="mb-2 text-xl font-bold text-gray-800 dark:text-gray-100">{farm.user_name}</h3>
-                  <div className="space-y-2 text-sm text-gray-600 dark:text-gray-300">
+                  <h3 className="mb-2 text-xl font-bold text-gray-800 dark:text-gray-200 dark:text-gray-100">{farm.user_name}</h3>
+                  <div className="space-y-2 text-sm text-gray-600 dark:text-gray-400 dark:text-gray-300">
                     <div className="flex items-center gap-2">
                       <MapPin className="h-4 w-4 text-teal-600" />
                       <span>{farm.location}</span>
                     </div>
                     <div className="flex items-center justify-between">
                       <span>{t('Soil Type:')}</span>
-                      <span className="font-medium text-gray-800 dark:text-gray-100">{translateOption(farm.soil_type)}</span>
+                      <span className="font-medium text-gray-800 dark:text-gray-200 dark:text-gray-100">{translateOption(farm.soil_type)}</span>
                     </div>
                     <div className="flex items-center justify-between">
                       <span>{t('Area:')}</span>
-                      <span className="font-medium text-gray-800 dark:text-gray-100">{farm.total_area} {t('acres')}</span>
+                      <span className="font-medium text-gray-800 dark:text-gray-200 dark:text-gray-100">{farm.total_area} {t('acres')}</span>
                     </div>
                     {farm.current_crops && farm.current_crops.length > 0 && (
                       <div className="border-t border-gray-200 dark:border-slate-700 pt-2">

@@ -97,10 +97,10 @@ function ExpenseCalculator() {
 
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
           <div className="card fade-in">
-            <h2 className="mb-6 text-2xl font-bold text-gray-800 dark:text-gray-100">Expense Details</h2>
+            <h2 className="mb-6 text-2xl font-bold text-gray-800 dark:text-gray-200 dark:text-gray-100">Expense Details</h2>
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
-                <label className="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-200">Select Farm</label>
+                <label className="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300 dark:text-gray-200">Select Farm</label>
                 <select
                   value={formData.farm_id}
                   onChange={(e) => setFormData({ ...formData, farm_id: e.target.value })}
@@ -118,7 +118,7 @@ function ExpenseCalculator() {
               </div>
 
               <div>
-                <label className="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-200">Crop Name</label>
+                <label className="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300 dark:text-gray-200">Crop Name</label>
                 <input
                   type="text"
                   value={formData.crop_name}
@@ -140,7 +140,7 @@ function ExpenseCalculator() {
                   ['other_costs', 'Other Costs', 'expense-other-input'],
                 ].map(([key, label, testId]) => (
                   <div key={key}>
-                    <label className="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-200">{label} (Rs)</label>
+                    <label className="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300 dark:text-gray-200">{label} (Rs)</label>
                     <input
                       type="number"
                       step="0.01"
@@ -156,7 +156,7 @@ function ExpenseCalculator() {
               </div>
 
               <div>
-                <label className="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-200">Expected Yield (quintals)</label>
+                <label className="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300 dark:text-gray-200">Expected Yield (quintals)</label>
                 <input
                   type="number"
                   step="0.1"
@@ -171,7 +171,7 @@ function ExpenseCalculator() {
 
               <div className="rounded-xl bg-gradient-to-br from-emerald-100 to-green-100 p-4">
                 <div className="flex items-center justify-between">
-                  <span className="text-sm font-medium text-gray-700 dark:text-gray-200">Total Expenses:</span>
+                  <span className="text-sm font-medium text-gray-700 dark:text-gray-300 dark:text-gray-200">Total Expenses:</span>
                   <span className="text-2xl font-bold text-emerald-700 dark:text-emerald-400">{formatCurrency(totalExpenses)}</span>
                 </div>
               </div>
@@ -191,11 +191,11 @@ function ExpenseCalculator() {
           </div>
 
           <div className="card fade-in" data-testid="expense-analysis-display">
-            <h2 className="mb-6 text-2xl font-bold text-gray-800 dark:text-gray-100">Financial Analysis</h2>
+            <h2 className="mb-6 text-2xl font-bold text-gray-800 dark:text-gray-200 dark:text-gray-100">Financial Analysis</h2>
             {loading ? (
               <div className="flex flex-col items-center justify-center py-16">
                 <TrendingUp className="mb-4 h-16 w-16 animate-pulse text-emerald-600" />
-                <p className="text-gray-600 dark:text-gray-300">Analyzing financial projections...</p>
+                <p className="text-gray-600 dark:text-gray-400 dark:text-gray-300">Analyzing financial projections...</p>
               </div>
             ) : analysis ? (
               <div className="space-y-6">
@@ -228,14 +228,14 @@ function ExpenseCalculator() {
                       <div className="space-y-3">
                         {costBreakdown.map((item) => (
                           <div key={item.label} className="grid gap-2 md:grid-cols-[120px_1fr_auto] md:items-center">
-                            <div className="text-sm font-semibold text-slate-700">{item.label}</div>
+                            <div className="text-sm font-semibold text-slate-700 dark:text-slate-300">{item.label}</div>
                             <div className="h-2 overflow-hidden rounded-full bg-slate-100">
                               <div
                                 className="h-full rounded-full bg-gradient-to-r from-emerald-400 to-lime-500"
                                 style={{ width: `${totalExpenses > 0 ? Math.max(4, (item.value / totalExpenses) * 100) : 0}%` }}
                               />
                             </div>
-                            <div className="text-sm font-bold text-slate-900">{formatCurrency(item.value)}</div>
+                            <div className="text-sm font-bold text-slate-900 dark:text-slate-50">{formatCurrency(item.value)}</div>
                           </div>
                         ))}
                       </div>
@@ -244,7 +244,7 @@ function ExpenseCalculator() {
                     <div className="grid gap-4">
                       {finance.breakeven_yield ? (
                         <FeaturePanel tone="emerald" title="Break-even point">
-                          <p className="text-sm leading-7 text-slate-700">{finance.breakeven_yield}</p>
+                          <p className="text-sm leading-7 text-slate-700 dark:text-slate-300">{finance.breakeven_yield}</p>
                         </FeaturePanel>
                       ) : null}
 
@@ -252,7 +252,7 @@ function ExpenseCalculator() {
                         <FeaturePanel tone="emerald" title="Recommendations">
                           <div className="space-y-3">
                             {finance.recommendations.map((item, index) => (
-                              <div key={`${item}-${index}`} className="rounded-2xl border border-emerald-100 bg-white px-4 py-4 text-sm leading-7 text-slate-700">
+                              <div key={`${item}-${index}`} className="rounded-2xl border border-emerald-100 bg-white dark:bg-slate-900 px-4 py-4 text-sm leading-7 text-slate-700 dark:text-slate-300">
                                 {item}
                               </div>
                             ))}
@@ -260,7 +260,7 @@ function ExpenseCalculator() {
                         </FeaturePanel>
                       ) : finance.recommendations ? (
                         <FeaturePanel tone="emerald" title="Recommendations">
-                          <p className="text-sm leading-7 text-slate-700">{finance.recommendations}</p>
+                          <p className="text-sm leading-7 text-slate-700 dark:text-slate-300">{finance.recommendations}</p>
                         </FeaturePanel>
                       ) : null}
                     </div>

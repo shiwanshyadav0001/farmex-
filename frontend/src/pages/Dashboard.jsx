@@ -132,7 +132,7 @@ function GradientBorder({ children, className = '' }) {
 }
 
 function Dashboard() {
-  const { t } = useTranslation();
+  const { t, language } = useTranslation();
   const [farms, setFarms] = useState([]);
   const [loading, setLoading] = useState(true);
   const [activePieIndex, setActivePieIndex] = useState(-1);
@@ -181,10 +181,10 @@ function Dashboard() {
   return (
     <div className="min-h-screen bg-[#fcfdfa] dark:bg-[#020617] transition-colors duration-500" data-testid="dashboard-page">
       {/* ═══ HERO SECTION ═══ */}
-      <section className="relative min-h-[500px] overflow-hidden border-b border-emerald-100/50 dark:border-slate-800/50 bg-white dark:bg-slate-950">
+      <section className="relative min-h-[500px] overflow-hidden border-b border-emerald-100/50 dark:border-slate-800/50 bg-white dark:bg-slate-900 dark:bg-slate-950">
         {/* 3D Immersive Background */}
         <div className="absolute inset-0 z-0">
-          <Suspense fallback={<div className="absolute inset-0 bg-emerald-50 dark:bg-slate-950 animate-pulse" />}>
+          <Suspense fallback={<div className="absolute inset-0 bg-emerald-50 dark:bg-emerald-900/20 dark:bg-slate-950 animate-pulse" />}>
             <FarmScene farmCount={farms.length} activeCategory="general" />
           </Suspense>
         </div>
@@ -196,7 +196,7 @@ function Dashboard() {
           <RevealOnScroll direction="up" stagger={0.15}>
             <div className="mb-6 flex flex-wrap items-center gap-4">
               <motion.div
-                className="inline-flex items-center gap-2 rounded-full border border-emerald-200 dark:border-emerald-800/50 bg-white/80 dark:bg-slate-900/80 backdrop-blur-sm px-4 py-2 text-sm font-medium text-emerald-800 dark:text-emerald-300 shadow-sm"
+                className="inline-flex items-center gap-2 rounded-full border border-emerald-200 dark:border-emerald-800/50 bg-white dark:bg-slate-900/80 dark:bg-slate-900/80 backdrop-blur-sm px-4 py-2 text-sm font-medium text-emerald-800 dark:text-emerald-300 shadow-sm"
                 whileHover={{ scale: 1.05 }}
               >
                 <Tractor className="h-4 w-4 text-emerald-600 dark:text-emerald-400" />
@@ -219,7 +219,7 @@ function Dashboard() {
               <div className="grid items-start gap-6 lg:grid-cols-2">
                 {/* ═══ CROP DISTRIBUTION REDESIGN ═══ */}
                 <TiltCard maxTilt={3} className="rounded-[32px] relative z-20 shadow-2xl min-h-[350px]">
-                  <div className="rounded-[32px] border border-emerald-100/50 dark:border-slate-800 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md p-6 shadow-xl overflow-hidden relative">
+                  <div className="rounded-[32px] border border-emerald-100/50 dark:border-slate-800 bg-white dark:bg-slate-900/80 dark:bg-slate-900/80 backdrop-blur-md p-6 shadow-xl overflow-hidden relative">
                     <h2 className="text-xl font-black text-slate-900 dark:text-slate-50 mb-6 flex items-center gap-2">
                       <Sprout className="h-5 w-5 text-emerald-500" />
                       {t('Crop Distribution')}
@@ -263,10 +263,10 @@ function Dashboard() {
                                 <div className="text-lg font-black text-emerald-600 dark:text-emerald-400 leading-none">
                                   {cropData[activePieIndex].value}
                                 </div>
-                                <div className="text-[10px] font-bold text-slate-400 dark:text-slate-500 uppercase mt-1">{t('Farms')}</div>
+                                <div className="text-[10px] font-bold text-slate-400 dark:text-slate-500 dark:text-slate-400 uppercase mt-1">{t('Farms')}</div>
                               </motion.div>
                             ) : (
-                              <div className="text-slate-300 dark:text-slate-700">
+                              <div className="text-slate-300 dark:text-slate-700 dark:text-slate-300">
                                 <Leaf className="h-6 w-6 mx-auto opacity-30" />
                               </div>
                             )}
@@ -280,8 +280,8 @@ function Dashboard() {
                         {activePieIndex >= 0 && cropData[activePieIndex] ? (
                           <motion.div initial={{ x: 10, opacity: 0 }} animate={{ x: 0, opacity: 1 }} className="space-y-4">
                             <div>
-                              <div className="text-xl font-black text-slate-900 dark:text-white leading-tight">{cropData[activePieIndex].name}</div>
-                              <div className="text-xs text-slate-500 mt-1">{t('Total representation across your holdings.')}</div>
+                              <div className="text-xl font-black text-slate-900 dark:text-slate-50 dark:text-white leading-tight">{cropData[activePieIndex].name}</div>
+                              <div className="text-xs text-slate-500 dark:text-slate-400 mt-1">{t('Total representation across your holdings.')}</div>
                             </div>
                             <div className="flex items-center gap-2">
                               <div className="h-2 w-2 rounded-full" style={{ backgroundColor: COLORS[activePieIndex % COLORS.length] }} />
@@ -302,7 +302,7 @@ function Dashboard() {
 
                 {/* ═══ FARM ACREAGE REDESIGN ═══ */}
                 <TiltCard maxTilt={3} className="rounded-[32px] relative z-20 shadow-2xl min-h-[350px]">
-                  <div className="rounded-[32px] border border-emerald-100/50 dark:border-slate-800 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md p-6 shadow-xl overflow-hidden">
+                  <div className="rounded-[32px] border border-emerald-100/50 dark:border-slate-800 bg-white dark:bg-slate-900/80 dark:bg-slate-900/80 backdrop-blur-md p-6 shadow-xl overflow-hidden">
                     <h2 className="text-xl font-black text-slate-900 dark:text-slate-50 mb-6 flex items-center gap-2">
                       <Tractor className="h-5 w-5 text-emerald-500" />
                       {t('Acreage Analysis')}
@@ -341,16 +341,16 @@ function Dashboard() {
                         {activeBarIndex >= 0 && areaData[activeBarIndex] ? (
                           <motion.div initial={{ x: 10, opacity: 0 }} animate={{ x: 0, opacity: 1 }} className="space-y-3">
                             <div>
-                              <div className="text-lg font-black text-slate-900 dark:text-white truncate max-w-[120px]" title={areaData[activeBarIndex].name}>
+                              <div className="text-lg font-black text-slate-900 dark:text-slate-50 dark:text-white truncate max-w-[120px]" title={areaData[activeBarIndex].name}>
                                 {areaData[activeBarIndex].name}
                               </div>
-                              <div className="text-[10px] text-slate-500 font-bold uppercase mt-1">{areaData[activeBarIndex].area} {t('Acres')}</div>
+                              <div className="text-[10px] text-slate-500 dark:text-slate-400 font-bold uppercase mt-1">{areaData[activeBarIndex].area} {t('Acres')}</div>
                             </div>
                             <div className="pt-2">
                               <div className="text-[9px] font-black text-slate-400 dark:text-slate-600 uppercase tracking-widest mb-1">{t('Produce')}</div>
                               <div className="flex flex-wrap gap-1">
                                 {areaData[activeBarIndex].crops.slice(0, 3).map((c, i) => (
-                                  <span key={i} className="text-[9px] font-bold text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/50 px-1.5 py-0.5 rounded-md">
+                                  <span key={i} className="text-[9px] font-bold text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-900/20 dark:bg-emerald-950/50 px-1.5 py-0.5 rounded-md">
                                     {c}
                                   </span>
                                 ))}
@@ -382,7 +382,7 @@ function Dashboard() {
                     {t('Smarter farm decisions with weather, soil, crop, and risk insights in one place')}
                   </motion.h1>
                   <motion.p
-                    className="mt-4 max-w-3xl text-base leading-7 text-slate-700 dark:text-slate-400"
+                    className="mt-4 max-w-3xl text-base leading-7 text-slate-700 dark:text-slate-300 dark:text-slate-400"
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
@@ -415,7 +415,7 @@ function Dashboard() {
                     <MagneticButton strength={0.2} radius={100}>
                       <Link
                         to="/weather"
-                        className="inline-flex items-center gap-2 rounded-full border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 px-5 py-2.5 text-sm font-semibold text-slate-800 dark:text-slate-100 transition hover:border-emerald-400 hover:shadow-[0_0_20px_rgba(16,185,129,0.15)]"
+                        className="inline-flex items-center gap-2 rounded-full border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 dark:bg-slate-800 px-5 py-2.5 text-sm font-semibold text-slate-800 dark:text-slate-200 dark:text-slate-100 transition hover:border-emerald-400 hover:shadow-[0_0_20px_rgba(16,185,129,0.15)]"
                         data-testid="check-weather-btn"
                       >
                         {t('Check Weather')}
@@ -429,7 +429,7 @@ function Dashboard() {
               {farms.length === 0 && (
                 <RevealOnScroll direction="right" delay={0.3}>
                   <TiltCard maxTilt={10}>
-                    <div className="rounded-[24px] border border-emerald-100 dark:border-slate-800 bg-white/90 dark:bg-slate-900/90 backdrop-blur-sm p-5 shadow-xl">
+                    <div className="rounded-[24px] border border-emerald-100 dark:border-slate-800 bg-white dark:bg-slate-900/90 dark:bg-slate-900/90 backdrop-blur-sm p-5 shadow-xl">
                       <h2 className="text-xl font-bold text-slate-900 dark:text-slate-50">{t('Core Platform Coverage')}</h2>
                       <div className="mt-5 space-y-3">
                         {[
@@ -469,14 +469,14 @@ function Dashboard() {
                 ].map((stat, i) => (
                   <motion.div
                     key={stat.label}
-                    className="rounded-xl border border-emerald-100 dark:border-slate-800 bg-white/70 dark:bg-slate-900/70 backdrop-blur-sm p-3 text-center"
+                    className="rounded-xl border border-emerald-100 dark:border-slate-800 bg-white dark:bg-slate-900/70 dark:bg-slate-900/70 backdrop-blur-sm p-3 text-center"
                     initial={{ opacity: 0, y: 30, scale: 0.95 }}
                     animate={{ opacity: 1, y: 0, scale: 1 }}
                     transition={{ delay: 0.6 + i * 0.1, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
                     whileHover={{ scale: 1.05, y: -4 }}
                   >
                     <stat.icon className="h-4 w-4 text-emerald-500 mx-auto mb-1" />
-                    <div className="text-xl font-black text-slate-900 dark:text-white">
+                    <div className="text-xl font-black text-slate-900 dark:text-slate-50 dark:text-white">
                       <AnimatedCounter value={stat.value} suffix={stat.suffix} />
                     </div>
                     <div className="text-xs text-slate-500 dark:text-slate-400 mt-1 font-medium">{t(stat.label)}</div>
@@ -512,7 +512,7 @@ function Dashboard() {
               <RevealOnScroll key={feature.title} direction="depth" delay={i * 0.1} className={colSpan}>
                 <Link to={feature.path} className="block h-full group">
                   <TiltCard maxTilt={10} glareColor={feature.glow} className="h-full">
-                    <div className="flex flex-col h-full rounded-[32px] border border-white/40 dark:border-white/5 bg-white/40 dark:bg-white/[0.03] backdrop-blur-xl p-8 shadow-[0_8px_32px_0_rgba(31,38,135,0.07)] transition-all group-hover:shadow-[0_8px_32px_0_rgba(16,185,129,0.15)] group-hover:bg-white/60 dark:group-hover:bg-white/[0.06] overflow-hidden relative">
+                    <div className="flex flex-col h-full rounded-[32px] border border-white/40 dark:border-white/5 bg-white dark:bg-slate-900/40 dark:bg-white dark:bg-slate-900/[0.03] backdrop-blur-xl p-8 shadow-[0_8px_32px_0_rgba(31,38,135,0.07)] transition-all group-hover:shadow-[0_8px_32px_0_rgba(16,185,129,0.15)] group-hover:bg-white dark:bg-slate-900/60 dark:group-hover:bg-white dark:bg-slate-900/[0.06] overflow-hidden relative">
                       {/* Background glow */}
                       <div className={`absolute -right-8 -top-8 w-32 h-32 rounded-full blur-[60px] opacity-20 bg-gradient-to-br ${feature.accent}`} />
                       
@@ -537,7 +537,7 @@ function Dashboard() {
                         {isLarge && (
                           <div className="h-1 w-24 bg-slate-200 dark:bg-slate-800 rounded-full overflow-hidden">
                             <motion.div 
-                              className="h-full bg-emerald-500" 
+                              className="h-full bg-emerald-50 dark:bg-emerald-900/200" 
                               initial={{ width: 0 }}
                               whileInView={{ width: '60%' }}
                               transition={{ duration: 1, delay: 0.5 }}
@@ -557,7 +557,7 @@ function Dashboard() {
       {/* ═══ QUICK ACCESS SECTION ═══ */}
       <section className="mx-auto max-w-7xl px-6 pb-10 sm:px-8">
         <RevealOnScroll direction="up" delay={0.2}>
-          <div className="rounded-[24px] border border-emerald-100 dark:border-slate-800 bg-white/90 dark:bg-slate-900/90 backdrop-blur-sm p-6 shadow-sm relative overflow-hidden">
+          <div className="rounded-[24px] border border-emerald-100 dark:border-slate-800 bg-white dark:bg-slate-900/90 dark:bg-slate-900/90 backdrop-blur-sm p-6 shadow-sm relative overflow-hidden">
             {/* Subtle gradient overlay for depth */}
             <div className="absolute inset-0 opacity-20 pointer-events-none bg-gradient-to-br from-emerald-400/10 via-transparent to-cyan-400/10 rounded-[24px]" />
 
@@ -581,7 +581,7 @@ function Dashboard() {
                       <MagneticButton strength={0.25} radius={80} showParticles={false}>
                         <Link
                           to={item.path}
-                          className="inline-flex min-w-[200px] items-center justify-between rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800/60 px-4 py-3 text-sm text-slate-900 dark:text-slate-200 transition hover:border-emerald-300 dark:hover:border-emerald-600 hover:bg-emerald-50 dark:hover:bg-slate-800 hover:shadow-lg"
+                          className="inline-flex min-w-[200px] items-center justify-between rounded-xl border border-slate-200 dark:border-slate-700 dark:border-slate-800 bg-slate-50 dark:bg-slate-800/60 px-4 py-3 text-sm text-slate-900 dark:text-slate-50 dark:text-slate-200 transition hover:border-emerald-300 dark:hover:border-emerald-600 hover:bg-emerald-50 dark:bg-emerald-900/20 dark:hover:bg-slate-800 hover:shadow-lg"
                         >
                           <span className="inline-flex items-center gap-3">
                             <Icon className="h-5 w-5 text-emerald-600" />

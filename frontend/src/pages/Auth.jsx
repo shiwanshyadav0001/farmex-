@@ -170,13 +170,13 @@ export default function Auth({ onAuthenticate }) {
   return (
     <div className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#f0fdf4] text-[#10211d]">
       <div className="absolute inset-0 z-0">
-        <Suspense fallback={<div className="absolute inset-0 bg-emerald-50" />}>
+        <Suspense fallback={<div className="absolute inset-0 bg-emerald-50 dark:bg-emerald-900/20" />}>
           <FarmScene />
         </Suspense>
       </div>
 
       {/* Soft natural overlay */}
-      <div className="absolute inset-0 z-[1] bg-white/5 backdrop-blur-[1px]" />
+      <div className="absolute inset-0 z-[1] bg-white dark:bg-slate-900/5 backdrop-blur-[1px]" />
 
       <motion.div
         variants={pageVariants}
@@ -203,7 +203,7 @@ export default function Auth({ onAuthenticate }) {
           </motion.div>
 
           <motion.div variants={itemVariants} className="space-y-4">
-            <div className="inline-flex items-center rounded-full border border-emerald-200 bg-emerald-50 px-4 py-1.5 text-xs font-bold text-emerald-700 shadow-sm">
+            <div className="inline-flex items-center rounded-full border border-emerald-200 dark:border-emerald-800/50 bg-emerald-50 dark:bg-emerald-900/20 px-4 py-1.5 text-xs font-bold text-emerald-700 shadow-sm">
               <span className="flex h-2 w-2 rounded-full bg-[#ffb300] mr-2 animate-pulse" />
               Live Farm Working Background
             </div>
@@ -217,7 +217,7 @@ export default function Auth({ onAuthenticate }) {
             {highlights.map((item, i) => (
               <motion.li
                 key={item}
-                className="flex items-center gap-4 bg-white/40 p-3 rounded-2xl border border-white/60 backdrop-blur-sm"
+                className="flex items-center gap-4 bg-white dark:bg-slate-900/40 p-3 rounded-2xl border border-white/60 backdrop-blur-sm"
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: i * 0.15 + 0.5, duration: 0.5 }}
@@ -235,8 +235,8 @@ export default function Auth({ onAuthenticate }) {
           {/* Card Shadow */}
           <div className="absolute -inset-4 bg-emerald-400/20 blur-3xl rounded-[3rem]" />
 
-          <div className="relative rounded-[3rem] border-4 border-white bg-white/70 p-8 backdrop-blur-2xl shadow-2xl">
-            <div className="flex p-1.5 bg-emerald-50/80 rounded-2xl mb-6 relative">
+          <div className="relative rounded-[3rem] border-4 border-white bg-white dark:bg-slate-900/70 p-8 backdrop-blur-2xl shadow-2xl">
+            <div className="flex p-1.5 bg-emerald-50 dark:bg-emerald-900/20/80 rounded-2xl mb-6 relative">
               <div 
                 className={`absolute top-1.5 bottom-1.5 w-[calc(50%-6px)] bg-[#2e7d32] shadow-lg rounded-xl transition-all duration-500 ${mode === 'login' ? 'left-1.5' : 'left-[50.5%]'}`} 
                 style={{ transitionTimingFunction: 'cubic-bezier(0.34, 1.56, 0.64, 1)' }}
@@ -283,7 +283,7 @@ export default function Auth({ onAuthenticate }) {
                       value={formData.name}
                       onChange={(e) => handleChange('name', e.target.value)}
                       required
-                      className="w-full bg-white/50 border-2 border-emerald-50 rounded-2xl px-5 py-3 text-[#1b3a24] placeholder-emerald-200 focus:outline-none focus:border-[#2e7d32] focus:ring-4 focus:ring-[#2e7d32]/10 transition-all font-bold"
+                      className="w-full bg-white dark:bg-slate-900/50 border-2 border-emerald-50 rounded-2xl px-5 py-3 text-[#1b3a24] placeholder-emerald-200 focus:outline-none focus:border-[#2e7d32] focus:ring-4 focus:ring-[#2e7d32]/10 transition-all font-bold"
                       placeholder="Farmer Name"
                     />
                   </motion.div>
@@ -297,7 +297,7 @@ export default function Auth({ onAuthenticate }) {
                   value={formData.email}
                   onChange={(e) => handleChange('email', e.target.value)}
                   required
-                  className="w-full bg-white/50 border-2 border-emerald-50 rounded-2xl px-5 py-3 text-[#1b3a24] placeholder-emerald-200 focus:outline-none focus:border-[#2e7d32] focus:ring-4 focus:ring-[#2e7d32]/10 transition-all font-bold"
+                  className="w-full bg-white dark:bg-slate-900/50 border-2 border-emerald-50 rounded-2xl px-5 py-3 text-[#1b3a24] placeholder-emerald-200 focus:outline-none focus:border-[#2e7d32] focus:ring-4 focus:ring-[#2e7d32]/10 transition-all font-bold"
                   placeholder="farmer@farmex.io"
                 />
               </div>
@@ -310,7 +310,7 @@ export default function Auth({ onAuthenticate }) {
                   value={formData.password}
                   onChange={(e) => handleChange('password', e.target.value)}
                   required
-                  className="w-full bg-white/50 border-2 border-emerald-50 rounded-2xl px-5 py-3 text-[#1b3a24] placeholder-emerald-200 focus:outline-none focus:border-[#2e7d32] focus:ring-4 focus:ring-[#2e7d32]/10 transition-all font-bold"
+                  className="w-full bg-white dark:bg-slate-900/50 border-2 border-emerald-50 rounded-2xl px-5 py-3 text-[#1b3a24] placeholder-emerald-200 focus:outline-none focus:border-[#2e7d32] focus:ring-4 focus:ring-[#2e7d32]/10 transition-all font-bold"
                   placeholder="••••••••"
                 />
               </div>
@@ -330,7 +330,7 @@ export default function Auth({ onAuthenticate }) {
                       value={formData.confirmPassword}
                       onChange={(e) => handleChange('confirmPassword', e.target.value)}
                       required
-                      className="w-full bg-white/50 border-2 border-emerald-50 rounded-2xl px-5 py-3 text-[#1b3a24] placeholder-emerald-200 focus:outline-none focus:border-[#2e7d32] focus:ring-4 focus:ring-[#2e7d32]/10 transition-all font-bold"
+                      className="w-full bg-white dark:bg-slate-900/50 border-2 border-emerald-50 rounded-2xl px-5 py-3 text-[#1b3a24] placeholder-emerald-200 focus:outline-none focus:border-[#2e7d32] focus:ring-4 focus:ring-[#2e7d32]/10 transition-all font-bold"
                       placeholder="••••••••"
                     />
                   </motion.div>

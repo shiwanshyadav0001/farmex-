@@ -195,13 +195,13 @@ function VoiceAssistant() {
           <LiveFeatureScene type="voice" languageLabel={languageCodes[language]} isListening={isListening} chatCount={chatHistory.length} />
         </div>
 
-        <div className="card border-0 shadow-2xl bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl">
+        <div className="card border-0 shadow-2xl bg-white dark:bg-slate-900/80 dark:bg-slate-900/80 backdrop-blur-xl">
           <div className="mb-6 flex items-center gap-2 px-4 py-2 bg-pink-50 dark:bg-pink-900/20 rounded-full border border-pink-100 dark:border-pink-900/30 w-fit">
             <span className="w-2 h-2 rounded-full bg-pink-500 animate-pulse" />
             <span className="text-sm font-bold text-pink-700 dark:text-pink-400 uppercase tracking-tight">{languageCodes[language]} Mode</span>
           </div>
 
-          <div className="mb-6 h-[450px] overflow-y-auto rounded-3xl bg-slate-50/50 dark:bg-slate-950/50 p-6 border border-slate-100 dark:border-slate-800">
+          <div className="mb-6 h-[450px] overflow-y-auto rounded-3xl bg-slate-50 dark:bg-slate-800/50 dark:bg-slate-950/50 p-6 border border-slate-100 dark:border-slate-800">
             {chatHistory.length === 0 ? (
               <div className="flex h-full flex-col items-center justify-center text-slate-400">
                 <MessageCircle className="mb-4 h-16 w-16 opacity-20" />
@@ -212,18 +212,18 @@ function VoiceAssistant() {
                 {chatHistory.map((msg, idx) => (
                   <div key={idx} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
                     <div className="group flex items-start gap-3 max-w-[85%]">
-                      <div className={`relative rounded-2xl px-5 py-3 shadow-sm ${msg.role === 'user' ? 'bg-pink-600 text-white rounded-tr-none' : 'bg-white dark:bg-slate-800 border border-slate-100 dark:border-slate-700 text-slate-800 dark:text-slate-100 rounded-tl-none'}`}>
+                      <div className={`relative rounded-2xl px-5 py-3 shadow-sm ${msg.role === 'user' ? 'bg-pink-600 text-white rounded-tr-none' : 'bg-white dark:bg-slate-900 dark:bg-slate-800 border border-slate-100 dark:border-slate-700 text-slate-800 dark:text-slate-200 dark:text-slate-100 rounded-tl-none'}`}>
                         {msg.role === 'user' ? <p className="text-sm font-medium">{msg.content}</p> : <AnimatedMessage content={msg.content} animate={msg.animate} />}
                       </div>
                       {msg.role === 'assistant' && (
-                        <button onClick={() => speakText(msg.content, idx)} className={`p-2.5 rounded-full transition-all shadow-md border ${currentlySpeaking === idx ? 'bg-pink-600 border-pink-600 text-white scale-110' : 'bg-white dark:bg-slate-800 border-pink-200 dark:border-slate-700 text-pink-600 hover:bg-pink-50'}`}>
+                        <button onClick={() => speakText(msg.content, idx)} className={`p-2.5 rounded-full transition-all shadow-md border ${currentlySpeaking === idx ? 'bg-pink-600 border-pink-600 text-white scale-110' : 'bg-white dark:bg-slate-900 dark:bg-slate-800 border-pink-200 dark:border-slate-700 text-pink-600 hover:bg-pink-50'}`}>
                           {currentlySpeaking === idx ? <VolumeX className="h-4 w-4" /> : <Volume2 className="h-4 w-4" />}
                         </button>
                       )}
                     </div>
                   </div>
                 ))}
-                {loading && <div className="flex justify-start"><div className="bg-white dark:bg-slate-800 border border-slate-100 dark:border-slate-700 rounded-2xl px-5 py-3 flex gap-1 items-center"><div className="w-1.5 h-1.5 bg-pink-400 rounded-full animate-bounce" /><div className="w-1.5 h-1.5 bg-pink-400 rounded-full animate-bounce [animation-delay:0.2s]" /><div className="w-1.5 h-1.5 bg-pink-400 rounded-full animate-bounce [animation-delay:0.4s]" /></div></div>}
+                {loading && <div className="flex justify-start"><div className="bg-white dark:bg-slate-900 dark:bg-slate-800 border border-slate-100 dark:border-slate-700 rounded-2xl px-5 py-3 flex gap-1 items-center"><div className="w-1.5 h-1.5 bg-pink-400 rounded-full animate-bounce" /><div className="w-1.5 h-1.5 bg-pink-400 rounded-full animate-bounce [animation-delay:0.2s]" /><div className="w-1.5 h-1.5 bg-pink-400 rounded-full animate-bounce [animation-delay:0.4s]" /></div></div>}
                 <div ref={messagesEndRef} />
               </div>
             )}
@@ -231,7 +231,7 @@ function VoiceAssistant() {
 
           <form onSubmit={handleSubmit} className="flex gap-3">
             <div className="relative flex-1">
-              <input type="text" value={message} onChange={(e) => setMessage(e.target.value)} placeholder={t('Ask a question...')} className="w-full rounded-2xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 px-5 py-4 text-slate-800 dark:text-slate-100 focus:ring-2 focus:ring-pink-500 outline-none pr-14" disabled={loading} />
+              <input type="text" value={message} onChange={(e) => setMessage(e.target.value)} placeholder={t('Ask a question...')} className="w-full rounded-2xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 dark:bg-slate-800 px-5 py-4 text-slate-800 dark:text-slate-200 dark:text-slate-100 focus:ring-2 focus:ring-pink-500 outline-none pr-14" disabled={loading} />
               <button type="button" onClick={toggleListening} className={`absolute right-2 top-1/2 -translate-y-1/2 p-2.5 rounded-xl transition-all ${isListening ? 'bg-red-500 text-white animate-pulse' : 'text-slate-400 hover:text-pink-600'}`}>
                 {isListening ? <MicOff className="h-6 w-6" /> : <Mic className="h-6 w-6" />}
               </button>
@@ -241,7 +241,7 @@ function VoiceAssistant() {
 
           <div className="mt-6 flex flex-wrap gap-2">
             {exampleQuestions[language].map((q, i) => (
-              <button key={i} type="button" onClick={() => { setMessage(''); sendPrompt(q); }} className="text-xs font-semibold bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 px-3 py-2 rounded-xl hover:border-pink-400 transition-all shadow-sm" disabled={loading}>{q}</button>
+              <button key={i} type="button" onClick={() => { setMessage(''); sendPrompt(q); }} className="text-xs font-semibold bg-white dark:bg-slate-900 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 px-3 py-2 rounded-xl hover:border-pink-400 transition-all shadow-sm" disabled={loading}>{q}</button>
             ))}
           </div>
           {error && <div className="mt-4 p-3 bg-red-50 text-red-600 rounded-xl text-sm border border-red-100">{error}</div>}

@@ -69,7 +69,7 @@ function DiseaseDetection() {
 
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
           <div className="card fade-in">
-            <h2 className="mb-6 text-2xl font-bold text-gray-800 dark:text-gray-100">Upload Plant Image</h2>
+            <h2 className="mb-6 text-2xl font-bold text-gray-800 dark:text-gray-200 dark:text-gray-100">Upload Plant Image</h2>
             <form onSubmit={handleSubmit} className="space-y-5">
               <div className="rounded-xl border-2 border-dashed border-gray-300 p-8 text-center transition-colors hover:border-green-500">
                 <input
@@ -84,12 +84,12 @@ function DiseaseDetection() {
                   {preview ? (
                     <div>
                       <img src={preview} alt="Preview" className="mx-auto mb-4 max-h-64 rounded-lg shadow-lg" />
-                      <p className="text-sm text-gray-600 dark:text-gray-300">Click to change image</p>
+                      <p className="text-sm text-gray-600 dark:text-gray-400 dark:text-gray-300">Click to change image</p>
                     </div>
                   ) : (
                     <div>
                       <Upload className="mx-auto mb-4 h-16 w-16 text-gray-400" />
-                      <p className="mb-2 text-lg font-medium text-gray-700 dark:text-gray-200">Click to upload image</p>
+                      <p className="mb-2 text-lg font-medium text-gray-700 dark:text-gray-300 dark:text-gray-200">Click to upload image</p>
                       <p className="text-sm text-gray-500">PNG, JPG, WEBP up to 10MB</p>
                     </div>
                   )}
@@ -116,11 +116,11 @@ function DiseaseDetection() {
           </div>
 
           <div className="card fade-in" data-testid="disease-result-display">
-            <h2 className="mb-6 text-2xl font-bold text-gray-800 dark:text-gray-100">Detection Results</h2>
+            <h2 className="mb-6 text-2xl font-bold text-gray-800 dark:text-gray-200 dark:text-gray-100">Detection Results</h2>
             {loading ? (
               <div className="flex flex-col items-center justify-center py-16">
                 <ShieldAlert className="mb-4 h-16 w-16 animate-pulse text-red-600" />
-                <p className="text-gray-600 dark:text-gray-300">Analyzing plant image with AI...</p>
+                <p className="text-gray-600 dark:text-gray-400 dark:text-gray-300">Analyzing plant image with AI...</p>
               </div>
             ) : detection ? (
               <div className="space-y-6">
