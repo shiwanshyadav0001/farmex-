@@ -35,7 +35,7 @@ function FarmingCalendar() {
       const response = await axios.post(`${API}/calendar/generate`, { ...formData, language });
       setCalendar(response.data);
     } catch (err) {
-      setError('Failed to generate farming calendar. Please try again.');
+      setError(t('Failed to generate farming calendar. Please try again.'));
       console.error(err);
     } finally {
       setLoading(false);
@@ -61,7 +61,7 @@ function FarmingCalendar() {
                   type="text"
                   value={formData.crop_name}
                   onChange={(e) => setFormData({ ...formData, crop_name: e.target.value })}
-                  placeholder="Enter crop name (e.g., Rice, Wheat, Corn)"
+                  placeholder={t("Enter crop name (e.g., Rice, Wheat, Corn)")}
                   className="input-field"
                   required
                   data-testid="calendar-crop-input"
@@ -87,7 +87,7 @@ function FarmingCalendar() {
                   step="0.1"
                   value={formData.area}
                   onChange={(e) => setFormData({ ...formData, area: e.target.value })}
-                  placeholder="Enter area in acres"
+                  placeholder={t("Enter area in acres")}
                   className="input-field"
                   required
                   data-testid="calendar-area-input"
@@ -103,7 +103,7 @@ function FarmingCalendar() {
                 data-testid="generate-calendar-btn"
               >
                 <Calendar className="h-5 w-5" />
-                {loading ? 'Generating...' : 'Generate Calendar'}
+                {loading ? t('Generating...') : t('Generate Calendar')}
               </button>
             </form>
           </div>
@@ -113,20 +113,20 @@ function FarmingCalendar() {
             {loading ? (
               <div className="flex flex-col items-center justify-center py-16">
                 <Clock className="mb-4 h-16 w-16 animate-pulse text-indigo-600" />
-                <p className="text-gray-600 dark:text-gray-400 dark:text-gray-300">Creating your farming calendar...</p>
+                <p className="text-gray-600 dark:text-gray-400 dark:text-gray-300">{t("Creating your farming calendar...")}</p>
               </div>
             ) : calendar ? (
               <div className="space-y-6">
                 <FeaturePanel
                   tone="violet"
-                  title={`Calendar for ${calendar.crop}`}
-                  subtitle="Same crop, planting date, and area now return the same activity timeline, so planning stays steady."
+                  title={`${t("Calendar for")} ${calendar.crop}`}
+                  subtitle={t("Same crop, planting date, and area now return the same activity timeline, so planning stays steady.")}
                 >
                   <div className="flex flex-wrap items-center gap-3">
-                    <StatusBadge tone="violet">Stable output</StatusBadge>
+                    <StatusBadge tone="violet">{t("Stable output")}</StatusBadge>
                     <div className="flex items-center gap-2 text-sm font-medium text-slate-600">
                       <CheckCircle2 className="h-4 w-4 text-violet-600" />
-                      Timeline synced from planting to harvest
+                      {t("Timeline synced from planting to harvest")}
                     </div>
                   </div>
                 </FeaturePanel>
@@ -134,12 +134,12 @@ function FarmingCalendar() {
                 {activities.length > 0 ? (
                   <>
                     <div className="grid gap-3 md:grid-cols-3">
-                      <MetricTile tone="violet" label="Activities" value={`${activities.length}`} hint="Timeline checkpoints" />
-                      <MetricTile tone="violet" label="Planting date" value={formData.planting_date || '--'} hint="Schedule anchor" />
-                      <MetricTile tone="violet" label="Area" value={formData.area ? `${formData.area} acres` : '--'} hint="Production scope" />
+                      <MetricTile tone="violet" label={t("Activities")} value={`${activities.length}`} hint={t("Timeline checkpoints")} />
+                      <MetricTile tone="violet" label={t("Planting date")} value={formData.planting_date || '--'} hint={t("Schedule anchor")} />
+                      <MetricTile tone="violet" label={t("Area")} value={formData.area ? `${formData.area} acres` : '--'} hint={t("Production scope")} />
                     </div>
 
-                    <FeaturePanel tone="violet" title="Farming timeline" subtitle="Tasks are laid out as milestones instead of a generic JSON block.">
+                    <FeaturePanel tone="violet" title={t("Farming timeline")} subtitle={t("Tasks are laid out as milestones instead of a generic JSON block.")}>
                       <div className="space-y-4">
                         {activities.map((item, index) => (
                           <div key={`${item.date}-${item.activity}-${index}`} className="grid gap-4 rounded-[26px] border border-violet-100 bg-white dark:bg-slate-900 p-5 md:grid-cols-[120px_1fr_auto] md:items-start">
@@ -149,7 +149,7 @@ function FarmingCalendar() {
                               <ResultRenderer data={item.description} />
                             </div>
                             <div className="md:justify-self-end">
-                              <StatusBadge tone={priorityTone(item.priority)}>{item.priority || 'Planned'}</StatusBadge>
+                              <StatusBadge tone={priorityTone(item.priority)}>{t(item.priority) || t('Planned')}</StatusBadge>
                             </div>
                           </div>
                         ))}
@@ -165,8 +165,8 @@ function FarmingCalendar() {
             ) : (
               <EmptyFeatureState
                 icon={Calendar}
-                title="Build a season timeline"
-                description="Enter crop, planting date, and area to turn this panel into a complete farming schedule with milestone dates and priorities."
+                title={t("Build a season timeline")}
+                description={t("Enter crop details to generate a complete farming timeline with optimal planting dates and activity reminders.")}
               />
             )}
           </div>

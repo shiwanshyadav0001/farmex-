@@ -8,7 +8,7 @@ import { useTranslation } from '@/i18n';
 const WeatherSceneFX = lazy(() => import('@/components/3d/WeatherSceneFX'));
 
 const surfaceClassName =
-  'relative overflow-hidden rounded-[30px] border border-white/10 bg-white/10 shadow-[0_30px_90px_rgba(2,6,23,0.28)] backdrop-blur-2xl';
+  'relative overflow-hidden rounded-[30px] border border-slate-200/50 dark:border-white/10 bg-white/70 dark:bg-white/10 shadow-[0_30px_90px_rgba(2,6,23,0.1)] dark:shadow-[0_30px_90px_rgba(2,6,23,0.28)] backdrop-blur-2xl';
 
 function Weather() {
   const { t } = useTranslation();
@@ -95,39 +95,39 @@ function Weather() {
 
     if (text.includes('thunder') || text.includes('storm')) {
       return {
-        page: 'from-slate-950 via-slate-900 to-blue-950',
-        accent: 'from-blue-400 via-indigo-200 to-slate-100',
-        chip: 'bg-blue-500/15 text-blue-100 border-blue-300/20',
+        page: 'from-blue-50 via-indigo-100 to-slate-200 dark:from-slate-950 dark:via-slate-900 dark:to-blue-950',
+        accent: 'from-blue-600 via-indigo-700 to-slate-800 dark:from-blue-400 dark:via-indigo-200 dark:to-slate-100',
+        chip: 'bg-blue-500/10 text-blue-700 dark:bg-blue-500/15 dark:text-blue-100 border-blue-200 dark:border-blue-300/20',
       };
     }
 
     if (text.includes('rain') || text.includes('drizzle') || text.includes('shower')) {
       return {
-        page: 'from-slate-950 via-sky-950 to-cyan-950',
-        accent: 'from-sky-300 via-cyan-100 to-white',
-        chip: 'bg-sky-500/15 text-sky-100 border-sky-300/20',
+        page: 'from-sky-50 via-cyan-100 to-blue-200 dark:from-slate-950 dark:via-sky-950 dark:to-cyan-950',
+        accent: 'from-sky-600 via-cyan-700 to-blue-800 dark:from-sky-300 dark:via-cyan-100 dark:to-white',
+        chip: 'bg-sky-500/10 text-sky-700 dark:bg-sky-500/15 dark:text-sky-100 border-sky-200 dark:border-sky-300/20',
       };
     }
 
     if (text.includes('mist') || text.includes('fog') || text.includes('haze')) {
       return {
-        page: 'from-slate-950 via-slate-800 to-emerald-950',
-        accent: 'from-slate-100 via-emerald-100 to-cyan-100',
-        chip: 'bg-white/10 text-slate-100 border-white/10',
+        page: 'from-slate-50 via-emerald-50 to-cyan-100 dark:from-slate-950 dark:via-slate-800 dark:to-emerald-950',
+        accent: 'from-slate-700 via-emerald-800 to-cyan-800 dark:from-slate-100 dark:via-emerald-100 dark:to-cyan-100',
+        chip: 'bg-slate-500/10 text-slate-700 dark:bg-white/10 dark:text-slate-100 border-slate-200 dark:border-white/10',
       };
     }
 
     return {
-      page: 'from-[#04120d] via-[#0a2a1d] to-[#0f4c37]',
-      accent: 'from-lime-200 via-white to-emerald-100',
-      chip: 'bg-emerald-500/15 text-emerald-100 border-emerald-300/20',
+      page: 'from-emerald-50 via-teal-50 to-lime-100 dark:from-[#04120d] dark:via-[#0a2a1d] dark:to-[#0f4c37]',
+      accent: 'from-emerald-700 via-teal-800 to-lime-800 dark:from-lime-200 dark:via-white dark:to-emerald-100',
+      chip: 'bg-emerald-500/10 text-emerald-700 dark:bg-emerald-500/15 dark:text-emerald-100 border-emerald-200 dark:border-emerald-300/20',
     };
   }, [weatherDescription]);
 
   return (
-    <div className={`min-h-screen bg-gradient-to-br ${theme.page} p-4 text-white sm:p-6`} data-testid="weather-page">
+    <div className={`min-h-screen bg-gradient-to-br ${theme.page} p-4 text-slate-900 dark:text-white sm:p-6 transition-colors duration-500`} data-testid="weather-page">
       <div className="mx-auto max-w-7xl space-y-6">
-        <section className="relative overflow-hidden rounded-[36px] border border-white/10 bg-black/20 shadow-[0_40px_120px_rgba(2,6,23,0.45)]">
+        <section className="relative overflow-hidden rounded-[36px] border border-slate-200/50 dark:border-white/10 bg-white/80 dark:bg-black/20 shadow-[0_40px_120px_rgba(2,6,23,0.1)] dark:shadow-[0_40px_120px_rgba(2,6,23,0.45)]">
           <Suspense fallback={<div className="absolute inset-0 bg-gradient-to-br from-black/30 via-black/20 to-black/60" />}>
             <WeatherSceneFX description={weatherDescription} />
           </Suspense>
@@ -146,7 +146,7 @@ function Weather() {
                   <CloudRain className="h-4 w-4" />
                   {t('Atmospheric Weather Intelligence')}
                 </span>
-                <span className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-white/75">
+                <span className="inline-flex items-center gap-2 rounded-full border border-slate-200/50 dark:border-white/10 bg-white/20 dark:bg-white/5 px-4 py-2 text-sm text-slate-700 dark:text-white/75 backdrop-blur-md">
                   <MapPin className="h-4 w-4" />
                   {searchedLocation || detectedLocation || location || t('Choose a location')}
                 </span>
@@ -154,7 +154,7 @@ function Weather() {
                   <button
                     type="button"
                     onClick={() => fetchWeather(detectedLocation, { fromAutoLocation: true })}
-                    className="inline-flex items-center gap-2 rounded-full border border-emerald-300/15 bg-emerald-400/10 px-4 py-2 text-sm text-emerald-100 transition hover:bg-emerald-400/20"
+                    className="inline-flex items-center gap-2 rounded-full border border-emerald-300/30 dark:border-emerald-300/15 bg-emerald-400/10 px-4 py-2 text-sm text-emerald-800 dark:text-emerald-100 transition hover:bg-emerald-400/20 backdrop-blur-md"
                   >
                     <MapPin className="h-4 w-4" />
                     {t('Current location')}: {detectedLocation}
@@ -165,31 +165,31 @@ function Weather() {
               <h1 className={`max-w-xl bg-gradient-to-r ${theme.accent} bg-clip-text text-4xl font-black tracking-tight text-transparent sm:text-5xl`} data-testid="weather-title">
                 {t('Weather that feels alive on the screen')}
               </h1>
-              <p className="mt-4 max-w-xl text-base leading-7 text-white/72 sm:text-lg">
+              <p className="mt-4 max-w-xl text-base leading-7 text-slate-800 dark:text-white/80 sm:text-lg">
                 {t('See real-time conditions, animated atmosphere, and forecast signals in one premium weather workspace designed for faster farm decisions.')}
               </p>
 
               <div className="mt-8 flex flex-wrap gap-3">
-                <div className="rounded-3xl border border-white/10 bg-black/25 px-5 py-4 backdrop-blur-xl">
-                  <div className="text-xs uppercase tracking-[0.22em] text-white/45">{t('Now')}</div>
-                  <div className="mt-2 text-5xl font-black">{temperature != null ? `${temperature}°` : '--'}</div>
+                <div className="rounded-3xl border border-slate-200/50 dark:border-white/10 bg-white/90 dark:bg-black/25 px-5 py-4 backdrop-blur-xl">
+                  <div className="text-xs uppercase tracking-[0.22em] text-slate-600 dark:text-white/60">{t('Now')}</div>
+                  <div className="mt-2 text-5xl font-black text-slate-900 dark:text-white">{temperature != null ? `${temperature}°` : '--'}</div>
                 </div>
-                <div className="rounded-3xl border border-white/10 bg-black/25 px-5 py-4 backdrop-blur-xl">
-                  <div className="text-xs uppercase tracking-[0.22em] text-white/45">{t('Condition')}</div>
-                  <div className="mt-2 text-lg font-semibold capitalize">{weatherDescription || t('Waiting for live data')}</div>
+                <div className="rounded-3xl border border-slate-200/50 dark:border-white/10 bg-white/90 dark:bg-black/25 px-5 py-4 backdrop-blur-xl">
+                  <div className="text-xs uppercase tracking-[0.22em] text-slate-600 dark:text-white/60">{t('Condition')}</div>
+                  <div className="mt-2 text-lg font-semibold capitalize text-slate-800 dark:text-white">{weatherDescription || t('Waiting for live data')}</div>
                 </div>
-                <div className="rounded-3xl border border-white/10 bg-black/25 px-5 py-4 backdrop-blur-xl">
-                  <div className="text-xs uppercase tracking-[0.22em] text-white/45">{t('Rain chance')}</div>
-                  <div className="mt-2 text-3xl font-bold">{rainProbability != null ? `${Math.round(rainProbability)}%` : '--'}</div>
+                <div className="rounded-3xl border border-slate-200/50 dark:border-white/10 bg-white/90 dark:bg-black/25 px-5 py-4 backdrop-blur-xl">
+                  <div className="text-xs uppercase tracking-[0.22em] text-slate-600 dark:text-white/60">{t('Rain chance')}</div>
+                  <div className="mt-2 text-3xl font-bold text-slate-900 dark:text-white">{rainProbability != null ? `${Math.round(rainProbability)}%` : '--'}</div>
                 </div>
                 {detectedLocation && searchedLocation && searchedLocation !== detectedLocation && (
-                  <div className="rounded-3xl border border-emerald-300/10 bg-emerald-400/10 px-5 py-4 backdrop-blur-xl">
-                    <div className="text-xs uppercase tracking-[0.22em] text-white/45">{t('Detected home weather')}</div>
-                    <div className="mt-2 text-sm font-semibold text-emerald-100">{detectedLocation}</div>
+                  <div className="rounded-3xl border border-emerald-300/10 dark:border-emerald-300/10 bg-emerald-400/10 px-5 py-4 backdrop-blur-xl">
+                    <div className="text-xs uppercase tracking-[0.22em] text-slate-600 dark:text-white/60">{t('Detected home weather')}</div>
+                    <div className="mt-2 text-sm font-semibold text-emerald-800 dark:text-emerald-100">{detectedLocation}</div>
                     <button
                       type="button"
                       onClick={() => fetchWeather(detectedLocation, { fromAutoLocation: true })}
-                      className="mt-3 inline-flex items-center gap-2 rounded-full border border-emerald-300/15 bg-white/5 px-3 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-emerald-100 transition hover:bg-white/10"
+                      className="mt-3 inline-flex items-center gap-2 rounded-full border border-emerald-300/30 dark:border-emerald-300/15 bg-white/10 dark:bg-white/5 px-3 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-emerald-800 dark:text-emerald-100 transition hover:bg-white/20"
                     >
                       <MapPin className="h-3.5 w-3.5" />
                       {t('Back to current location')}
@@ -207,22 +207,22 @@ function Weather() {
             >
               <div className="mb-5 flex items-center justify-between">
                 <div>
-                  <div className="text-xs uppercase tracking-[0.24em] text-white/45">{t('Live Search')}</div>
-                  <div className="mt-2 text-2xl font-bold">{t('Weather Forecast')}</div>
+                  <div className="text-xs uppercase tracking-[0.24em] text-slate-600 dark:text-white/60">{t('Live Search')}</div>
+                  <div className="mt-2 text-2xl font-bold text-slate-900 dark:text-white">{t('Weather Forecast')}</div>
                 </div>
-                <Cloud className="h-8 w-8 text-white/70" />
+                <Cloud className="h-8 w-8 text-slate-600 dark:text-white/70" />
               </div>
 
               <div className="space-y-4">
                 <div>
-                  <label className="mb-2 block text-sm font-medium text-white/80">{t('Location')}</label>
+                  <label className="mb-2 block text-sm font-medium text-slate-900 dark:text-white/90">{t('Location')}</label>
                   <input
                     type="text"
                     value={location}
                     onChange={(event) => setLocation(event.target.value)}
                     onKeyDown={(event) => event.key === 'Enter' && fetchWeather(location)}
                     placeholder={t('Enter city name (e.g., Mumbai, Delhi)')}
-                    className="w-full rounded-2xl border border-white/12 bg-black/25 px-4 py-3 text-white placeholder:text-white/35 outline-none transition focus:border-emerald-300/40 focus:ring-4 focus:ring-emerald-200/10"
+                    className="w-full rounded-2xl border border-slate-300 dark:border-white/12 bg-white/60 dark:bg-black/25 px-4 py-3 text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-white/35 outline-none transition focus:border-emerald-500 dark:focus:border-emerald-300/40 focus:ring-4 focus:ring-emerald-500/10 dark:focus:ring-emerald-200/10"
                     data-testid="weather-location-input"
                   />
                 </div>
@@ -311,11 +311,11 @@ function Weather() {
                 <div className={`absolute inset-0 bg-gradient-to-br ${item.accent}`} />
                 <div className="relative">
                   <div className="mb-10 flex items-center justify-between">
-                    <span className="text-xs uppercase tracking-[0.24em] text-white/45">{item.label}</span>
-                    <item.icon className="h-6 w-6 text-white/70" />
+                    <span className="text-xs uppercase tracking-[0.24em] text-slate-600 dark:text-white/60">{item.label}</span>
+                    <item.icon className="h-6 w-6 text-slate-700 dark:text-white/70" />
                   </div>
-                  <div className="text-3xl font-black capitalize text-white">{item.value}</div>
-                  <div className="mt-2 text-sm text-white/65">{item.detail}</div>
+                  <div className="text-3xl font-black capitalize text-slate-900 dark:text-white">{item.value}</div>
+                  <div className="mt-2 text-sm text-slate-800 dark:text-white/80">{item.detail}</div>
                 </div>
               </motion.div>
             ))}
@@ -326,10 +326,10 @@ function Weather() {
           <section className={`${surfaceClassName} p-5 sm:p-6`} data-testid="forecast-card">
             <div className="mb-6 flex flex-wrap items-end justify-between gap-4">
               <div>
-                <div className="text-xs uppercase tracking-[0.24em] text-white/45">{t('Forecast Window')}</div>
-                <h2 className="mt-2 text-2xl font-bold text-white">{t('7-Day Forecast')}</h2>
+                <div className="text-xs uppercase tracking-[0.24em] text-slate-600 dark:text-white/60">{t('Forecast Window')}</div>
+                <h2 className="mt-2 text-2xl font-bold text-slate-900 dark:text-white">{t('7-Day Forecast')}</h2>
               </div>
-              <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-white/70">
+              <div className="inline-flex items-center gap-2 rounded-full border border-slate-200/50 dark:border-white/10 bg-white/20 dark:bg-white/5 px-4 py-2 text-sm text-slate-700 dark:text-white/70 backdrop-blur-md">
                 <Waves className="h-4 w-4" />
                 {t('Animated atmosphere follows live condition data')}
               </div>
@@ -342,25 +342,25 @@ function Weather() {
                   initial={{ opacity: 0, y: 24 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.45, delay: 0.05 * index, ease: [0.16, 1, 0.3, 1] }}
-                  className="rounded-[26px] border border-white/10 bg-black/20 p-5 backdrop-blur-xl transition hover:-translate-y-1.5 hover:bg-black/25"
+                  className="rounded-[26px] border border-slate-200/50 dark:border-white/10 bg-white/90 dark:bg-black/20 p-5 backdrop-blur-xl transition hover:-translate-y-1.5 hover:bg-white/100 dark:hover:bg-black/25"
                   data-testid={`forecast-day-${index}`}
                 >
-                  <div className="mb-3 text-sm font-medium text-white/55">{day.date}</div>
+                  <div className="mb-3 text-sm font-medium text-slate-600 dark:text-white/70">{day.date}</div>
                   <div className="mb-5 flex items-center justify-between">
                     <div>
-                      <div className="text-3xl font-black text-white">{Math.round(day.temp_max)}°</div>
-                      <div className="text-sm text-white/45">{Math.round(day.temp_min)}°</div>
+                      <div className="text-3xl font-black text-slate-900 dark:text-white">{Math.round(day.temp_max)}°</div>
+                      <div className="text-sm text-slate-600 dark:text-white/60">{Math.round(day.temp_min)}°</div>
                     </div>
-                    <Cloud className="h-10 w-10 text-sky-200" />
+                    <Cloud className="h-10 w-10 text-emerald-600 dark:text-sky-200" />
                   </div>
-                  <div className="mb-4 text-sm capitalize text-white/82">{day.description}</div>
-                  <div className="space-y-2 text-xs text-white/58">
+                  <div className="mb-4 text-sm capitalize text-slate-800 dark:text-white/90">{day.description}</div>
+                  <div className="space-y-2 text-xs text-slate-700 dark:text-white/70">
                     <div className="flex items-center gap-2">
-                      <Droplets className="h-4 w-4 text-sky-200" />
+                      <Droplets className="h-4 w-4 text-emerald-500 dark:text-sky-200" />
                       <span>{t('{value}% humidity', { value: day.humidity })}</span>
                     </div>
                     <div className="flex items-center gap-2">
-                      <CloudRain className="h-4 w-4 text-cyan-200" />
+                      <CloudRain className="h-4 w-4 text-teal-500 dark:text-cyan-200" />
                       <span>{t('Rain: {value}%', { value: Math.round(day.rain_probability) })}</span>
                     </div>
                   </div>

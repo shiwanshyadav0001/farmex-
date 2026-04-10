@@ -137,14 +137,14 @@ function Irrigation() {
               <div className="space-y-6">
                 <FeaturePanel
                   tone="cyan"
-                  title="Plan locked for this input"
-                  subtitle="Same farm and crop details now return the same irrigation plan, so the workflow feels dependable."
+                  title={t("Plan locked for this input")}
+                  subtitle={t("Same farm and crop details now return the same irrigation plan, so the workflow feels dependable.")}
                 >
                   <div className="flex flex-wrap items-center gap-3">
-                    <StatusBadge tone="cyan">Stable output</StatusBadge>
+                    <StatusBadge tone="cyan">{t("Stable output")}</StatusBadge>
                     <div className="flex items-center gap-2 text-sm font-medium text-slate-600">
                       <CheckCircle2 className="h-4 w-4 text-cyan-600" />
-                      Weather-aware scheduling active
+                      {t("Weather-aware scheduling active")}
                     </div>
                   </div>
                 </FeaturePanel>
@@ -152,9 +152,9 @@ function Irrigation() {
                 {schedule.length > 0 ? (
                   <>
                     <div className="grid gap-3 md:grid-cols-3">
-                      <MetricTile tone="cyan" label={t("Irrigation days")} value={`${irrigatingDays} / ${schedule.length}`} hint="Days that need watering" />
-                      <MetricTile tone="cyan" label={t("Average water")} value={averageWater(schedule)} hint="Across recommended sessions" />
-                      <MetricTile tone="cyan" label={t("Typical time")} value={schedule.find((day) => day?.time)?.time || '--'} hint="Best application window" />
+                      <MetricTile tone="cyan" label={t("Irrigation days")} value={`${irrigatingDays} / ${schedule.length}`} hint={t("Days that need watering")} />
+                      <MetricTile tone="cyan" label={t("Average water")} value={averageWater(schedule)} hint={t("Across recommended sessions")} />
+                      <MetricTile tone="cyan" label={t("Typical time")} value={schedule.find((day) => day?.time)?.time || '--'} hint={t("Best application window")} />
                     </div>
 
                     <div className="grid gap-4">
@@ -167,13 +167,13 @@ function Irrigation() {
                         >
                           <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
                             <div className="max-w-xl">
-                              <StatusBadge tone={day.irrigate ? 'cyan' : 'slate'}>{day.irrigate ? 'Irrigate' : 'Hold water'}</StatusBadge>
+                              <StatusBadge tone={day.irrigate ? 'cyan' : 'slate'}>{t(day.irrigate ? 'Irrigate' : 'Hold water')}</StatusBadge>
                               <h3 className="mt-3 text-2xl font-black text-slate-900 dark:text-slate-50">{day.date}</h3>
-                              <p className="mt-3 text-sm leading-7 text-slate-600">{day.notes || 'Monitor field moisture and adjust only if real rainfall differs from forecast.'}</p>
+                              <p className="mt-3 text-sm leading-7 text-slate-600">{day.notes || t('Monitor field moisture and adjust only if real rainfall differs from forecast.')}</p>
                             </div>
                             <div className="grid min-w-[230px] grid-cols-2 gap-3">
-                              <MetricTile tone={day.irrigate ? 'cyan' : 'slate'} label="Water" value={day.irrigate ? `${day.water_quantity || '--'} L/acre` : 'Skip'} />
-                              <MetricTile tone={day.irrigate ? 'cyan' : 'slate'} label="Window" value={day.time || '--'} />
+                              <MetricTile tone={day.irrigate ? 'cyan' : 'slate'} label={t("Water")} value={day.irrigate ? `${day.water_quantity || '--'} L/acre` : t('Skip')} />
+                              <MetricTile tone={day.irrigate ? 'cyan' : 'slate'} label={t("Window")} value={day.time || '--'} />
                             </div>
                           </div>
                         </div>
@@ -187,7 +187,7 @@ function Irrigation() {
                 )}
 
                 {irrigationPlan.weather_forecast && irrigationPlan.weather_forecast.length > 0 && (
-                  <FeaturePanel tone="cyan" title={t("7-day rainfall pressure")} subtitle="The planner uses this forecast to reduce overwatering and react to incoming rain.">
+                  <FeaturePanel tone="cyan" title={t("7-day rainfall pressure")} subtitle={t("The planner uses this forecast to reduce overwatering and react to incoming rain.")}>
                     <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-4">
                       {irrigationPlan.weather_forecast.slice(0, 8).map((day, index) => (
                         <div key={index} className="rounded-2xl border border-cyan-100 bg-white dark:bg-slate-900 px-4 py-4">
@@ -211,8 +211,8 @@ function Irrigation() {
             ) : (
               <EmptyFeatureState
                 icon={Droplets}
-                title="Generate a real irrigation schedule"
-                description="Select the farm and crop first. This panel will turn into a day-by-day water plan with timing, quantity, and rainfall pressure."
+                title={t("Generate a real irrigation schedule")}
+                description={t("Select the farm and crop first. This panel will turn into a day-by-day water plan with timing, quantity, and rainfall pressure.")}
               />
             )}
           </div>

@@ -69,7 +69,7 @@ function RiskAnalysis() {
       const response = await axios.post(`${API}/risk/analyze`, { farm_id: selectedFarmId });
       setRiskAnalysis(response.data);
     } catch (err) {
-      setError('Failed to analyze risks. Please try again.');
+      setError(t('Failed to analyze risks. Please try again.'));
       console.error(err);
     } finally {
       setLoading(false);
@@ -92,7 +92,7 @@ function RiskAnalysis() {
             <h2 className="mb-6 text-2xl font-bold text-gray-800 dark:text-gray-200 dark:text-gray-100">{t('Select Farm')}</h2>
             <form onSubmit={handleSubmit} className="space-y-5">
               <div>
-                <label className="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300 dark:text-gray-200">Farm</label>
+                <label className="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300 dark:text-gray-200">{t("Farm")}</label>
                 <select
                   value={selectedFarmId}
                   onChange={(e) => setSelectedFarmId(e.target.value)}
@@ -110,13 +110,13 @@ function RiskAnalysis() {
               </div>
 
               <div className="rounded-xl border border-orange-200 dark:border-orange-900/50 bg-orange-50 dark:bg-orange-900/10 p-4 backdrop-blur-sm">
-                <h3 className="mb-2 text-sm font-black text-orange-900 dark:text-orange-100 uppercase tracking-wider">Risk Categories Analyzed:</h3>
+                <h3 className="mb-2 text-sm font-black text-orange-900 dark:text-orange-100 uppercase tracking-wider">{t("Risk Categories Analyzed:")}</h3>
                 <ul className="space-y-1 text-sm text-orange-800 dark:text-orange-200 font-medium">
-                  <li>• Weather-related risks (drought, flood, frost)</li>
-                  <li>• Disease and pest risks</li>
-                  <li>• Market price volatility</li>
-                  <li>• Operational risks</li>
-                  <li>• Mitigation strategies</li>
+                  <li>• {t("Weather-related risks (drought, flood, frost)")}</li>
+                  <li>• {t("Disease and pest risks")}</li>
+                  <li>• {t("Market price volatility")}</li>
+                  <li>• {t("Operational risks")}</li>
+                  <li>• {t("Mitigation strategies")}</li>
                 </ul>
               </div>
 
@@ -129,7 +129,7 @@ function RiskAnalysis() {
                 data-testid="analyze-risk-btn"
               >
                 <Shield className="h-5 w-5" />
-                {loading ? 'Analyzing Risks...' : 'Analyze Risks'}
+                {loading ? t('Analyzing Risks...') : t('Analyze Risks')}
               </button>
             </form>
           </div>
@@ -139,20 +139,20 @@ function RiskAnalysis() {
             {loading ? (
               <div className="flex flex-col items-center justify-center py-16">
                 <AlertTriangle className="mb-4 h-16 w-16 animate-pulse text-orange-600" />
-                <p className="text-gray-600 dark:text-gray-400 dark:text-gray-300">Performing comprehensive risk analysis...</p>
+                <p className="text-gray-600 dark:text-gray-400 dark:text-gray-300">{t("Performing comprehensive risk analysis...")}</p>
               </div>
             ) : riskAnalysis ? (
               <div className="space-y-6">
                 <FeaturePanel
                   tone={tone}
-                  title="Comprehensive risk report"
-                  subtitle="Same farm conditions now return the same risk result, which makes the warning system feel trustworthy."
+                  title={t("Comprehensive risk report")}
+                  subtitle={t("Same farm conditions now return the same risk result, which makes the warning system feel trustworthy.")}
                 >
                   <div className="flex flex-wrap items-center gap-3">
-                    <StatusBadge tone={tone}>Stable output</StatusBadge>
+                    <StatusBadge tone={tone}>{t("Stable output")}</StatusBadge>
                     <div className="flex items-center gap-2 text-sm font-medium text-slate-600">
                       <CheckCircle2 className="h-4 w-4 text-orange-600" />
-                      Alert model synchronized with weather context
+                      {t("Alert model synchronized with weather context")}
                     </div>
                   </div>
                 </FeaturePanel>
@@ -160,16 +160,16 @@ function RiskAnalysis() {
                 {(analysis.weather_risks || analysis.mitigation_strategies || analysis.overall_risk_score) ? (
                   <>
                     <div className="grid gap-3 md:grid-cols-3">
-                      <MetricTile tone={tone} label="Overall risk" value={score} hint="Farm-wide exposure level" />
-                      <MetricTile tone="orange" label="Farm" value={selectedFarm?.location || '--'} hint="Current risk target" />
-                      <MetricTile tone="cyan" label="Weather" value={riskAnalysis.weather_context ? `${Math.round(riskAnalysis.weather_context.temp)} deg` : '--'} hint={riskAnalysis.weather_context ? `${riskAnalysis.weather_context.humidity}% humidity` : 'No live weather'} />
+                      <MetricTile tone={tone} label={t("Overall risk")} value={score} hint={t("Farm-wide exposure level")} />
+                      <MetricTile tone="orange" label={t("Farm")} value={selectedFarm?.location || '--'} hint={t("Current risk target")} />
+                      <MetricTile tone="cyan" label={t("Weather")} value={riskAnalysis.weather_context ? `${Math.round(riskAnalysis.weather_context.temp)} deg` : '--'} hint={riskAnalysis.weather_context ? `${riskAnalysis.weather_context.humidity}% ${t('humidity')}` : t('No live weather')} />
                     </div>
 
-                    <RiskList title="Weather risks" items={ensureArray(analysis.weather_risks)} tone="orange" />
-                    <RiskList title="Disease and pest risks" items={ensureArray(analysis.disease_risks)} tone="amber" />
-                    <RiskList title="Market risks" items={ensureArray(analysis.market_risks)} tone="orange" />
-                    <RiskList title="Operational risks" items={ensureArray(analysis.operational_risks)} tone="amber" />
-                    <RiskList title="Mitigation strategies" items={ensureArray(analysis.mitigation_strategies)} tone="emerald" />
+                    <RiskList title={t("Weather risks")} items={ensureArray(analysis.weather_risks)} tone="orange" />
+                    <RiskList title={t("Disease and pest risks")} items={ensureArray(analysis.disease_risks)} tone="amber" />
+                    <RiskList title={t("Market risks")} items={ensureArray(analysis.market_risks)} tone="orange" />
+                    <RiskList title={t("Operational risks")} items={ensureArray(analysis.operational_risks)} tone="amber" />
+                    <RiskList title={t("Mitigation strategies")} items={ensureArray(analysis.mitigation_strategies)} tone="emerald" />
                   </>
                 ) : (
                   <FeaturePanel tone="orange">
@@ -180,8 +180,8 @@ function RiskAnalysis() {
             ) : (
               <EmptyFeatureState
                 icon={Shield}
-                title="Map the farm before the risk hits"
-                description="Select a farm to see overall exposure, weather risk, disease pressure, market volatility, and mitigation strategies in one place."
+                title={t("Map the farm before the risk hits")}
+                description={t("Select a farm to see overall exposure, weather risk, disease pressure, market volatility, and mitigation strategies in one place.")}
               />
             )}
           </div>

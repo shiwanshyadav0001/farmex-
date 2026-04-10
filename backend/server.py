@@ -201,6 +201,82 @@ class WeatherWarningRequest(BaseModel):
     user_email: str
     location: str
 
+BACKEND_TRANSLATIONS = {
+    "No major disease signs detected. Keep monitoring the crop, maintain balanced nutrition, and avoid unnecessary spraying.": {
+        "hi": "कोई बड़े रोग के लक्षण नहीं मिले। फसल की निगरानी करते रहें, संतुलित पोषण बनाए रखें और अनावश्यक छिड़काव से बचें।",
+        "mr": "कोणतेही मोठे रोगाचे लक्षण आढळले नाही. पिकाची देखरेख सुरू ठेवा, संतुलित पोषण द्या आणि अनावश्यक फवारणी टाळा."
+    },
+    "Use clean irrigation water, follow field sanitation, and inspect leaves every few days.": {
+        "hi": "साफ सिंचाई के पानी का उपयोग करें, खेत की स्वच्छता का पालन करें और हर कुछ दिनों में पत्तियों का निरीक्षण करें।",
+        "mr": "स्वच्छ सिंचन पाण्याचा वापर करा, शेतीची स्वच्छता पाळा आणि दर काही दिवसांनी पानांची पाहणी करा."
+    },
+    "Remove badly infected leaves, avoid overhead irrigation, and apply a crop-safe fungicide if spread increases.": {
+        "hi": "बुरी तरह संक्रमित पत्तियों को हटा दें, ओवरहेड सिंचाई से बचें और यदि प्रसार बढ़ता है तो फसल-सुरक्षित कवकनाशी लगाएं।",
+        "mr": "खूप खराब झालेली पाने काढून टाका, वरून पाणी देणे टाळा आणि जर प्रादुर्भाव वाढला तर बुरशीनाशकाचा वापर करा."
+    },
+    "Keep enough spacing, reduce leaf wetness, and rotate crops when possible.": {
+        "hi": "पर्याप्त दूरी रखें, पत्तियों के गीलेपन को कम करें और जब संभव हो फसलों को बदलें।",
+        "mr": "पुरेशी जागा ठेवा, पानांवरील ओलावा कमी करा आणि शक्य असल्यास पिकांची अदलाबदल करा."
+    },
+    "Scout the field quickly, remove heavily affected foliage, and apply a suitable fungicide based on the crop and label directions.": {
+        "hi": "जल्दी से खेत का निरीक्षण करें, भारी रूप से प्रभावित पत्ते हटा दें, और फसल और लेबल निर्देशों के आधार पर एक उपयुक्त कवकनाशी लगाएं।",
+        "mr": "त्वरित शेताची पाहणी करा, जास्त प्रादुर्भाव झालेली पाने काढून टाका आणि पिकाच्या लेबलवरील सूचनांनुसार योग्य बुरशीनाशक वापरा."
+    },
+    "Use resistant varieties, avoid excessive nitrogen, and maintain field airflow.": {
+        "hi": "प्रतिरोधी किस्मों का उपयोग करें, अत्यधिक नाइट्रोजन से बचें और खेत में हवा का प्रवाह बनाए रखें।",
+        "mr": "रोगप्रतिकारक जातींचा वापर करा, जास्त नायट्रोजन टाळा आणि शेतात हवा खेळती ठेवा."
+    },
+    "Prune the worst affected leaves and use crop-safe protection if symptoms keep expanding.": {
+        "hi": "सबसे खराब प्रभावित पत्तियों की छंटाई करें और यदि लक्षण बढ़ते रहें तो फसल-सुरक्षित सुरक्षा का उपयोग करें।",
+        "mr": "सर्वात जास्त खराब झालेली पाने छाटून टाका आणि जर लक्षणे वाढत राहिली तर पिकासाठी सुरक्षित औषधे वापरा."
+    },
+    "Avoid continuous leaf wetness, sanitize tools, and improve airflow around plants.": {
+        "hi": "पत्तियों को लगातार गीला न रखें, उपकरणों को सैनिटाइज करें और पौधों के आसपास हवा के प्रवाह में सुधार करें।",
+        "mr": "पाने सतत ओले राहू देऊ नका, अवजारे स्वच्छ ठेवा आणि झाडांभोवती हवा खेळती राहील याची काळजी घ्या."
+    },
+    "Remove infected tissue and apply a recommended fungicide quickly before the infection spreads.": {
+        "hi": "संक्रमित ऊतकों को हटा दें और संक्रमण फैलने से पहले जल्दी से अनुशंसित कवकनाशी लगाएं।",
+        "mr": "संसर्ग झालेला भाग काढून टाका आणि प्रादुर्भाव पसरण्यापूर्वी शिफारस केलेले बुरशीनाशक ताबडतोब वापरा."
+    },
+    "Avoid crowding, reduce humidity buildup, and inspect the underside of leaves regularly.": {
+        "hi": "पौधों को सघन न लगाएं, उमस को कम करें और नियमित रूप से पत्तियों के निचले हिस्से का निरीक्षण करें।",
+        "mr": "झाडे दाटीवाटीने लावू नका, आर्द्रता कमी करा आणि पानांच्या खालच्या बाजूची नियमित पाहणी करा."
+    },
+    "Confirm the disease in the field and use a crop-specific treatment after checking the active ingredient and label guidance.": {
+        "hi": "खेत में रोग की पुष्टि करें और सक्रिय सामग्री और लेबल मार्गदर्शन की जांच के बाद फसल-विशिष्ट उपचार का उपयोग करें।",
+        "mr": "शेतात रोगाची खात्री करा आणि औषधाचा घटक व लेबलवरील माहिती वाचूनच योग्य उपचार करा."
+    },
+    "Keep the field clean, avoid plant stress, and monitor symptom spread closely.": {
+        "hi": "खेत को साफ रखें, पौधों के तनाव से बचें और लक्षणों के प्रसार की बारीकी से निगरानी करें।",
+        "mr": "शेत स्वच्छ ठेवा, झाडांवर ताण येणार नाही याची काळजी घ्या आणि रोगाच्या लक्षणांकडे बारीक लक्ष ठेवा."
+    },
+    "Low": {"hi": "कम", "mr": "कमी"},
+    "Medium": {"hi": "मध्यम", "mr": "मध्यम"},
+    "High": {"hi": "उच्च", "mr": "जास्त"},
+    "Image unclear or unsupported plant sample": {
+        "hi": "छवि अस्पष्ट या असमर्थित पौधा नमूना",
+        "mr": "प्रतिमा अस्पष्ट आहे किंवा हे पीक समर्थित नाही"
+    },
+    "Upload a close, well-lit leaf image with a plain background. Avoid blurred or distant photos.": {
+        "hi": "सादे बैकग्राउंड के साथ एक पास की, अच्छी रोशनी वाली पत्ती की छवि अपलोड करें। धुंधली या दूर की तस्वीरों से बचें।",
+        "mr": "साध्या पार्श्वभूमीवर स्पष्ट आणि उजेडात घेतलेला पाण्याचा फोटो अपलोड करा. धूसर किंवा लांबून घेतलेले फोटो टाळा."
+    },
+    "Use one leaf per photo and make sure the affected area is visible.": {
+        "hi": "प्रति फोटो एक पत्ता उपयोग करें और सुनिश्चित करें कि प्रभावित क्षेत्र दिखाई दे रहा है।",
+        "mr": "एका फोटोत एकच पान वापरा आणि रोगाचा भाग स्पष्ट दिसेल याची खात्री करा."
+    },
+    "Unknown": {"hi": "अज्ञात", "mr": "अज्ञात"},
+}
+
+def translate_backend_text(text: str, language: str) -> str:
+    if language == "en" or not text:
+        return text
+    
+    trans_entry = BACKEND_TRANSLATIONS.get(text)
+    if trans_entry:
+        return trans_entry.get(language, text)
+    return text
+
 # ==================== HELPER FUNCTIONS ====================
 
 class ImageContent:
@@ -380,58 +456,52 @@ async def get_llm_chat(system_message: str, session_id: str = None) -> LlmChat:
 def build_chat_reply(message: str, language: str = "en") -> str:
     prompt_lower = message.lower().strip()
 
-    # Handle simple arithmetic
-    if "+" in prompt_lower or "-" in prompt_lower or "*" in prompt_lower or "/" in prompt_lower:
-        try:
-            # Basic sanitization and evaluation
-            clean_prompt = "".join(c for c in prompt_lower if c in "0123456789+-*/. ")
-            if clean_prompt:
-                result = eval(clean_prompt)
-                return f"The calculation '{clean_prompt.strip()}' equals {result}. How can I help with your crops today?"
-        except:
-            pass
-
     # Generic greetings
-    if prompt_lower in ["hi", "hello", "hii", "hey"]:
-        return "Hello! I am your Farmex AI assistant. I can help with crop recommendations, weather planning, irrigation, and more. What is on your mind?"
+    if prompt_lower in ["hi", "hello", "hii", "hey", "नमस्ते"]:
+        replies = {
+            "en": "Hello! I am your Farmex AI assistant. I can help with crop recommendations, weather planning, irrigation, and more. What is on your mind?",
+            "hi": "नमस्ते! मैं आपका फार्मएक्स एआई सहायक हूं। मैं फसल की सिफारिशों, मौसम नियोजन, सिंचाई और बहुत कुछ में मदद कर सकता हूं। आपके मन में क्या है?",
+            "mr": "नमस्कार! मी तुमचा फार्मएक्स एआय सहाय्यक आहे. मी पीक शिफारसी, हवामान नियोजन, सिंचन आणि बरेच काही करण्यात मदत करू शकतो. तुमच्या मनात काय आहे?"
+        }
+        return replies.get(language, replies["en"])
 
+    reply = ""
     if "summer" in prompt_lower and ("crop" in prompt_lower or "plant" in prompt_lower):
-        reply = (
-            "For summer conditions, start with crops that handle heat and variable water well. "
-            "Good options are maize, groundnut, bajra, pulses, and short-duration vegetables. "
-            "Choose based on your soil type, irrigation access, and local market demand."
-        )
+        replies = {
+            "en": "For summer conditions, start with crops that handle heat and variable water well. Good options are maize, groundnut, bajra, pulses, and short-duration vegetables.",
+            "hi": "गर्मी की स्थिति के लिए, उन फसलों से शुरू करें जो गर्मी और पानी की कमी को अच्छी तरह से सहन करती हैं। अच्छे विकल्प मक्का, मूंगफली, बाजरा, दलहन और कम अवधि वाली सब्जियां हैं।",
+            "mr": "उन्हाळ्याच्या परिस्थितीसाठी, उष्णता आणि पाण्याची कमतरता चांगल्या प्रकारे सहन करणाऱ्या पिकांपासून सुरुवात करा. मका, भुईमूग, बाजरी, कडधान्ये आणि कमी कालावधीच्या भाज्या हे चांगले पर्याय आहेत."
+        }
+        reply = replies.get(language, replies["en"])
     elif "water" in prompt_lower and "rice" in prompt_lower:
-        reply = (
-            "Rice usually needs regular moisture, especially during transplanting, tillering, and flowering. "
-            "Avoid over-irrigation all day long. Keep the field moist, allow controlled wetting and drying when possible, "
-            "and adjust based on rainfall and soil type."
-        )
+        replies = {
+            "en": "Rice usually needs regular moisture, especially during transplanting and flowering. Keep the field moist and adjust based on rainfall.",
+            "hi": "चावल को आमतौर पर नियमित नमी की आवश्यकता होती है, विशेष रूप से रोपाई और फूल आने के दौरान। खेत को नम रखें और बारिश के आधार पर समायोजन करें।",
+            "mr": "तांदळाला सहसा नियमित आर्द्रतेची गरज असते, विशेषतः लावणी आणि फुलोऱ्याच्या वेळी. शेत ओलसर ठेवा आणि पावसाच्या आधारे बदल करा."
+        }
+        reply = replies.get(language, replies["en"])
     elif "blight" in prompt_lower or "disease" in prompt_lower or "leaf spot" in prompt_lower:
-        reply = (
-            "Remove heavily affected leaves first, avoid overhead watering, improve airflow around the crop, "
-            "and use a crop-safe fungicide only if the spread is increasing. Monitor new leaves every 2 to 3 days."
-        )
-    elif "harvest" in prompt_lower and "wheat" in prompt_lower:
-        reply = (
-            "Harvest wheat when the crop turns golden, grains are hard, and moisture is low enough for safe storage. "
-            "Avoid harvesting after unexpected rain and dry the harvested grain properly before storage."
-        )
+        replies = {
+            "en": "Remove heavily affected leaves first, avoid overhead watering, and improve airflow around the crop. Monitor new leaves every 2 to 3 days.",
+            "hi": "सबसे पहले भारी प्रभावित पत्तियों को हटा दें, ओवरहेड पानी देने से बचें और फसल के चारों ओर हवा के प्रवाह में सुधार करें। हर 2 से 3 दिनों में नई पत्तियों की निगरानी करें।",
+            "mr": "प्रथम जास्त प्रादुर्भाव झालेली पाने काढून टाका, वरून पाणी देणे टाळा आणि पिकाभोवती हवा खेळती राहील याची काळजी घ्या. दर २ ते ३ दिवसांनी नवीन पानांची पाहणी करा."
+        }
+        reply = replies.get(language, replies["en"])
     elif "fertilizer" in prompt_lower:
-        reply = (
-            "Use fertilizer in split doses instead of one heavy application. Match the nutrient plan to crop stage, "
-            "soil condition, and irrigation availability to reduce waste and improve uptake."
-        )
+        replies = {
+            "en": "Use fertilizer in split doses instead of one heavy application. Match the nutrient plan to crop stage and soil condition.",
+            "hi": "एक भारी प्रयोग के बजाय विभाजित खुराक में उर्वरक का उपयोग करें। पोषक तत्व योजना को फसल के चरण और मिट्टी की स्थिति से मिलाएं।",
+            "mr": "खताचा एकदाच मोठा वापर करण्याऐवजी विभागून डोस द्या. पोषक तत्वांचे नियोजन पिकाची अवस्था आणि जमिनीच्या स्थितीनुसार करा."
+        }
+        reply = replies.get(language, replies["en"])
     else:
-        reply = (
-            "Please share your crop, location, soil type, season, and the exact problem. "
-            "I can then suggest irrigation, crop choice, disease treatment, or harvest guidance."
-        )
+        replies = {
+            "en": "Please share your crop, location, soil type, and the exact problem. I can then suggest irrigation, crop choice, or disease treatment.",
+            "hi": "कृपया अपनी फसल, स्थान, मिट्टी का प्रकार और सटीक समस्या साझा करें। फिर मैं सिंचाई, फसल चुनाव या रोग उपचार का सुझाव दे सकता हूं।",
+            "mr": "कृपया तुमचे पीक, ठिकाण, जमिनीचा प्रकार आणि नेमकी समस्या सांगा. त्यानंतर मी सिंचन, पीक निवड किंवा रोग उपचाराबद्दल सुचवू शकतो."
+        }
+        reply = replies.get(language, replies["en"])
 
-    if language == "hi":
-        return (
-            "सलाह: " + reply
-        )
     return reply
 
 def build_mock_ai_response(prompt: str):
@@ -681,52 +751,52 @@ def normalize_calendar_response(calendar_data: Any, planting_date: str) -> Any:
     calendar_data["activities"] = normalized_activities
     return calendar_data
 
-def build_disease_guidance(label: str) -> Dict[str, str]:
+def build_disease_guidance(label: str, language: str = "en") -> Dict[str, str]:
     normalized = normalize_disease_label(label)
     lower = normalized.lower()
 
     if "healthy" in lower:
         return {
-            "treatment": "No major disease signs detected. Keep monitoring the crop, maintain balanced nutrition, and avoid unnecessary spraying.",
-            "prevention": "Use clean irrigation water, follow field sanitation, and inspect leaves every few days.",
-            "severity": "Low",
+            "treatment": translate_backend_text("No major disease signs detected. Keep monitoring the crop, maintain balanced nutrition, and avoid unnecessary spraying.", language),
+            "prevention": translate_backend_text("Use clean irrigation water, follow field sanitation, and inspect leaves every few days.", language),
+            "severity": translate_backend_text("Low", language),
         }
 
     if "blight" in lower:
         return {
-            "treatment": "Remove badly infected leaves, avoid overhead irrigation, and apply a crop-safe fungicide if spread increases.",
-            "prevention": "Keep enough spacing, reduce leaf wetness, and rotate crops when possible.",
-            "severity": "Medium",
+            "treatment": translate_backend_text("Remove badly infected leaves, avoid overhead irrigation, and apply a crop-safe fungicide if spread increases.", language),
+            "prevention": translate_backend_text("Keep enough spacing, reduce leaf wetness, and rotate crops when possible.", language),
+            "severity": translate_backend_text("Medium", language),
         }
 
     if "rust" in lower:
         return {
-            "treatment": "Scout the field quickly, remove heavily affected foliage, and apply a suitable fungicide based on the crop and label directions.",
-            "prevention": "Use resistant varieties, avoid excessive nitrogen, and maintain field airflow.",
-            "severity": "Medium",
+            "treatment": translate_backend_text("Scout the field quickly, remove heavily affected foliage, and apply a suitable fungicide based on the crop and label directions.", language),
+            "prevention": translate_backend_text("Use resistant varieties, avoid excessive nitrogen, and maintain field airflow.", language),
+            "severity": translate_backend_text("Medium", language),
         }
 
     if "spot" in lower or "leaf" in lower:
         return {
-            "treatment": "Prune the worst affected leaves and use crop-safe protection if symptoms keep expanding.",
-            "prevention": "Avoid continuous leaf wetness, sanitize tools, and improve airflow around plants.",
-            "severity": "Medium",
+            "treatment": translate_backend_text("Prune the worst affected leaves and use crop-safe protection if symptoms keep expanding.", language),
+            "prevention": translate_backend_text("Avoid continuous leaf wetness, sanitize tools, and improve airflow around plants.", language),
+            "severity": translate_backend_text("Medium", language),
         }
 
     if "mildew" in lower:
         return {
-            "treatment": "Remove infected tissue and apply a recommended fungicide quickly before the infection spreads.",
-            "prevention": "Avoid crowding, reduce humidity buildup, and inspect the underside of leaves regularly.",
-            "severity": "Medium",
+            "treatment": translate_backend_text("Remove infected tissue and apply a recommended fungicide quickly before the infection spreads.", language),
+            "prevention": translate_backend_text("Avoid crowding, reduce humidity buildup, and inspect the underside of leaves regularly.", language),
+            "severity": translate_backend_text("Medium", language),
         }
 
     return {
-        "treatment": "Confirm the disease in the field and use a crop-specific treatment after checking the active ingredient and label guidance.",
-        "prevention": "Keep the field clean, avoid plant stress, and monitor symptom spread closely.",
-        "severity": "Medium",
+        "treatment": translate_backend_text("Confirm the disease in the field and use a crop-specific treatment after checking the active ingredient and label guidance.", language),
+        "prevention": translate_backend_text("Keep the field clean, avoid plant stress, and monitor symptom spread closely.", language),
+        "severity": translate_backend_text("Medium", language),
     }
 
-def detect_plant_disease_from_image(contents: bytes, crop_name: str = "") -> Dict[str, Any]:
+def detect_plant_disease_from_image(contents: bytes, crop_name: str = "", language: str = "en") -> Dict[str, Any]:
     url = f"https://api-inference.huggingface.co/models/{PLANT_DISEASE_MODEL}"
     try:
         processor, model = load_plant_disease_model()
@@ -747,7 +817,7 @@ def detect_plant_disease_from_image(contents: bytes, crop_name: str = "") -> Dic
                 "confidence": "0%",
                 "treatment": "Use a crop-specific classifier for this crop or upload an image from a crop supported by the current model.",
                 "prevention": f"Current model supports crops such as {supported_preview}. Wheat-like cereal crops need a different disease model.",
-                "severity": "Unknown",
+                "severity": translate_backend_text("Unknown", language),
                 "source": "local-model",
                 "supported_crops": supported_crops,
             }
@@ -763,7 +833,7 @@ def detect_plant_disease_from_image(contents: bytes, crop_name: str = "") -> Dic
                     "confidence": "0%",
                     "treatment": "Switch to a model trained on this crop before using disease detection for it.",
                     "prevention": "Avoid trusting cross-crop predictions for unsupported plants.",
-                    "severity": "Unknown",
+                    "severity": translate_backend_text("Unknown", language),
                     "source": "local-model",
                     "supported_crops": supported_crops,
                 }
@@ -773,15 +843,15 @@ def detect_plant_disease_from_image(contents: bytes, crop_name: str = "") -> Dic
 
         score = float(probabilities[predicted_class].item())
         label = model.config.id2label.get(predicted_class, "Unknown")
-        guidance = build_disease_guidance(label)
+        guidance = build_disease_guidance(label, language)
 
         if score < 0.45:
             return {
-                "disease_name": "Image unclear or unsupported plant sample",
+                "disease_name": translate_backend_text("Image unclear or unsupported plant sample", language),
                 "confidence": f"{round(score * 100, 1)}%",
-                "treatment": "Upload a close, well-lit leaf image with a plain background. Avoid blurred or distant photos.",
-                "prevention": "Use one leaf per photo and make sure the affected area is visible.",
-                "severity": "Unknown",
+                "treatment": translate_backend_text("Upload a close, well-lit leaf image with a plain background. Avoid blurred or distant photos.", language),
+                "prevention": translate_backend_text("Use one leaf per photo and make sure the affected area is visible.", language),
+                "severity": translate_backend_text("Unknown", language),
                 "source": "local-model",
                 "raw_label": normalize_disease_label(label),
             }
@@ -1145,7 +1215,7 @@ Format as JSON with fields: schedule (array of day objects with date, irrigate, 
 
 # 4. DISEASE DETECTION
 @api_router.post("/disease/detect")
-async def detect_disease(file: UploadFile = File(...), crop_name: str = Form("")):
+async def detect_disease(file: UploadFile = File(...), crop_name: str = Form(""), language: str = Form("en")):
     """AI-powered plant disease detection from image"""
     try:
         # Read image file
@@ -1156,6 +1226,7 @@ async def detect_disease(file: UploadFile = File(...), crop_name: str = Form("")
             {
                 "image_hash": image_hash,
                 "crop_name": crop_name,
+                "language": language,
             },
         )
         cached_detection = await safe_find_one("disease_detections", {"cache_key": cache_key})
@@ -1164,7 +1235,7 @@ async def detect_disease(file: UploadFile = File(...), crop_name: str = Form("")
                 "detection": cached_detection["detection_result"],
                 "filename": file.filename,
             }
-        response = detect_plant_disease_from_image(contents, crop_name)
+        response = detect_plant_disease_from_image(contents, crop_name, language)
         
         # Save to database
         detection_doc = {

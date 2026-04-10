@@ -36,7 +36,7 @@ function DiseaseDetection() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!selectedFile) {
-      setError('Please select an image first');
+      setError(t('Please select an image first'));
       return;
     }
 
@@ -45,6 +45,7 @@ function DiseaseDetection() {
 
     const formData = new FormData();
     formData.append('file', selectedFile);
+    formData.append('language', language);
 
     try {
       const response = await axios.post(`${API}/disease/detect`, formData, {
@@ -52,7 +53,7 @@ function DiseaseDetection() {
       });
       setDetection(response.data);
     } catch (err) {
-      setError('Failed to detect disease. Please try again with a different image.');
+      setError(t('Failed to detect disease. Please try again with a different image.'));
       console.error(err);
     } finally {
       setLoading(false);
@@ -86,7 +87,7 @@ function DiseaseDetection() {
                   {preview ? (
                     <div>
                       <img src={preview} alt="Preview" className="mx-auto mb-4 max-h-64 rounded-lg shadow-lg" />
-                      <p className="text-sm text-gray-600 dark:text-gray-400 dark:text-gray-300">Click to change image</p>
+                      <p className="text-sm text-gray-600 dark:text-gray-400 dark:text-gray-300">{t("Click to change image")}</p>
                     </div>
                   ) : (
                     <div>
@@ -128,14 +129,14 @@ function DiseaseDetection() {
               <div className="space-y-6">
                 <FeaturePanel
                   tone={tone}
-                  title="Analysis complete"
-                  subtitle="Same image now returns the same disease result, which keeps the diagnosis stable while you review treatment steps."
+                  title={t("Analysis complete")}
+                  subtitle={t("Same image now returns the same disease result, which keeps the diagnosis stable while you review treatment steps.")}
                 >
                   <div className="flex flex-wrap items-center gap-3">
-                    <StatusBadge tone={tone}>Stable output</StatusBadge>
+                    <StatusBadge tone={tone}>{t("Stable output")}</StatusBadge>
                     <div className="flex items-center gap-2 text-sm font-medium text-slate-600">
                       <CheckCircle className="h-4 w-4 text-rose-600" />
-                      File: {detection.filename}
+                      {t("File")}: {detection.filename}
                     </div>
                   </div>
                 </FeaturePanel>
@@ -181,8 +182,8 @@ function DiseaseDetection() {
             ) : (
               <EmptyFeatureState
                 icon={Bug}
-                title="Scan the leaf, not just upload it"
-                description="Add a plant image to see the diagnosis, confidence, severity, treatment, and prevention guidance in a more useful clinical layout."
+                title={t("Scan the leaf, not just upload it")}
+                description={t("Add a plant image to see the diagnosis, confidence, severity, treatment, and prevention guidance in a more useful clinical layout.")}
               />
             )}
           </div>

@@ -263,10 +263,10 @@ function Dashboard() {
                                 <div className="text-lg font-black text-emerald-600 dark:text-emerald-400 leading-none">
                                   {cropData[activePieIndex].value}
                                 </div>
-                                <div className="text-[10px] font-bold text-slate-400 dark:text-slate-500 dark:text-slate-400 uppercase mt-1">{t('Farms')}</div>
+                                <div className="text-[10px] font-bold text-slate-500 dark:text-slate-300 uppercase mt-1">{t('Farms')}</div>
                               </motion.div>
                             ) : (
-                              <div className="text-slate-300 dark:text-slate-700 dark:text-slate-300">
+                              <div className="text-slate-300 dark:text-slate-600">
                                 <Leaf className="h-6 w-6 mx-auto opacity-30" />
                               </div>
                             )}
@@ -280,8 +280,8 @@ function Dashboard() {
                         {activePieIndex >= 0 && cropData[activePieIndex] ? (
                           <motion.div initial={{ x: 10, opacity: 0 }} animate={{ x: 0, opacity: 1 }} className="space-y-4">
                             <div>
-                              <div className="text-xl font-black text-slate-900 dark:text-slate-50 dark:text-white leading-tight">{cropData[activePieIndex].name}</div>
-                              <div className="text-xs text-slate-500 dark:text-slate-400 mt-1">{t('Total representation across your holdings.')}</div>
+                              <div className="text-xl font-black text-slate-900 dark:text-slate-50 leading-tight">{cropData[activePieIndex].name}</div>
+                              <div className="text-xs text-slate-500 dark:text-slate-300 mt-1">{t('Total representation across your holdings.')}</div>
                             </div>
                             <div className="flex items-center gap-2">
                               <div className="h-2 w-2 rounded-full" style={{ backgroundColor: COLORS[activePieIndex % COLORS.length] }} />
@@ -341,16 +341,16 @@ function Dashboard() {
                         {activeBarIndex >= 0 && areaData[activeBarIndex] ? (
                           <motion.div initial={{ x: 10, opacity: 0 }} animate={{ x: 0, opacity: 1 }} className="space-y-3">
                             <div>
-                              <div className="text-lg font-black text-slate-900 dark:text-slate-50 dark:text-white truncate max-w-[120px]" title={areaData[activeBarIndex].name}>
+                              <div className="text-lg font-black text-slate-900 dark:text-slate-50 truncate max-w-[120px]" title={areaData[activeBarIndex].name}>
                                 {areaData[activeBarIndex].name}
                               </div>
-                              <div className="text-[10px] text-slate-500 dark:text-slate-400 font-bold uppercase mt-1">{areaData[activeBarIndex].area} {t('Acres')}</div>
+                              <div className="text-[10px] text-slate-500 dark:text-slate-300 font-bold uppercase mt-1">{areaData[activeBarIndex].area} {t('Acres')}</div>
                             </div>
                             <div className="pt-2">
-                              <div className="text-[9px] font-black text-slate-400 dark:text-slate-600 uppercase tracking-widest mb-1">{t('Produce')}</div>
+                              <div className="text-[9px] font-black text-slate-500 dark:text-slate-300 uppercase tracking-widest mb-1">{t('Produce')}</div>
                               <div className="flex flex-wrap gap-1">
                                 {areaData[activeBarIndex].crops.slice(0, 3).map((c, i) => (
-                                  <span key={i} className="text-[9px] font-bold text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-900/20 dark:bg-emerald-950/50 px-1.5 py-0.5 rounded-md">
+                                  <span key={i} className="text-[9px] font-bold text-emerald-600 dark:text-emerald-300 bg-emerald-50 dark:bg-emerald-900/40 dark:bg-emerald-950 px-1.5 py-0.5 rounded-md">
                                     {c}
                                   </span>
                                 ))}
@@ -476,10 +476,10 @@ function Dashboard() {
                     whileHover={{ scale: 1.05, y: -4 }}
                   >
                     <stat.icon className="h-4 w-4 text-emerald-500 mx-auto mb-1" />
-                    <div className="text-xl font-black text-slate-900 dark:text-slate-50 dark:text-white">
+                    <div className="text-xl font-black text-slate-900 dark:text-slate-50">
                       <AnimatedCounter value={stat.value} suffix={stat.suffix} />
                     </div>
-                    <div className="text-xs text-slate-500 dark:text-slate-400 mt-1 font-medium">{t(stat.label)}</div>
+                    <div className="text-xs text-slate-500 dark:text-slate-300 mt-1 font-medium">{t(stat.label)}</div>
                   </motion.div>
                 ))}
               </div>
@@ -495,7 +495,7 @@ function Dashboard() {
             <h2 className="text-4xl font-black tracking-tight text-slate-900 dark:text-slate-50" data-testid="features-heading">
               {t('Agricultural OS Ecosystem')}
             </h2>
-            <p className="mt-4 max-w-2xl text-lg text-slate-600 dark:text-slate-400">
+            <p className="mt-4 max-w-2xl text-lg text-slate-700 dark:text-slate-300">
               {t('A cinematic suite of tools designed to maximize farm yield and minimize operation risks through deep tech integration.')}
             </p>
           </div>
@@ -525,7 +525,7 @@ function Dashboard() {
                       
                       <div className="flex-1">
                         <h3 className="text-2xl font-bold text-slate-900 dark:text-slate-50 tracking-tight">{t(feature.title)}</h3>
-                        <p className="mt-3 text-base leading-relaxed text-slate-600 dark:text-slate-400">{t(feature.description)}</p>
+                        <p className="mt-3 text-base leading-relaxed text-slate-700 dark:text-slate-300">{t(feature.description)}</p>
                       </div>
 
                       <div className="mt-8 flex items-center justify-between">
@@ -564,7 +564,7 @@ function Dashboard() {
             <div className="relative z-10 flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
               <div className="max-w-3xl">
                 <h2 className="text-2xl font-bold text-slate-900 dark:text-slate-50">{t('Quick access')}</h2>
-                <p className="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">
+                <p className="mt-2 text-sm leading-6 text-slate-700 dark:text-slate-300">
                   {t('Jump directly into the modules most useful for setting up and validating the product.')}
                 </p>
               </div>

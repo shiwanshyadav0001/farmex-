@@ -66,28 +66,28 @@ function SoilInsights() {
                 data-testid="get-soil-insights-btn"
               >
                 <MapPin className="h-5 w-5" />
-                {loading ? 'Analyzing...' : 'Get Insights'}
+                {loading ? t('Analyzing...') : t('Get Insights')}
               </button>
             </form>
 
             <div className="mt-6 rounded-xl bg-gradient-to-br from-amber-100 to-orange-100 p-6 shadow-sm">
-              <h3 className="mb-3 font-semibold text-amber-900">What You&apos;ll Get:</h3>
+              <h3 className="mb-3 font-semibold text-amber-900">{t("What You'll Get")}:</h3>
               <ul className="space-y-2 text-sm text-amber-800">
                 <li className="flex items-center gap-2">
                   <span className="h-1.5 w-1.5 rounded-full bg-amber-400" />
-                  Soil type distribution in your region
+                  {t("Soil type distribution in your region")}
                 </li>
                 <li className="flex items-center gap-2">
                   <span className="h-1.5 w-1.5 rounded-full bg-amber-400" />
-                  Rainfall patterns and monsoon timing
+                  {t("Rainfall patterns and monsoon timing")}
                 </li>
                 <li className="flex items-center gap-2">
                   <span className="h-1.5 w-1.5 rounded-full bg-amber-400" />
-                  Water retention characteristics
+                  {t("Water retention characteristics")}
                 </li>
                 <li className="flex items-center gap-2">
                   <span className="h-1.5 w-1.5 rounded-full bg-amber-400" />
-                  Irrigation requirements
+                  {t("Irrigation requirements")}
                 </li>
               </ul>
             </div>
@@ -98,20 +98,20 @@ function SoilInsights() {
             {loading ? (
               <div className="flex flex-col items-center justify-center py-16">
                 <Map className="mb-4 h-16 w-16 animate-pulse text-amber-600" />
-                <p className="text-gray-600 dark:text-gray-400 dark:text-gray-300">Gathering geo-based insights...</p>
+                <p className="text-gray-600 dark:text-gray-400 dark:text-gray-300">{t("Gathering geo-based insights...")}</p>
               </div>
             ) : insights ? (
               <div className="space-y-6">
                 <FeaturePanel
                   tone="amber"
-                  title={`Analysis for ${insights.location}`}
-                  subtitle="Same location now returns the same soil insight pack, so your land profile stays consistent."
+                  title={`${t("Analysis for")} ${insights.location}`}
+                  subtitle={t("Same location now returns the same soil insight pack, so your land profile stays consistent.")}
                 >
                   <div className="flex flex-wrap items-center gap-3">
-                    <StatusBadge tone="amber">Stable output</StatusBadge>
+                    <StatusBadge tone="amber">{t("Stable output")}</StatusBadge>
                     <div className="flex items-center gap-2 text-sm font-medium text-slate-600">
                       <CheckCircle2 className="h-4 w-4 text-amber-600" />
-                      Terrain profile ready
+                      {t("Terrain profile ready")}
                     </div>
                   </div>
                 </FeaturePanel>
@@ -119,13 +119,13 @@ function SoilInsights() {
                 {(detail.soil_types || detail.rainfall_pattern || detail.characteristics) ? (
                   <>
                     <div className="grid gap-3 md:grid-cols-3">
-                      <MetricTile tone="amber" label="Soil types" value={Array.isArray(detail.soil_types) ? detail.soil_types.length : '--'} hint="Regional type signals" />
-                      <MetricTile tone="amber" label="Water retention" value={detail.water_retention || '--'} hint="Moisture holding behavior" />
-                      <MetricTile tone="amber" label="Irrigation need" value={detail.irrigation_needs ? 'Defined' : '--'} hint="Field watering guidance" />
+                      <MetricTile tone="amber" label={t("Soil types")} value={Array.isArray(detail.soil_types) ? detail.soil_types.length : '--'} hint={t("Regional type signals")} />
+                      <MetricTile tone="amber" label={t("Water retention")} value={detail.water_retention || '--'} hint={t("Moisture holding behavior")} />
+                      <MetricTile tone="amber" label={t("Irrigation need")} value={detail.irrigation_needs ? t('Defined') : '--'} hint={t("Field watering guidance")} />
                     </div>
 
                     {Array.isArray(detail.soil_types) && detail.soil_types.length > 0 ? (
-                      <FeaturePanel tone="amber" title="Dominant soil profile" subtitle="These soil types shape crop suitability and water behavior in the selected region.">
+                      <FeaturePanel tone="amber" title={t("Dominant soil profile")} subtitle={t("These soil types shape crop suitability and water behavior in the selected region.")}>
                         <div className="flex flex-wrap gap-2">
                           {detail.soil_types.map((soilType, index) => (
                             <StatusBadge key={`${soilType}-${index}`} tone="amber">{soilType}</StatusBadge>
@@ -136,19 +136,19 @@ function SoilInsights() {
 
                     <div className="grid gap-4">
                       {detail.characteristics ? (
-                        <FeaturePanel tone="amber" title="Soil characteristics">
+                        <FeaturePanel tone="amber" title={t("Soil characteristics")}>
                           <ResultRenderer data={detail.characteristics} />
                         </FeaturePanel>
                       ) : null}
 
                       {detail.rainfall_pattern ? (
-                        <FeaturePanel tone="amber" title="Rainfall pattern">
+                        <FeaturePanel tone="amber" title={t("Rainfall pattern")}>
                           <ResultRenderer data={detail.rainfall_pattern} />
                         </FeaturePanel>
                       ) : null}
 
                       {Array.isArray(detail.monsoon_months) && detail.monsoon_months.length > 0 ? (
-                        <FeaturePanel tone="amber" title="Monsoon window">
+                        <FeaturePanel tone="amber" title={t("Monsoon window")}>
                           <div className="flex flex-wrap gap-2">
                             {detail.monsoon_months.map((month, index) => (
                               <StatusBadge key={`${month}-${index}`} tone="amber">{month}</StatusBadge>
@@ -158,7 +158,7 @@ function SoilInsights() {
                       ) : null}
 
                       {detail.irrigation_needs ? (
-                        <FeaturePanel tone="amber" title="Irrigation requirement">
+                        <FeaturePanel tone="amber" title={t("Irrigation requirement")}>
                           <ResultRenderer data={detail.irrigation_needs} />
                         </FeaturePanel>
                       ) : null}
@@ -171,11 +171,11 @@ function SoilInsights() {
                 )}
 
                 {insights.current_weather ? (
-                  <FeaturePanel tone="cyan" title="Current climate context" subtitle="Live weather is shown next to the regional soil signal so land advice feels grounded in present conditions.">
+                  <FeaturePanel tone="cyan" title={t("Current climate context")} subtitle={t("Live weather is shown next to the regional soil signal so land advice feels grounded in present conditions.")}>
                     <div className="grid gap-3 md:grid-cols-3">
-                      <MetricTile tone="cyan" label="Temperature" value={`${Math.round(insights.current_weather.temp)} deg`} />
-                      <MetricTile tone="cyan" label="Humidity" value={`${insights.current_weather.humidity}%`} />
-                      <MetricTile tone="cyan" label="Weather" value={insights.current_weather.description || '--'} hint="Current sky state" />
+                      <MetricTile tone="cyan" label={t("Temperature")} value={`${Math.round(insights.current_weather.temp)} deg`} />
+                      <MetricTile tone="cyan" label={t("Humidity")} value={`${insights.current_weather.humidity}%`} />
+                      <MetricTile tone="cyan" label={t("Weather")} value={t(insights.current_weather.description) || '--'} hint={t("Current sky state")} />
                     </div>
                   </FeaturePanel>
                 ) : null}
@@ -183,8 +183,8 @@ function SoilInsights() {
             ) : (
               <EmptyFeatureState
                 icon={CloudRain}
-                title="Read the land before planting"
-                description="Enter a location to see soil types, rainfall memory, monsoon timing, and irrigation behavior for that region."
+                title={t("Read the land before planting")}
+                description={t("Enter a location to see soil types, rainfall memory, monsoon timing, and irrigation behavior for that region.")}
               />
             )}
           </div>

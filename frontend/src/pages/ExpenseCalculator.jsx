@@ -65,7 +65,7 @@ function ExpenseCalculator() {
       const response = await axios.post(`${API}/expense/calculate`, payload);
       setAnalysis(response.data);
     } catch (err) {
-      setError('Failed to calculate expenses. Please try again.');
+      setError(t('Failed to calculate expenses. Please try again.'));
       console.error(err);
     } finally {
       setLoading(false);
@@ -80,14 +80,13 @@ function ExpenseCalculator() {
     parseFloat(formData.irrigation_cost || 0) +
     parseFloat(formData.other_costs || 0);
 
-  const finance = analysis?.analysis || {};
   const costBreakdown = [
-    { label: 'Seeds', value: Number(formData.seed_cost || 0) },
-    { label: 'Fertilizer', value: Number(formData.fertilizer_cost || 0) },
-    { label: 'Pesticides', value: Number(formData.pesticide_cost || 0) },
-    { label: 'Labor', value: Number(formData.labor_cost || 0) },
-    { label: 'Irrigation', value: Number(formData.irrigation_cost || 0) },
-    { label: 'Other', value: Number(formData.other_costs || 0) },
+    { label: t('Seeds'), value: Number(formData.seed_cost || 0) },
+    { label: t('Fertilizer'), value: Number(formData.fertilizer_cost || 0) },
+    { label: t('Pesticides'), value: Number(formData.pesticide_cost || 0) },
+    { label: t('Labor'), value: Number(formData.labor_cost || 0) },
+    { label: t('Irrigation'), value: Number(formData.irrigation_cost || 0) },
+    { label: t('Other'), value: Number(formData.other_costs || 0) },
   ];
 
   return (
@@ -142,7 +141,7 @@ function ExpenseCalculator() {
                   ['other_costs', 'Other Costs', 'expense-other-input'],
                 ].map(([key, label, testId]) => (
                   <div key={key}>
-                    <label className="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300 dark:text-gray-200">{t(`${label} (Rs)`)}</label>
+                    <label className="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300 dark:text-gray-200">{t(label)} (Rs)</label>
                     <input
                       type="number"
                       step="0.01"
@@ -197,20 +196,20 @@ function ExpenseCalculator() {
             {loading ? (
               <div className="flex flex-col items-center justify-center py-16">
                 <TrendingUp className="mb-4 h-16 w-16 animate-pulse text-emerald-600" />
-                <p className="text-gray-600 dark:text-gray-400 dark:text-gray-300">{t('Analyzing financial projections...')}</p>
+                <p className="text-gray-600 dark:text-gray-400 dark:text-gray-300">{t("Analyzing financial projections...")}</p>
               </div>
             ) : analysis ? (
               <div className="space-y-6">
                 <FeaturePanel
                   tone="emerald"
-                  title="Financial projection complete"
-                  subtitle="Same expense inputs now return the same analysis, so your profit planning no longer shifts between clicks."
+                  title={t("Financial projection complete")}
+                  subtitle={t("Same expense inputs now return the same analysis, so your profit planning no longer shifts between clicks.")}
                 >
                   <div className="flex flex-wrap items-center gap-3">
-                    <StatusBadge tone="emerald">Stable output</StatusBadge>
+                    <StatusBadge tone="emerald">{t("Stable output")}</StatusBadge>
                     <div className="flex items-center gap-2 text-sm font-medium text-slate-600">
                       <CheckCircle2 className="h-4 w-4 text-emerald-600" />
-                      ROI signal generated
+                      {t("ROI signal generated")}
                     </div>
                   </div>
                 </FeaturePanel>
@@ -226,7 +225,7 @@ function ExpenseCalculator() {
                       <MetricTile tone="emerald" label={t("ROI")} value={finance.roi || '--'} />
                     </div>
 
-                    <FeaturePanel tone="emerald" title="Cost stack" subtitle="Your live input costs are shown as a real breakdown instead of disappearing behind the result box.">
+                    <FeaturePanel tone="emerald" title={t("Cost stack")} subtitle={t("Your live input costs are shown as a real breakdown instead of disappearing behind the result box.")}>
                       <div className="space-y-3">
                         {costBreakdown.map((item) => (
                           <div key={item.label} className="grid gap-2 md:grid-cols-[120px_1fr_auto] md:items-center">
@@ -245,13 +244,13 @@ function ExpenseCalculator() {
 
                     <div className="grid gap-4">
                       {finance.breakeven_yield ? (
-                        <FeaturePanel tone="emerald" title="Break-even point">
+                        <FeaturePanel tone="emerald" title={t("Break-even point")}>
                           <p className="text-sm leading-7 text-slate-700 dark:text-slate-300">{finance.breakeven_yield}</p>
                         </FeaturePanel>
                       ) : null}
 
                       {Array.isArray(finance.recommendations) ? (
-                        <FeaturePanel tone="emerald" title="Recommendations">
+                        <FeaturePanel tone="emerald" title={t("Recommendations")}>
                           <div className="space-y-3">
                             {finance.recommendations.map((item, index) => (
                               <div key={`${item}-${index}`} className="rounded-2xl border border-emerald-100 bg-white dark:bg-slate-900 px-4 py-4 text-sm leading-7 text-slate-700 dark:text-slate-300">
@@ -261,7 +260,7 @@ function ExpenseCalculator() {
                           </div>
                         </FeaturePanel>
                       ) : finance.recommendations ? (
-                        <FeaturePanel tone="emerald" title="Recommendations">
+                        <FeaturePanel tone="emerald" title={t("Recommendations")}>
                           <p className="text-sm leading-7 text-slate-700 dark:text-slate-300">{finance.recommendations}</p>
                         </FeaturePanel>
                       ) : null}
@@ -276,8 +275,8 @@ function ExpenseCalculator() {
             ) : (
               <EmptyFeatureState
                 icon={DollarSign}
-                title="Turn costs into a profit view"
-                description="Enter expenses and expected yield to see revenue, margin, ROI, break-even, and action recommendations in a clearer finance layout."
+                title={t("Turn costs into a profit view")}
+                description={t("Enter expenses and expected yield to see revenue, margin, ROI, break-even, and action recommendations in a clearer finance layout.")}
               />
             )}
           </div>

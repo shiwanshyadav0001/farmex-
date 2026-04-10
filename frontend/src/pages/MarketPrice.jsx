@@ -36,7 +36,7 @@ function MarketPrice() {
       const response = await axios.post(`${API}/market/predict`, formData);
       setPrediction(response.data);
     } catch (err) {
-      setError('Failed to predict market prices. Please try again.');
+      setError(t('Failed to predict market prices. Please try again.'));
       console.error(err);
     } finally {
       setLoading(false);
@@ -117,7 +117,7 @@ function MarketPrice() {
                 {loading ? (
                   <>
                     <Loader className="h-5 w-5 animate-spin" />
-                    Analyzing Market...
+                    {t("Analyzing Market...")}
                   </>
                 ) : (
                   <>
@@ -132,20 +132,20 @@ function MarketPrice() {
             {loading ? (
               <div className="flex flex-col items-center justify-center py-16">
                 <Loader className="mb-4 h-16 w-16 animate-spin text-purple-600" />
-                <p className="text-gray-600 dark:text-gray-400 dark:text-gray-300">Analyzing market trends...</p>
+                <p className="text-gray-600 dark:text-gray-400 dark:text-gray-300">{t("Analyzing market trends...")}</p>
               </div>
             ) : prediction ? (
               <div className="space-y-6">
                 <FeaturePanel
                   tone="violet"
-                  title={`Market signal for ${prediction.crop}`}
-                  subtitle="Same crop and location now return the same prediction, so price planning does not jump around between clicks."
+                  title={`${t("Market signal for")} ${prediction.crop}`}
+                  subtitle={t("Same crop and location now return the same prediction, so price planning does not jump around between clicks.")}
                 >
                   <div className="flex flex-wrap items-center gap-3">
-                    <StatusBadge tone="violet">Stable output</StatusBadge>
+                    <StatusBadge tone="violet">{t("Stable output")}</StatusBadge>
                     <div className="flex items-center gap-2 text-sm font-medium text-slate-600">
                       <CheckCircle2 className="h-4 w-4 text-violet-600" />
-                      Market trend analysis ready
+                      {t("Market trend analysis ready")}
                     </div>
                   </div>
                 </FeaturePanel>
@@ -153,18 +153,18 @@ function MarketPrice() {
                 {market.current_price_range || forecast.length ? (
                   <>
                     <div className="grid gap-3 md:grid-cols-3">
-                      <MetricTile tone="violet" label="Current range" value={market.current_price_range || '--'} hint="Estimated mandi range" />
-                      <MetricTile tone={tone} label="Trend" value={market.trend || '--'} hint="Near-term outlook" />
-                      <MetricTile tone="violet" label="Best action" value={market.recommendation ? 'Decision ready' : '--'} hint={formData.location || 'Waiting for location'} />
+                      <MetricTile tone="violet" label={t("Current range")} value={market.current_price_range || '--'} hint={t("Estimated mandi range")} />
+                      <MetricTile tone={tone} label={t("Trend")} value={t(market.trend) || '--'} hint={t("Near-term outlook")} />
+                      <MetricTile tone="violet" label={t("Best action")} value={market.recommendation ? t('Decision ready') : '--'} hint={formData.location || t('Waiting for location')} />
                     </div>
 
                     {forecast.length > 0 ? (
-                      <FeaturePanel tone="violet" title="3-month forecast track" subtitle="Each month is shown as a forward-looking price pulse rather than plain JSON text.">
+                      <FeaturePanel tone="violet" title={t("3-month forecast track")} subtitle={t("Each month is shown as a forward-looking price pulse rather than plain JSON text.")}>
                         <div className="grid gap-4 md:grid-cols-3">
                           {forecast.map((item, index) => (
                             <div key={`${item.month}-${index}`} className="rounded-[28px] border border-violet-100 bg-white dark:bg-slate-900 p-5 shadow-[0_18px_55px_rgba(15,23,42,0.08)]">
-                              <StatusBadge tone={trendTone(item.trend)}>{item.trend || 'stable'}</StatusBadge>
-                              <h3 className="mt-3 text-2xl font-black text-slate-900 dark:text-slate-50">{item.month}</h3>
+                              <StatusBadge tone={trendTone(item.trend)}>{t(item.trend) || t('stable')}</StatusBadge>
+                              <h3 className="mt-3 text-2xl font-black text-slate-900 dark:text-slate-50">{t(item.month)}</h3>
                               <div className="mt-3 text-lg font-bold text-slate-700 dark:text-slate-300">{renderValue(item.price_range) || '--'}</div>
                             </div>
                           ))}
@@ -174,7 +174,7 @@ function MarketPrice() {
 
                     <div className="grid gap-4">
                       {Array.isArray(market.factors) && market.factors.length > 0 ? (
-                        <FeaturePanel tone="violet" title="Price drivers" subtitle="These are the strongest reasons behind the current market outlook.">
+                        <FeaturePanel tone="violet" title={t("Price drivers")} subtitle={t("These are the strongest reasons behind the current market outlook.")}>
                           <div className="flex flex-wrap gap-2">
                             {market.factors.map((factor, index) => (
                               <StatusBadge key={`${factor}-${index}`} tone="violet">{factor}</StatusBadge>
@@ -184,7 +184,7 @@ function MarketPrice() {
                       ) : null}
 
                       {market.recommendation ? (
-                        <FeaturePanel tone={tone} title="Sell recommendation" subtitle="Action guidance generated from the current price range and trend signal.">
+                        <FeaturePanel tone={tone} title={t("Sell recommendation")} subtitle={t("Action guidance generated from the current price range and trend signal.")}>
                           <ResultRenderer data={market.recommendation} />
                         </FeaturePanel>
                       ) : null}
@@ -196,15 +196,15 @@ function MarketPrice() {
                   </FeaturePanel>
                 )}
 
-                <FeaturePanel tone="amber" title="Planning note" subtitle="Market prices remain estimates, but the UI now presents them in a clearer decision-ready format.">
-                  <p className="text-sm leading-7 text-slate-700 dark:text-slate-300">Actual mandi prices can still vary by week, trader demand, arrivals, and weather-linked supply changes.</p>
+                <FeaturePanel tone="amber" title={t("Planning note")} subtitle={t("Market prices remain estimates, but the UI now presents them in a clearer decision-ready format.")}>
+                  <p className="text-sm leading-7 text-slate-700 dark:text-slate-300">{t("Actual mandi prices can still vary by week, trader demand, arrivals, and weather-linked supply changes.")}</p>
                 </FeaturePanel>
               </div>
             ) : (
               <EmptyFeatureState
                 icon={BarChart3}
-                title="Turn inputs into a live price outlook"
-                description="Enter a crop and location to see current range, monthly direction, demand factors, and the best selling recommendation."
+                title={t("Turn inputs into a live price outlook")}
+                description={t("Enter a crop and location to see current range, monthly direction, demand factors, and the best selling recommendation.")}
               />
             )}
           </div>
