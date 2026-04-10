@@ -1,0 +1,935 @@
+{
+  "farms": [
+    {
+      "id": "713c8d1c-1088-4835-b305-e0638cf1c493",
+      "user_name": "shiwanshyadav",
+      "user_email": "sy8973577@gmail.com",
+      "location": "mumbai",
+      "latitude": 20.5937,
+      "longitude": 78.9629,
+      "soil_type": "Loamy",
+      "total_area": 2.0,
+      "current_crops": [
+        "rice"
+      ],
+      "created_at": "2026-04-10T13:12:27.940282+00:00"
+    },
+    {
+      "id": "8cf4078f-9d5e-4083-9339-29c2c00c72b2",
+      "user_name": "jitesh",
+      "user_email": "sy8973577@gmail.com",
+      "location": "mumbai",
+      "latitude": 20.5937,
+      "longitude": 78.9629,
+      "soil_type": "Loamy",
+      "total_area": 10.0,
+      "current_crops": [
+        "wheat"
+      ],
+      "created_at": "2026-04-10T13:12:54.647503+00:00"
+    },
+    {
+      "id": "deed18b9-ffa3-4a19-854f-7a0b0bdc4d58",
+      "user_name": "anurag jha ",
+      "user_email": "sy8973577@gmail.com",
+      "location": "mumbai",
+      "latitude": 20.5937,
+      "longitude": 78.9629,
+      "soil_type": "Chalky",
+      "total_area": 50.0,
+      "current_crops": [
+        "corn"
+      ],
+      "created_at": "2026-04-10T13:13:43.773150+00:00"
+    }
+  ],
+  "crop_recommendations": [
+    {
+      "id": "2e3c1e29-e9f7-42a7-a83b-3d36283e2f35",
+      "cache_key": "crop_recommendation:9dc324037798bf5a5515684eb89703d988e426cea9124d0a2d380a8ceff63f68",
+      "location": "mumbai",
+      "soil_type": "Sandy",
+      "season": "Monsoon",
+      "recommendation": {
+        "crops": [
+          {
+            "name": "Rice",
+            "reason": "High monsoon rainfall and sandy soil with good drainage support rice cultivation; Mumbai region traditionally grows paddy.",
+            "yield_estimate": "4-5 tonnes per acre",
+            "growing_tips": "Use well-drained fields, apply balanced NPK fertilizer, ensure proper irrigation during early growth, control weeds and pests with integrated management."
+          },
+          {
+            "name": "Maize",
+            "reason": "Maize thrives in warm monsoon temperatures and sandy loam; high yield potential in Mumbai.",
+            "yield_estimate": "2.5-3 tonnes per acre",
+            "growing_tips": "Plant in well-fertilized beds, maintain 30-35 cm spacing, use mulch to retain moisture, monitor for pests like stem borers."
+          },
+          {
+            "name": "Okra",
+            "reason": "Okra is a heat\u2011tolerant vegetable that performs well in sandy soils and monsoon climate.",
+            "yield_estimate": "1.5-2 tonnes per acre",
+            "growing_tips": "Plant in raised beds, provide 2-3 m spacing, use drip irrigation, apply compost, and harvest regularly to encourage fruit set."
+          },
+          {
+            "name": "Eggplant",
+            "reason": "Eggplant prefers warm temperatures and sandy soils; suitable for monsoon season in Mumbai.",
+            "yield_estimate": "1.2-1.5 tonnes per acre",
+            "growing_tips": "Plant in well\u2011drained beds, use mulch, apply balanced fertilizer, and control pests like whiteflies."
+          },
+          {
+            "name": "Chickpea",
+            "reason": "Chickpeas are drought\u2011tolerant and can be sown after monsoon rains; sandy soil drains well.",
+            "yield_estimate": "0.8-1 tonne per acre",
+            "growing_tips": "Sow in early monsoon, use nitrogen\u2011fixing inoculants, maintain proper spacing, and monitor for root rot."
+          }
+        ]
+      },
+      "timestamp": "2026-04-10T13:36:40.443070+00:00"
+    },
+    {
+      "id": "1955389b-d687-44fa-905a-f564922466b8",
+      "cache_key": "crop_recommendation:364d351a2a24481f548adb528c430ef0f5fef8cae2a97bb966454963edfd2a3e",
+      "location": "mumbai",
+      "soil_type": "Loamy",
+      "season": "Winter",
+      "recommendation": {
+        "crops": [
+          {
+            "name": "Okra",
+            "reason": "Thrives in warm winter temperatures and loamy soil, high market demand",
+            "yield_estimate": "10-12 t/acre",
+            "growing_tips": "Sow seeds 2-3 weeks after last frost, 30-45 cm spacing, mulch to retain moisture, apply balanced NPK 10-10-10, control pests with neem oil"
+          },
+          {
+            "name": "Spinach",
+            "reason": "Cold tolerant, fast-growing, suitable for loamy soil",
+            "yield_estimate": "5-6 t/acre",
+            "growing_tips": "Plant in early winter, 20-25 cm spacing, keep soil moist, use compost, harvest leaves every 2-3 weeks"
+          },
+          {
+            "name": "Lettuce",
+            "reason": "Prefers cooler temperatures, quick turnover, loamy soil ideal",
+            "yield_estimate": "4-5 t/acre",
+            "growing_tips": "Sow in rows 30 cm apart, mulch, maintain 18-20\u00b0C soil, use drip irrigation, prevent bolting with shade cloth"
+          },
+          {
+            "name": "Coriander",
+            "reason": "Adaptable to warm winter, high culinary demand",
+            "yield_estimate": "3-4 t/acre",
+            "growing_tips": "Plant 15-20 cm apart, keep soil moist, apply organic mulch, harvest stems regularly, watch for aphids"
+          },
+          {
+            "name": "Mustard",
+            "reason": "Cold tolerant, good for winter cropping, loamy soil supports growth",
+            "yield_estimate": "2-3 t/acre",
+            "growing_tips": "Sow 15-20 cm apart, use 20-25 cm row spacing, apply 50 kg/ha N, control weeds, harvest when pods mature"
+          }
+        ]
+      },
+      "timestamp": "2026-04-10T15:25:36.025315+00:00"
+    }
+  ],
+  "irrigation_schedules": [
+    {
+      "id": "7560bff6-8f2f-4679-9822-e3c8892cd0c0",
+      "cache_key": "irrigation_plan:fea36fb8d9363f3e6ed5f1b030e7cb748822d699527119bf47e1466244031448",
+      "farm_id": "8cf4078f-9d5e-4083-9339-29c2c00c72b2",
+      "crop_type": "wheat",
+      "plan": {
+        "schedule": [
+          {
+            "date": "2026-04-10",
+            "irrigate": true,
+            "water_quantity": 24000,
+            "time": "04:00",
+            "notes": "No rain forecast, moderate temp, irrigate to maintain 5\u20116\u202fmm."
+          },
+          {
+            "date": "2026-04-11",
+            "irrigate": false,
+            "water_quantity": 0,
+            "time": "",
+            "notes": "Monitor soil moisture; no irrigation needed."
+          },
+          {
+            "date": "2026-04-12",
+            "irrigate": true,
+            "water_quantity": 24000,
+            "time": "04:00",
+            "notes": "Clear sky, maintain soil moisture."
+          },
+          {
+            "date": "2026-04-13",
+            "irrigate": false,
+            "water_quantity": 0,
+            "time": "",
+            "notes": "No irrigation; check moisture."
+          },
+          {
+            "date": "2026-04-14",
+            "irrigate": true,
+            "water_quantity": 24000,
+            "time": "04:00",
+            "notes": "Irrigate to keep field at 5\u20116\u202fmm."
+          },
+          {
+            "date": "2026-04-15",
+            "irrigate": false,
+            "water_quantity": 0,
+            "time": "",
+            "notes": "No irrigation; monitor."
+          },
+          {
+            "date": "2026-04-16",
+            "irrigate": true,
+            "water_quantity": 24000,
+            "time": "04:00",
+            "notes": "Final irrigation before next cycle."
+          }
+        ]
+      },
+      "timestamp": "2026-04-10T13:37:27.973459+00:00"
+    },
+    {
+      "id": "76a82c94-3bf1-4341-a60d-9d43ce6c4025",
+      "cache_key": "irrigation_plan:9488cc5adf61e9943d889d23127e95f3883d615975b6d33ed2d9a20ae68a69a0",
+      "farm_id": "713c8d1c-1088-4835-b305-e0638cf1c493",
+      "crop_type": "rice",
+      "plan": {
+        "schedule": [
+          {
+            "date": "2026-04-10",
+            "irrigate": "yes",
+            "water_quantity": 20000,
+            "time": "04:00-05:00",
+            "notes": "Clear sky, moderate humidity; irrigate to maintain 5\u202fmm depth."
+          },
+          {
+            "date": "2026-04-11",
+            "irrigate": "yes",
+            "water_quantity": 20000,
+            "time": "04:00-05:00",
+            "notes": "Clear sky, higher humidity; irrigation needed."
+          },
+          {
+            "date": "2026-04-12",
+            "irrigate": "yes",
+            "water_quantity": 20000,
+            "time": "04:00-05:00",
+            "notes": "Clear sky; maintain moisture."
+          },
+          {
+            "date": "2026-04-13",
+            "irrigate": "yes",
+            "water_quantity": 20000,
+            "time": "04:00-05:00",
+            "notes": "Assuming similar conditions; monitor soil moisture."
+          },
+          {
+            "date": "2026-04-14",
+            "irrigate": "yes",
+            "water_quantity": 20000,
+            "time": "04:00-05:00",
+            "notes": "No forecast data; continue irrigation."
+          },
+          {
+            "date": "2026-04-15",
+            "irrigate": "yes",
+            "water_quantity": 20000,
+            "time": "04:00-05:00",
+            "notes": "Continue standard schedule."
+          },
+          {
+            "date": "2026-04-16",
+            "irrigate": "yes",
+            "water_quantity": 20000,
+            "time": "04:00-05:00",
+            "notes": "Maintain moisture; adjust if rainfall occurs."
+          }
+        ]
+      },
+      "timestamp": "2026-04-10T15:26:10.805945+00:00"
+    }
+  ],
+  "disease_detections": [
+    {
+      "id": "3859acd4-8199-4a2f-905f-0d32204980c4",
+      "cache_key": "disease_detection:bae78b3a6fef516d913859767047dcb5f3855e4a2cb3ce08a33d945bfe7730d3",
+      "filename": "tarspot-1.jpg",
+      "crop_name": "",
+      "detection_result": {
+        "disease_name": "Corn (maize) Common rust",
+        "confidence": "97.9%",
+        "treatment": "Scout the field quickly, remove heavily affected foliage, and apply a suitable fungicide based on the crop and label directions.",
+        "prevention": "Use resistant varieties, avoid excessive nitrogen, and maintain field airflow.",
+        "severity": "Medium",
+        "source": "local-model"
+      },
+      "timestamp": "2026-04-10T13:38:40.335187+00:00"
+    }
+  ],
+  "price_predictions": [
+    {
+      "id": "a95e2fe6-c30c-400f-a88c-248e0a54b686",
+      "cache_key": "market_prediction:d98a23180b73f50b1a9a7d751fcdf9e1aa1fa0c3746766ffe9c6d4cfba80ed57",
+      "crop_name": "Rice",
+      "location": "mumbai",
+      "prediction": {
+        "current_price_range": {
+          "min": 1200,
+          "max": 1400
+        },
+        "forecast": [
+          {
+            "month": "May",
+            "price_range": {
+              "min": 1250,
+              "max": 1450
+            }
+          },
+          {
+            "month": "June",
+            "price_range": {
+              "min": 1300,
+              "max": 1500
+            }
+          },
+          {
+            "month": "July",
+            "price_range": {
+              "min": 1350,
+              "max": 1550
+            }
+          }
+        ],
+        "trend": "rising",
+        "factors": [
+          "monsoon onset and rainfall patterns",
+          "increased demand from wholesale markets",
+          "government procurement and price support schemes",
+          "currency fluctuations affecting import costs"
+        ],
+        "recommendation": "Sell in May when prices are expected to peak before the gradual rise in June and July."
+      },
+      "timestamp": "2026-04-10T13:39:07.746440+00:00"
+    },
+    {
+      "id": "8fdd9108-9231-444b-9df7-d045681fe4ec",
+      "cache_key": "market_prediction:dfb84d25efde66f078ef7eaa00f5b65b913a7d5b8f2e4b7ccba3c5b15d538122",
+      "crop_name": "Wheat",
+      "location": "delhi",
+      "prediction": {
+        "current_price_range": "\u20b94,250-\u20b94,550",
+        "forecast": [
+          {
+            "month": "May",
+            "price_range": "\u20b94,300-\u20b94,650"
+          },
+          {
+            "month": "June",
+            "price_range": "\u20b94,350-\u20b94,700"
+          },
+          {
+            "month": "July",
+            "price_range": "\u20b94,400-\u20b94,750"
+          }
+        ],
+        "trend": "rising",
+        "factors": [
+          "Supply constraints due to lower monsoon rainfall in Punjab and Haryana",
+          "Government procurement levels expected to remain steady",
+          "Global wheat prices up due to supply disruptions in major exporters",
+          "Higher input costs (fertilizers, diesel) affecting net margins",
+          "Storage losses expected to increase post-harvest"
+        ],
+        "recommendation": "Sell between early May and mid-June to capture peak prices before the monsoon season reduces demand."
+      },
+      "timestamp": "2026-04-10T13:48:18.939747+00:00"
+    },
+    {
+      "id": "d885a4f4-c2cd-482c-b217-af4280585ace",
+      "cache_key": "market_prediction:02ecc16cb73b8923ec72fdb3d090784d7e4b163f6436522e6400e93de2567173",
+      "crop_name": "Onion",
+      "location": "mumbai",
+      "prediction": {
+        "current_price_range": {
+          "min": 1200,
+          "max": 1400
+        },
+        "forecast": [
+          {
+            "month": "May",
+            "min": 1300,
+            "max": 1500
+          },
+          {
+            "month": "June",
+            "min": 1400,
+            "max": 1600
+          },
+          {
+            "month": "July",
+            "min": 1500,
+            "max": 1700
+          }
+        ],
+        "trend": "rising",
+        "factors": [
+          "monsoon rainfall affecting supply",
+          "storage capacity and spoilage rates",
+          "seasonal demand surge in winter markets",
+          "government price support schemes",
+          "import/export dynamics",
+          "price volatility due to global onion market"
+        ],
+        "recommendation": "Sell in early May when prices peak before monsoon-induced supply constraints, or consider a staggered sale in late June to capture higher prices as post\u2011monsoon demand rises."
+      },
+      "timestamp": "2026-04-10T14:10:44.945386+00:00"
+    },
+    {
+      "id": "9182e7b9-569d-401c-a68f-acb28e255602",
+      "cache_key": "market_prediction:3b36aefc6e2b13ae4b19a2acea2ef3f154b6770e0f8d2b8223adfdf18d918ca0",
+      "crop_name": "Tomato",
+      "location": "mumbai",
+      "prediction": {
+        "current_price_range": {
+          "min": 120,
+          "max": 140
+        },
+        "forecast": [
+          {
+            "month": "May",
+            "price_range": {
+              "min": 125,
+              "max": 145
+            }
+          },
+          {
+            "month": "June",
+            "price_range": {
+              "min": 130,
+              "max": 150
+            }
+          },
+          {
+            "month": "July",
+            "price_range": {
+              "min": 135,
+              "max": 155
+            }
+          }
+        ],
+        "trend": "rising",
+        "factors": [
+          "monsoon onset increasing water availability",
+          "higher demand from restaurants and hotels",
+          "transport cost rise due to fuel price hikes",
+          "expected lower yield from 2025 crop due to late sowing",
+          "import tariffs on imported tomatoes",
+          "consumer preference shift to fresh produce"
+        ],
+        "recommendation": "Sell in May when prices peak before the July rise"
+      },
+      "timestamp": "2026-04-10T14:12:44.025042+00:00"
+    },
+    {
+      "id": "5081b372-4710-4c02-acc5-8f7dca76c198",
+      "cache_key": "market_prediction:aa26726824ef3373c69d15036c8a869a72f5a9eb3746f8c37fa7b354134cf680",
+      "crop_name": "Tea",
+      "location": "mumbai",
+      "prediction": {
+        "current_price_range": {
+          "min": 1200,
+          "max": 1400
+        },
+        "forecast": [
+          {
+            "month": "May",
+            "price_range": {
+              "min": 1250,
+              "max": 1450
+            }
+          },
+          {
+            "month": "June",
+            "price_range": {
+              "min": 1300,
+              "max": 1500
+            }
+          },
+          {
+            "month": "July",
+            "price_range": {
+              "min": 1350,
+              "max": 1550
+            }
+          }
+        ],
+        "trend": "rising",
+        "factors": [
+          "increased demand from premium exporters",
+          "monsoon affecting supply chains",
+          "currency depreciation boosting export competitiveness",
+          "global tea price rally",
+          "storage cost considerations"
+        ],
+        "recommendation": "Sell in June to July when prices peak; if quality is high and storage costs are manageable, holding until July maximizes returns."
+      },
+      "timestamp": "2026-04-10T14:14:49.765923+00:00"
+    },
+    {
+      "id": "6dad7090-09d7-455e-8102-3473c3859977",
+      "cache_key": "market_prediction:a85aa4be613d024e5643a2bca31d0dc2c923a60d23ca9f7b1ee4d5e895a41182",
+      "crop_name": "Cotton",
+      "location": "mumbai",
+      "prediction": {
+        "current_price_range": "\u20b93500-\u20b93800",
+        "forecast": [
+          {
+            "month": "May",
+            "price_range": "\u20b93600-\u20b93900"
+          },
+          {
+            "month": "June",
+            "price_range": "\u20b93700-\u20b94000"
+          },
+          {
+            "month": "July",
+            "price_range": "\u20b93800-\u20b94100"
+          }
+        ],
+        "trend": "rising",
+        "factors": [
+          "Global cotton demand up",
+          "Monsoon expected to reduce supply",
+          "Domestic production forecast moderate",
+          "Government policy supportive of exporters",
+          "Currency depreciation boosting export competitiveness"
+        ],
+        "recommendation": "Sell between early May and mid-June to capture peak prices before monsoon-driven supply constraints."
+      },
+      "timestamp": "2026-04-10T14:17:23.872220+00:00"
+    },
+    {
+      "id": "ac72df6e-a816-45e5-8a1a-81c938280dc3",
+      "cache_key": "market_prediction:4a53372a821d02c78093cd8dd56b560badd45e0e5a38a58959457ac7176fb03f",
+      "crop_name": "Potato",
+      "location": "mumbai",
+      "prediction": {
+        "current_price_range": [
+          20002500
+        ],
+        "forecast": [
+          {
+            "month": "May",
+            "price_range": [
+              21002600
+            ]
+          },
+          {
+            "month": "June",
+            "price_range": [
+              22002700
+            ]
+          },
+          {
+            "month": "July",
+            "price_range": [
+              23002800
+            ]
+          }
+        ],
+        "trend": "rising",
+        "factors": [
+          "Monsoon rainfall affecting supply",
+          "Storage capacity and spoilage",
+          "Demand from processing units",
+          "Price of feed and fertilizer",
+          "Government procurement policies"
+        ],
+        "recommendation": "Sell in early May after monsoon when prices peak and before storage losses increase."
+      },
+      "timestamp": "2026-04-10T15:27:03.484788+00:00"
+    },
+    {
+      "id": "fd53b336-99b6-48d1-8184-dbe64a4e4ee6",
+      "cache_key": "market_prediction:d766858cba4f0e1442d38e7c4e32bdf59ae5f7c886c0a0d602f12fe8f422d6a6",
+      "crop_name": "Corn",
+      "location": "mumbai",
+      "prediction": {
+        "current_price_range": "\u20b9 4,200-4,500 per quintal",
+        "forecast": [
+          {
+            "month": "May",
+            "price_range": "\u20b9 4,300-4,600"
+          },
+          {
+            "month": "June",
+            "price_range": "\u20b9 4,400-4,700"
+          },
+          {
+            "month": "July",
+            "price_range": "\u20b9 4,500-4,800"
+          }
+        ],
+        "trend": "rising",
+        "factors": [
+          "Monsoon delay leading to lower supply",
+          "Global corn prices up due to US drought",
+          "Domestic demand from food processing",
+          "Government procurement policies",
+          "Currency depreciation affecting imports"
+        ],
+        "recommendation": "Sell in May to June when prices peak before July's expected rise, but consider holding until July if storage costs are low."
+      },
+      "timestamp": "2026-04-10T15:27:44.947651+00:00"
+    }
+  ],
+  "soil_insights": [
+    {
+      "id": "2fc595b7-2440-48fe-a35e-79eb1dfd4872",
+      "cache_key": "soil_insights:7d9b37aca0ca3ddd544b936a092115584a2890a8ede72c4cd1fb8a17c9a6ee34",
+      "analysis": {
+        "soil_types": [
+          "Alluvial",
+          "Laterite",
+          "Black Cotton Soil"
+        ],
+        "characteristics": {
+          "texture": "loam to sandy loam",
+          "pH": "6.0-6.5",
+          "fertility": "moderate to high, rich in organic matter",
+          "drainage": "good to moderate",
+          "organic_matter": "10-12%"
+        },
+        "rainfall_pattern": {
+          "average_annual_mm": 2200,
+          "distribution": "high during monsoon, low otherwise"
+        },
+        "monsoon_months": [
+          "June",
+          "July",
+          "August",
+          "September"
+        ],
+        "water_retention": "moderate to high due to loam and organic matter; field capacity ~30-35%",
+        "irrigation_needs": "moderate; supplemental irrigation during dry spells; drip or sprinkler recommended; water use efficiency ~70%"
+      },
+      "timestamp": "2026-04-10T13:39:30.450906+00:00"
+    }
+  ],
+  "farming_calendars": [
+    {
+      "id": "723012f6-2906-4653-b28e-3439248deec2",
+      "cache_key": "farming_calendar:7c1c62ee7d72d794aa917e10b65fe5a7d1c1990da2fd159e284493d9611170bd",
+      "crop_name": "rice ",
+      "planting_date": "2026-04-10",
+      "calendar": {
+        "activities": [
+          {
+            "date": "2026-04-10",
+            "activity": "Land Preparation",
+            "description": "Clear weeds, level field, and till the soil to a fine seedbed.",
+            "priority": "High"
+          },
+          {
+            "date": "2026-04-17",
+            "activity": "Soil Testing",
+            "description": "Collect soil samples to determine pH and nutrient levels for tailored fertilization.",
+            "priority": "High"
+          },
+          {
+            "date": "2026-04-24",
+            "activity": "Baseline Fertilizer Application",
+            "description": "Apply basal dose of NPK based on soil test results (e.g., 50\u202fkg\u202f/\u202fha N, 30\u202fkg\u202f/\u202fha P\u2082O\u2085, 30\u202fkg\u202f/\u202fha K\u2082O).",
+            "priority": "Medium"
+          },
+          {
+            "date": "2026-05-01",
+            "activity": "Irrigation System Check",
+            "description": "Inspect and repair sprinkler/pipe network to ensure uniform water distribution.",
+            "priority": "Medium"
+          },
+          {
+            "date": "2026-05-08",
+            "activity": "Seed Selection & Seedling Raising",
+            "description": "Choose high\u2011yield, disease\u2011resistant variety; raise seedlings in nursery 2\u20133\u202fweeks before transplanting.",
+            "priority": "High"
+          },
+          {
+            "date": "2026-04-10",
+            "activity": "Transplanting",
+            "description": "Plant 2\u2011week old seedlings at 20\u202fcm \u00d7 20\u202fcm spacing (\u22482.0\u202facres).",
+            "priority": "High"
+          },
+          {
+            "date": "2026-04-20",
+            "activity": "First Fertilization",
+            "description": "Apply 30\u202fkg\u202f/\u202fha N, 15\u202fkg\u202f/\u202fha P\u2082O\u2085, 15\u202fkg\u202f/\u202fha K\u2082O at tillering stage.",
+            "priority": "Medium"
+          },
+          {
+            "date": "2026-05-01",
+            "activity": "Irrigation",
+            "description": "Maintain 5\u20137\u202fcm water depth; irrigate every 3\u20134\u202fdays.",
+            "priority": "Medium"
+          },
+          {
+            "date": "2026-05-15",
+            "activity": "Pest Scouting",
+            "description": "Inspect for planthoppers, rice stem borers; record incidence.",
+            "priority": "High"
+          },
+          {
+            "date": "2026-06-01",
+            "activity": "Second Fertilization",
+            "description": "Apply 20\u202fkg\u202f/\u202fha N, 10\u202fkg\u202f/\u202fha P\u2082O\u2085, 10\u202fkg\u202f/\u202fha K\u2082O at panicle initiation.",
+            "priority": "Medium"
+          },
+          {
+            "date": "2026-06-15",
+            "activity": "Irrigation",
+            "description": "Continue 5\u20137\u202fcm water depth; adjust frequency to 2\u20133\u202fdays.",
+            "priority": "Medium"
+          },
+          {
+            "date": "2026-07-01",
+            "activity": "Third Fertilization",
+            "description": "Apply 15\u202fkg\u202f/\u202fha N, 5\u202fkg\u202f/\u202fha P\u2082O\u2085, 5\u202fkg\u202f/\u202fha K\u2082O at heading.",
+            "priority": "Medium"
+          },
+          {
+            "date": "2026-07-15",
+            "activity": "Pest Control",
+            "description": "Apply insecticide (e.g., imidacloprid) if pest threshold exceeded; use IPM practices.",
+            "priority": "High"
+          },
+          {
+            "date": "2026-08-01",
+            "activity": "Irrigation",
+            "description": "Maintain water depth; reduce frequency to 4\u20135\u202fdays as grain fills.",
+            "priority": "Medium"
+          },
+          {
+            "date": "2026-08-15",
+            "activity": "Final Fertilization",
+            "description": "Apply 10\u202fkg\u202f/\u202fha N, 5\u202fkg\u202f/\u202fha P\u2082O\u2085, 5\u202fkg\u202f/\u202fha K\u2082O to boost grain quality.",
+            "priority": "Medium"
+          },
+          {
+            "date": "2026-09-01",
+            "activity": "Irrigation",
+            "description": "Stop irrigation 7\u201310\u202fdays before expected harvest to reduce moisture.",
+            "priority": "Medium"
+          },
+          {
+            "date": "2026-09-10",
+            "activity": "Harvest",
+            "description": "Harvest mature panicles using combine; aim for 90% grain maturity.",
+            "priority": "High"
+          },
+          {
+            "date": "2026-09-15",
+            "activity": "Threshing",
+            "description": "Separate grains from straw; remove chaff and husks.",
+            "priority": "High"
+          },
+          {
+            "date": "2026-09-20",
+            "activity": "Drying",
+            "description": "Dry grains to 14% moisture using solar dryers or mechanical dryers.",
+            "priority": "High"
+          },
+          {
+            "date": "2026-09-25",
+            "activity": "Storage",
+            "description": "Store grains in ventilated silos; monitor for pests and moisture.",
+            "priority": "High"
+          },
+          {
+            "date": "2026-09-30",
+            "activity": "Field Cleanup",
+            "description": "Remove leftover straw, clean equipment, and prepare field for next season.",
+            "priority": "Low"
+          }
+        ]
+      },
+      "timestamp": "2026-04-10T13:39:55.344263+00:00"
+    },
+    {
+      "id": "681cf974-8071-464f-be08-24e6bdb9306f",
+      "cache_key": "farming_calendar:2fcf326d80f89f4d4da209a66fc5a1c9df453475ab9d6d4b25c89f604e3106cf",
+      "crop_name": "wheat",
+      "planting_date": "2026-04-10",
+      "calendar": {
+        "activities": [
+          {
+            "date": "2026-04-10",
+            "activity": "Soil Test",
+            "description": "Collect soil samples from the 2.0 acre field to determine nutrient levels and pH.",
+            "priority": "low"
+          },
+          {
+            "date": "2026-04-17",
+            "activity": "Fertilizer Application",
+            "description": "Apply baseline nitrogen, phosphorus, and potassium based on soil test results.",
+            "priority": "medium"
+          },
+          {
+            "date": "2026-04-24",
+            "activity": "Tillage",
+            "description": "Perform deep tillage to break up clods and prepare a fine seedbed.",
+            "priority": "medium"
+          },
+          {
+            "date": "2026-05-01",
+            "activity": "Seedbed Preparation",
+            "description": "Level the field, remove debris, and ensure proper seedbed moisture.",
+            "priority": "medium"
+          },
+          {
+            "date": "2026-04-10",
+            "activity": "Planting",
+            "description": "Plant wheat seeds at a rate of 120 lbs/acre, 1.5 inches deep, 30 inches apart.",
+            "priority": "high"
+          },
+          {
+            "date": "2026-04-15",
+            "activity": "Irrigation",
+            "description": "Apply 0.5 inches of water to support early root development.",
+            "priority": "medium"
+          },
+          {
+            "date": "2026-04-18",
+            "activity": "Weed Control",
+            "description": "Apply pre-emergent herbicide to suppress weed growth.",
+            "priority": "medium"
+          },
+          {
+            "date": "2026-04-24",
+            "activity": "First Fertilization",
+            "description": "Apply 30 lbs/acre of nitrogen to support tillering.",
+            "priority": "high"
+          },
+          {
+            "date": "2026-05-01",
+            "activity": "Irrigation",
+            "description": "Apply 0.5 inches of water to maintain soil moisture during stem elongation.",
+            "priority": "medium"
+          },
+          {
+            "date": "2026-05-05",
+            "activity": "Fungal Disease Management",
+            "description": "Apply fungicide to protect against early-season rust and mildew.",
+            "priority": "medium"
+          },
+          {
+            "date": "2026-05-08",
+            "activity": "Second Fertilization",
+            "description": "Apply 30 lbs/acre of nitrogen to support grain filling.",
+            "priority": "high"
+          },
+          {
+            "date": "2026-05-15",
+            "activity": "Irrigation",
+            "description": "Apply 0.5 inches of water to support grain development.",
+            "priority": "medium"
+          },
+          {
+            "date": "2026-05-20",
+            "activity": "Pest Scouting",
+            "description": "Inspect for insect pests and apply insecticide if thresholds are exceeded.",
+            "priority": "medium"
+          },
+          {
+            "date": "2026-05-22",
+            "activity": "Third Fertilization",
+            "description": "Apply 20 lbs/acre of nitrogen to finalize grain filling.",
+            "priority": "high"
+          },
+          {
+            "date": "2026-05-29",
+            "activity": "Irrigation",
+            "description": "Apply 0.5 inches of water to maintain optimal moisture during late grain filling.",
+            "priority": "medium"
+          },
+          {
+            "date": "2026-06-15",
+            "activity": "Final Pest Control",
+            "description": "Apply late-season insecticide to protect against aphids and other pests.",
+            "priority": "medium"
+          },
+          {
+            "date": "2026-07-30",
+            "activity": "Harvest",
+            "description": "Harvest wheat when grain moisture is 12-14% using combine.",
+            "priority": "high"
+          },
+          {
+            "date": "2026-08-01",
+            "activity": "Threshing",
+            "description": "Separate grain from straw and clean the grain.",
+            "priority": "high"
+          },
+          {
+            "date": "2026-08-03",
+            "activity": "Cleaning",
+            "description": "Remove foreign matter and dry the grain to 13% moisture.",
+            "priority": "high"
+          },
+          {
+            "date": "2026-08-05",
+            "activity": "Storage",
+            "description": "Store grain in a dry, well-ventilated facility.",
+            "priority": "high"
+          },
+          {
+            "date": "2026-08-07",
+            "activity": "Field Cleanup",
+            "description": "Remove residue, repair equipment, and prepare field for next season.",
+            "priority": "medium"
+          }
+        ]
+      },
+      "timestamp": "2026-04-10T15:28:58.676748+00:00"
+    }
+  ],
+  "risk_analyses": [
+    {
+      "id": "4adecbbb-fb05-4b77-bdd0-4608e5a1ac1e",
+      "cache_key": "risk_analysis:6c01a7a2aceeec6baeec737b569f5ef227d6b4baca0eeef08a0a2221c07f6143",
+      "farm_id": "713c8d1c-1088-4835-b305-e0638cf1c493",
+      "analysis": {
+        "weather_risks": "Drought risk moderate due to low rainfall forecast; flood risk low in short term but potential later; frost risk negligible; extreme heat risk moderate as temperatures around 31\u00b0C with high feels-like 34\u00b0C.",
+        "disease_risks": "Rice blast and bacterial leaf blight risk moderate; pest pressure from stem borers and planthoppers moderate; dry conditions may reduce fungal diseases but high humidity can promote others.",
+        "market_risks": "Price volatility moderate; small acreage limits hedging; market influenced by government procurement and monsoon supply.",
+        "operational_risks": "Labor shortages, equipment maintenance, water availability, pest control costs, regulatory compliance.",
+        "mitigation_strategies": [
+          "Implement drip irrigation and water conservation to mitigate drought; schedule irrigation to avoid waterlogging; use disease-resistant rice varieties; apply timely fungicides and insecticides; monitor weather for heat stress; diversify crop mix; consider crop insurance; lock in prices via forward contracts; maintain equipment; train labor; comply with regulations."
+        ],
+        "overall_risk_score": "Medium"
+      },
+      "timestamp": "2026-04-10T13:40:34.166558+00:00"
+    }
+  ],
+  "expenses": [
+    {
+      "id": "37c48240-4561-46c5-a156-435404ff3a06",
+      "cache_key": "expense_analysis:421d52b33ba935ca6ee0bf04538485696c98b53033d2cdd3ff77152dc3a59217",
+      "farm_id": "713c8d1c-1088-4835-b305-e0638cf1c493",
+      "crop_name": "rice",
+      "total_expenses": 4000.0,
+      "expected_yield": 2.0,
+      "analysis": {
+        "price_per_quintal": 2500,
+        "total_revenue": 5000,
+        "profit": 1000,
+        "profit_margin": 20,
+        "roi": 25,
+        "breakeven_yield": 1.6,
+        "recommendations": "Consider adopting high\u2011yield varieties, optimize fertilizer use, explore cost\u2011effective irrigation methods, and diversify crops to mitigate price volatility."
+      },
+      "timestamp": "2026-04-10T13:43:44.380297+00:00"
+    }
+  ]
+}

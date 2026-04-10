@@ -1,0 +1,182 @@
+export const SUPPORTED_LANGUAGES = [
+  { code: 'en', label: 'English' },
+  { code: 'hi', label: 'हिंदी' },
+  { code: 'mr', label: 'मराठी' },
+];
+
+export const LANGUAGE_TO_LOCALE = {
+  en: 'en-IN',
+  hi: 'hi-IN',
+  mr: 'mr-IN',
+};
+
+const phraseMap = {
+  'Farmex Workspace': { hi: 'फार्मेक्स वर्कस्पेस', mr: 'फार्मेक्स कार्यक्षेत्र' },
+  Today: { hi: 'आज', mr: 'आज' },
+  Live: { hi: 'लाइव', mr: 'लाइव्ह' },
+  Dashboard: { hi: 'डैशबोर्ड', mr: 'डॅशबोर्ड' },
+  Overview: { hi: 'सारांश', mr: 'आढावा' },
+  'Weather Forecast': { hi: 'मौसम पूर्वानुमान', mr: 'हवामान अंदाज' },
+  'Live climate': { hi: 'लाइव मौसम', mr: 'थेट हवामान' },
+  'Crop Recommendation': { hi: 'फसल सिफारिश', mr: 'पिक शिफारस' },
+  'AI crop fit': { hi: 'एआई फसल सुझाव', mr: 'एआय पिक निवड' },
+  'Irrigation Planner': { hi: 'सिंचाई योजनाकार', mr: 'सिंचन नियोजक' },
+  'Water planning': { hi: 'पानी योजना', mr: 'पाणी नियोजन' },
+  'Disease Detection': { hi: 'रोग पहचान', mr: 'रोग शोध' },
+  'Image diagnosis': { hi: 'छवि जांच', mr: 'प्रतिमा तपासणी' },
+  'Market Prices': { hi: 'बाजार मूल्य', mr: 'बाजारभाव' },
+  'Price outlook': { hi: 'मूल्य रुझान', mr: 'भाव अंदाज' },
+  'Soil & Rainfall': { hi: 'मिट्टी और वर्षा', mr: 'माती आणि पर्जन्य' },
+  'Land intelligence': { hi: 'भूमि जानकारी', mr: 'जमीन माहिती' },
+  'Farming Calendar': { hi: 'खेती कैलेंडर', mr: 'शेती दिनदर्शिका' },
+  'Season planning': { hi: 'सीजन योजना', mr: 'हंगाम नियोजन' },
+  'Risk Analysis': { hi: 'जोखिम विश्लेषण', mr: 'जोखीम विश्लेषण' },
+  'Farm risks': { hi: 'खेती जोखिम', mr: 'शेती जोखीम' },
+  'Voice Assistant': { hi: 'वॉइस असिस्टेंट', mr: 'व्हॉइस असिस्टंट' },
+  'Ask Farmex': { hi: 'फार्मेक्स से पूछें', mr: 'फार्मेक्सला विचारा' },
+  'Expense Calculator': { hi: 'खर्च कैलकुलेटर', mr: 'खर्च कॅल्क्युलेटर' },
+  'Profit view': { hi: 'मुनाफा दृश्य', mr: 'नफा दृश्य' },
+  'Farm Management': { hi: 'फार्म प्रबंधन', mr: 'शेत व्यवस्थापन' },
+  'Farm records': { hi: 'फार्म रिकॉर्ड', mr: 'शेत नोंदी' },
+  'Farm records, AI advice, weather, and risk tools in one place.': { hi: 'एक ही जगह पर फार्म रिकॉर्ड, एआई सलाह, मौसम और जोखिम उपकरण।', mr: 'एकाच ठिकाणी शेत नोंदी, एआय सल्ला, हवामान आणि जोखीम साधने.' },
+  'Language': { hi: 'भाषा', mr: 'भाषा' },
+  'Farmex AI Agriculture Platform': { hi: 'फार्मेक्स एआई कृषि प्लेटफ़ॉर्म', mr: 'फार्मेक्स एआय कृषी प्लॅटफॉर्म' },
+  'Smarter farm decisions with weather, soil, crop, and risk insights in one place': { hi: 'मौसम, मिट्टी, फसल और जोखिम जानकारी के साथ बेहतर खेती निर्णय एक ही जगह पर', mr: 'हवामान, माती, पिके आणि जोखीम माहिती एकाच ठिकाणी घेऊन अधिक चांगले शेती निर्णय' },
+  'Farmex helps farmers plan crops, manage water, study risks, organize farm records, and get practical guidance through a clean and simple interface.': { hi: 'फार्मेक्स किसानों को फसल योजना, पानी प्रबंधन, जोखिम समझने, फार्म रिकॉर्ड रखने और आसान इंटरफ़ेस के साथ व्यावहारिक सलाह पाने में मदद करता है।', mr: 'फार्मेक्स शेतकऱ्यांना पिकांची योजना, पाणी व्यवस्थापन, जोखीम समजून घेणे, शेत नोंदी ठेवणे आणि सोप्या इंटरफेसमधून उपयुक्त मार्गदर्शन मिळवण्यात मदत करते.' },
+  'Get Started': { hi: 'शुरू करें', mr: 'सुरू करा' },
+  'Check Weather': { hi: 'मौसम देखें', mr: 'हवामान पहा' },
+  'Core Platform Coverage': { hi: 'मुख्य प्लेटफ़ॉर्म कवरेज', mr: 'मुख्य प्लॅटफॉर्म कव्हरेज' },
+  'Decision support with crop recommendation and farm planning': { hi: 'फसल सिफारिश और फार्म योजना के साथ निर्णय समर्थन', mr: 'पिक शिफारस आणि शेत नियोजनासह निर्णय सहाय्य' },
+  'Resource optimization through irrigation and expense tools': { hi: 'सिंचाई और खर्च उपकरणों के माध्यम से संसाधन अनुकूलन', mr: 'सिंचन आणि खर्च साधनांद्वारे संसाधन अनुकूलन' },
+  'Integrated weather, soil, and crop-related insights': { hi: 'एकीकृत मौसम, मिट्टी और फसल संबंधी जानकारी', mr: 'एकत्रित हवामान, माती आणि पिकाशी संबंधित माहिती' },
+  'Rural-friendly flows with simple forms and voice assistant': { hi: 'सरल फॉर्म और वॉइस असिस्टेंट के साथ ग्रामीण अनुकूल उपयोग', mr: 'सोपे फॉर्म आणि व्हॉइस असिस्टंटसह ग्रामीण वापरासाठी अनुकूल प्रवाह' },
+  'Main features available in the website': { hi: 'वेबसाइट में उपलब्ध मुख्य सुविधाएँ', mr: 'वेबसाइटमध्ये उपलब्ध मुख्य सुविधा' },
+  'These modules cover the main agriculture decision and resource-management flows already present in Farmex.': { hi: 'ये मॉड्यूल फार्मेक्स में पहले से मौजूद मुख्य कृषि निर्णय और संसाधन प्रबंधन प्रवाह को कवर करते हैं।', mr: 'हे मॉड्यूल फार्मेक्समध्ये आधीपासून असलेल्या मुख्य कृषी निर्णय आणि संसाधन व्यवस्थापन प्रवाहांना कव्हर करतात.' },
+  'Current conditions and forecast support for location-based farm planning.': { hi: 'स्थान आधारित फार्म योजना के लिए वर्तमान मौसम और पूर्वानुमान समर्थन।', mr: 'ठिकाणावर आधारित शेत नियोजनासाठी सध्याच्या हवामान आणि अंदाजाची मदत.' },
+  'AI-assisted crop suggestions based on location, soil, season, and area.': { hi: 'स्थान, मिट्टी, मौसम और क्षेत्रफल के आधार पर एआई फसल सुझाव।', mr: 'ठिकाण, माती, हंगाम आणि क्षेत्रफळावर आधारित एआय पिक सूचना.' },
+  'Water scheduling tools to help optimize irrigation and farm resource use.': { hi: 'सिंचाई और संसाधन उपयोग को बेहतर बनाने के लिए पानी शेड्यूलिंग उपकरण।', mr: 'सिंचन आणि शेत संसाधन वापर सुधारण्यासाठी पाणी वेळापत्रक साधने.' },
+  'Regional soil and rainfall insights for better field-level decisions.': { hi: 'बेहतर खेत-स्तरीय निर्णयों के लिए क्षेत्रीय मिट्टी और वर्षा जानकारी।', mr: 'शेतस्तर निर्णयांसाठी प्रादेशिक माती आणि पर्जन्य माहिती.' },
+  'Weather, disease, market, and operational risk review for each farm.': { hi: 'हर फार्म के लिए मौसम, रोग, बाजार और संचालन जोखिम समीक्षा।', mr: 'प्रत्येक शेतासाठी हवामान, रोग, बाजार आणि कामकाज जोखीम पुनरावलोकन.' },
+  'Simple assistant flow for quick agricultural guidance in English, Hindi, and Marathi.': { hi: 'अंग्रेज़ी, हिंदी और मराठी में त्वरित कृषि मार्गदर्शन के लिए सरल असिस्टेंट।', mr: 'इंग्रजी, हिंदी आणि मराठीत त्वरित कृषी मार्गदर्शनासाठी सोपा सहाय्यक.' },
+  'Open module': { hi: 'मॉड्यूल खोलें', mr: 'मॉड्यूल उघडा' },
+  'Quick access': { hi: 'त्वरित पहुँच', mr: 'त्वरित प्रवेश' },
+  'Jump directly into the modules most useful for setting up and validating the product.': { hi: 'उत्पाद को जल्दी सेटअप और जांचने के लिए सबसे उपयोगी मॉड्यूल पर सीधे जाएँ।', mr: 'सेटअप आणि उत्पादन तपासणीसाठी सर्वात उपयुक्त मॉड्यूल्सकडे थेट जा.' },
+  'Real-time weather data and 7-day forecasts': { hi: 'रीयल-टाइम मौसम डेटा और 7-दिन का पूर्वानुमान', mr: 'रीअल-टाइम हवामान डेटा आणि 7 दिवसांचा अंदाज' },
+  'Please enter a location': { hi: 'कृपया स्थान दर्ज करें', mr: 'कृपया ठिकाण टाका' },
+  'Failed to fetch weather data. Please try again.': { hi: 'मौसम डेटा प्राप्त नहीं हो सका। कृपया फिर से प्रयास करें।', mr: 'हवामान डेटा मिळवता आला नाही. कृपया पुन्हा प्रयत्न करा.' },
+  'Location': { hi: 'स्थान', mr: 'ठिकाण' },
+  'Enter city name (e.g., Mumbai, Delhi)': { hi: 'शहर का नाम दर्ज करें (जैसे मुंबई, दिल्ली)', mr: 'शहराचे नाव टाका (उदा. मुंबई, दिल्ली)' },
+  'Get Weather': { hi: 'मौसम प्राप्त करें', mr: 'हवामान मिळवा' },
+  'Current Weather': { hi: 'वर्तमान मौसम', mr: 'सध्याचे हवामान' },
+  'Temperature': { hi: 'तापमान', mr: 'तापमान' },
+  'Feels like {value}°C': { hi: 'महसूस होता है {value}°C', mr: 'असे वाटते {value}°C' },
+  'Humidity': { hi: 'आर्द्रता', mr: 'आर्द्रता' },
+  'Wind Speed': { hi: 'हवा की गति', mr: 'वाऱ्याचा वेग' },
+  'Condition': { hi: 'स्थिति', mr: 'स्थिती' },
+  '7-Day Forecast': { hi: '7-दिन का पूर्वानुमान', mr: '7 दिवसांचा अंदाज' },
+  '{value}% humidity': { hi: '{value}% आर्द्रता', mr: '{value}% आर्द्रता' },
+  'Rain: {value}%': { hi: 'बारिश: {value}%', mr: 'पाऊस: {value}%' },
+  'Multilingual AI assistant for instant farming help': { hi: 'तुरंत खेती सहायता के लिए बहुभाषी एआई सहायक', mr: 'त्वरित शेती मदतीसाठी बहुभाषिक एआय सहाय्यक' },
+  'Start a conversation with your AI farming assistant': { hi: 'अपने एआई खेती सहायक के साथ बातचीत शुरू करें', mr: 'तुमच्या एआय शेती सहाय्यकाशी संवाद सुरू करा' },
+  'Ask about crops, weather, diseases, or any farming question': { hi: 'फसल, मौसम, रोग या किसी भी खेती से जुड़े सवाल पूछें', mr: 'पिके, हवामान, रोग किंवा कोणताही शेतीविषयक प्रश्न विचारा' },
+  'Ask me anything about farming...': { hi: 'खेती के बारे में कुछ भी पूछें...', mr: 'शेतीबद्दल काहीही विचारा...' },
+  'Send': { hi: 'भेजें', mr: 'पाठवा' },
+  'Example Questions:': { hi: 'उदाहरण प्रश्न:', mr: 'उदाहरण प्रश्न:' },
+  'Failed to get response. Please try again.': { hi: 'उत्तर प्राप्त नहीं हुआ। कृपया फिर से प्रयास करें।', mr: 'उत्तर मिळाले नाही. कृपया पुन्हा प्रयत्न करा.' },
+  'AI-powered crop suggestions based on your farm conditions': { hi: 'आपकी खेती की स्थिति के आधार पर एआई फसल सुझाव', mr: 'तुमच्या शेतीच्या परिस्थितीनुसार एआय पिक सूचना' },
+  'Farm Details': { hi: 'फार्म विवरण', mr: 'शेत तपशील' },
+  'Enter your location': { hi: 'अपना स्थान दर्ज करें', mr: 'तुमचे ठिकाण टाका' },
+  'Soil Type': { hi: 'मिट्टी का प्रकार', mr: 'मातीचा प्रकार' },
+  'Season': { hi: 'मौसम', mr: 'हंगाम' },
+  'Available Area (acres)': { hi: 'उपलब्ध क्षेत्र (एकड़)', mr: 'उपलब्ध क्षेत्र (एकर)' },
+  'Enter area in acres': { hi: 'क्षेत्रफल एकड़ में दर्ज करें', mr: 'क्षेत्रफळ एकरमध्ये टाका' },
+  'Preferences (Optional)': { hi: 'प्राथमिकताएँ (वैकल्पिक)', mr: 'प्राधान्ये (ऐच्छिक)' },
+  'Any specific preferences or requirements...': { hi: 'कोई विशेष पसंद या आवश्यकता...', mr: 'काही विशेष अपेक्षा किंवा गरजा...' },
+  'Get Recommendations': { hi: 'सिफारिश प्राप्त करें', mr: 'शिफारसी मिळवा' },
+  'AI Recommendations': { hi: 'एआई सिफारिशें', mr: 'एआय शिफारसी' },
+  'Analyzing your farm conditions...': { hi: 'आपके फार्म की स्थिति का विश्लेषण हो रहा है...', mr: 'तुमच्या शेताच्या परिस्थितीचे विश्लेषण सुरू आहे...' },
+  'Based on current weather and soil conditions': { hi: 'वर्तमान मौसम और मिट्टी की स्थिति के आधार पर', mr: 'सध्याच्या हवामान आणि मातीच्या स्थितीवर आधारित' },
+  'Enter your farm details to get AI-powered crop recommendations': { hi: 'एआई फसल सिफारिश प्राप्त करने के लिए अपने फार्म का विवरण दर्ज करें', mr: 'एआय पिक शिफारस मिळवण्यासाठी शेत तपशील भरा' },
+  'Failed to get crop recommendations. Please try again.': { hi: 'फसल सिफारिश प्राप्त नहीं हो सकी। कृपया फिर से प्रयास करें।', mr: 'पिक शिफारसी मिळवता आल्या नाहीत. कृपया पुन्हा प्रयत्न करा.' },
+  'Manage your farm profiles and information': { hi: 'अपने फार्म प्रोफाइल और जानकारी को प्रबंधित करें', mr: 'तुमच्या शेताची प्रोफाइल आणि माहिती व्यवस्थापित करा' },
+  'Add New Farm': { hi: 'नया फार्म जोड़ें', mr: 'नवीन शेत जोडा' },
+  'Create New Farm': { hi: 'नया फार्म बनाएं', mr: 'नवीन शेत तयार करा' },
+  'Farm Owner Name': { hi: 'फार्म मालिक का नाम', mr: 'शेतमालकाचे नाव' },
+  'Enter owner name': { hi: 'मालिक का नाम दर्ज करें', mr: 'मालकाचे नाव टाका' },
+  'Enter location': { hi: 'स्थान दर्ज करें', mr: 'ठिकाण टाका' },
+  'Total Area (acres)': { hi: 'कुल क्षेत्रफल (एकड़)', mr: 'एकूण क्षेत्रफळ (एकर)' },
+  'Current Crops (comma-separated)': { hi: 'वर्तमान फसलें (कॉमा से अलग करें)', mr: 'सध्याची पिके (स्वल्पविरामाने वेगळी करा)' },
+  'e.g., Rice, Wheat, Corn': { hi: 'जैसे धान, गेहूं, मक्का', mr: 'उदा. तांदूळ, गहू, मका' },
+  'Creating...': { hi: 'बनाया जा रहा है...', mr: 'तयार होत आहे...' },
+  'Create Farm': { hi: 'फार्म बनाएं', mr: 'शेत तयार करा' },
+  'Your Farms': { hi: 'आपके फार्म', mr: 'तुमची शेते' },
+  'No farms yet. Create your first farm to get started!': { hi: 'अभी कोई फार्म नहीं है। शुरू करने के लिए अपना पहला फार्म बनाएं!', mr: 'अजून कोणतेही शेत नाही. सुरू करण्यासाठी तुमचे पहिले शेत तयार करा!' },
+  'Soil Type:': { hi: 'मिट्टी का प्रकार:', mr: 'मातीचा प्रकार:' },
+  'Area:': { hi: 'क्षेत्रफल:', mr: 'क्षेत्रफळ:' },
+  'Current Crops:': { hi: 'वर्तमान फसलें:', mr: 'सध्याची पिके:' },
+  'acres': { hi: 'एकड़', mr: 'एकर' },
+  'Failed to create farm. Please try again.': { hi: 'फार्म नहीं बन सका। कृपया फिर से प्रयास करें।', mr: 'शेत तयार करता आले नाही. कृपया पुन्हा प्रयत्न करा.' },
+};
+
+const optionMap = {
+  Sandy: { hi: 'बलुई', mr: 'वालुकामय' },
+  Loamy: { hi: 'दोमट', mr: 'लोमयुक्त' },
+  Clay: { hi: 'चिकनी', mr: 'चिकणमाती' },
+  Silt: { hi: 'गादयुक्त', mr: 'गाळयुक्त' },
+  Peaty: { hi: 'पीटयुक्त', mr: 'पीटयुक्त' },
+  Chalky: { hi: 'चूनेदार', mr: 'चुनखडी' },
+  Summer: { hi: 'गर्मी', mr: 'उन्हाळा' },
+  Winter: { hi: 'सर्दी', mr: 'हिवाळा' },
+  Monsoon: { hi: 'मानसून', mr: 'पावसाळा' },
+  Spring: { hi: 'वसंत', mr: 'वसंत' },
+  Autumn: { hi: 'शरद', mr: 'शरद' },
+  English: { hi: 'अंग्रेज़ी', mr: 'इंग्रजी' },
+  Hindi: { hi: 'हिंदी', mr: 'हिंदी' },
+  Marathi: { hi: 'मराठी', mr: 'मराठी' },
+};
+
+const resultLabels = {
+  current_price_range: { hi: 'मूल्य सीमा', mr: 'किंमत श्रेणी' },
+  forecast: { hi: 'पूर्वानुमान', mr: 'अंदाज' },
+  month: { hi: 'महीना', mr: 'महिना' },
+  trend: { hi: 'रुझान', mr: 'ट्रेंड' },
+  activities: { hi: 'गतिविधियाँ', mr: 'कामे' },
+  date: { hi: 'तारीख', mr: 'तारीख' },
+  activity: { hi: 'गतिविधि', mr: 'काम' },
+  description: { hi: 'विवरण', mr: 'वर्णन' },
+  priority: { hi: 'प्राथमिकता', mr: 'प्राधान्य' },
+  current_weather: { hi: 'वर्तमान मौसम', mr: 'सध्याचे हवामान' },
+  weather_context: { hi: 'मौसम संदर्भ', mr: 'हवामान संदर्भ' },
+  current_crops: { hi: 'वर्तमान फसलें', mr: 'सध्याची पिके' },
+  temp: { hi: 'तापमान', mr: 'तापमान' },
+  humidity: { hi: 'आर्द्रता', mr: 'आर्द्रता' },
+};
+
+const dynamicStrings = {
+  stable: { hi: 'स्थिर', mr: 'स्थिर' },
+  rising: { hi: 'बढ़ता हुआ', mr: 'वाढत आहे' },
+  falling: { hi: 'घटता हुआ', mr: 'घटत आहे' },
+  high: { hi: 'उच्च', mr: 'उच्च' },
+  medium: { hi: 'मध्यम', mr: 'मध्यम' },
+  low: { hi: 'कम', mr: 'कमी' },
+};
+
+export function tr(language, englishText, vars = {}) {
+  const translated = language === 'en' ? englishText : phraseMap[englishText]?.[language] || englishText;
+  return translated.replace(/\{(\w+)\}/g, (_, key) => vars[key] ?? '');
+}
+
+export function translateOptionValue(value, language) {
+  return language === 'en' ? value : optionMap[value]?.[language] || value;
+}
+
+export function getTranslatedLabel(language, label) {
+  return language === 'en' ? null : resultLabels[label]?.[language] || null;
+}
+
+export function translateDynamicString(value, language) {
+  if (typeof value !== 'string' || language === 'en') return value;
+  const exact = dynamicStrings[value]?.[language];
+  if (exact) return exact;
+  return value.replace(/^Week\s+/i, language === 'hi' ? 'सप्ताह ' : 'आठवडा ').replace(/^Month\s+/i, language === 'hi' ? 'महीना ' : 'महिना ');
+}
