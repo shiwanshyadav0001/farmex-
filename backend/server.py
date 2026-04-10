@@ -682,6 +682,11 @@ def load_plant_disease_model():
         raise RuntimeError(PLANT_MODEL_LOAD_ERROR)
 
     try:
+        # These are lazily imported to keep the main process lightweight
+        from transformers import AutoImageProcessor, AutoModelForImageClassification
+        import torch
+        from PIL import Image
+
         PLANT_PROCESSOR = AutoImageProcessor.from_pretrained(PLANT_DISEASE_MODEL)
         PLANT_MODEL = AutoModelForImageClassification.from_pretrained(PLANT_DISEASE_MODEL)
         PLANT_MODEL.eval()
@@ -797,83 +802,93 @@ def build_disease_guidance(label: str, language: str = "en") -> Dict[str, str]:
     }
 
 def detect_plant_disease_from_image(contents: bytes, crop_name: str = "", language: str = "en") -> Dict[str, Any]:
+    """
+    AI-powered plant disease detection from image using HuggingFace Inference API.
+    This cloud-first approach avoids heavy local dependencies like torch/transformers.
+    """
     url = f"https://api-inference.huggingface.co/models/{PLANT_DISEASE_MODEL}"
+    headers = {}
+    
+    # Use existing HUGGINGFACE_API_TOKEN if configured in .env
+    hf_token = os.getenv("HUGGINGFACE_API_TOKEN") or os.getenv("HF_TOKEN")
+    if hf_token:
+        headers["Authorization"] = f"Bearer {hf_token}"
+
     try:
-        processor, model = load_plant_disease_model()
-        image = Image.open(io.BytesIO(contents)).convert("RGB")
-        inputs = processor(images=image, return_tensors="pt")
-
-        with torch.no_grad():
-            outputs = model(**inputs)
-
-        probabilities = torch.nn.functional.softmax(outputs.logits, dim=-1)[0]
-        requested_crop = canonicalize_crop_name(crop_name)
-        supported_crops = get_supported_crops_from_model(model)
-
-        if requested_crop and requested_crop not in supported_crops:
-            supported_preview = ", ".join(supported_crops[:8])
+        # 1. Call HuggingFace Inference API
+        response = requests.post(url, headers=headers, data=contents, timeout=30)
+        
+        # Handle model loading state (503 Service Unavailable is common when HF is starting the model)
+        if response.status_code == 503:
+            logger.warning("HuggingFace model is loading. Returning warming-up state.")
             return {
-                "disease_name": f"{crop_name.title()} is not supported by the current disease model",
-                "confidence": "0%",
-                "treatment": "Use a crop-specific classifier for this crop or upload an image from a crop supported by the current model.",
-                "prevention": f"Current model supports crops such as {supported_preview}. Wheat-like cereal crops need a different disease model.",
-                "severity": translate_backend_text("Unknown", language),
-                "source": "local-model",
-                "supported_crops": supported_crops,
+                "disease_name": translate_backend_text("AI model is starting up", language),
+                "confidence": "...",
+                "treatment": translate_backend_text("The detection system is warming up. Please try again in 30 seconds.", language),
+                "prevention": translate_backend_text("This happens occasionally on the first request of the day.", language),
+                "severity": translate_backend_text("Low", language),
+                "source": "hf-cloud-api-warming"
             }
 
+        response.raise_for_status()
+        predictions = response.json()
+
+        if not isinstance(predictions, list) or not predictions:
+            raise ValueError("Invalid response format from HF API")
+
+        # 2. Match with requested crop if provided
+        requested_crop = canonicalize_crop_name(crop_name)
+        top_prediction = None
+
         if requested_crop:
-            matching_indices = [
-                idx for idx, label_name in model.config.id2label.items()
-                if extract_crop_from_label(label_name) == requested_crop
+            # Filter predictions that mention the requested crop
+            crop_matches = [
+                p for p in predictions 
+                if requested_crop in extract_crop_from_label(p.get("label", "")).lower()
             ]
-            if not matching_indices:
-                return {
-                    "disease_name": f"No {crop_name.title()} labels found in the current model",
-                    "confidence": "0%",
-                    "treatment": "Switch to a model trained on this crop before using disease detection for it.",
-                    "prevention": "Avoid trusting cross-crop predictions for unsupported plants.",
-                    "severity": translate_backend_text("Unknown", language),
-                    "source": "local-model",
-                    "supported_crops": supported_crops,
-                }
-            predicted_class = max(matching_indices, key=lambda idx: float(probabilities[idx].item()))
+            if crop_matches:
+                top_prediction = max(crop_matches, key=lambda x: x.get("score", 0))
+            else:
+                top_prediction = predictions[0]
         else:
-            predicted_class = int(probabilities.argmax().item())
+            top_prediction = predictions[0]
 
-        score = float(probabilities[predicted_class].item())
-        label = model.config.id2label.get(predicted_class, "Unknown")
+        label = top_prediction.get("label", "Unknown")
+        score = top_prediction.get("score", 0)
+        
+        # 3. Build guidance based on the identified label
         guidance = build_disease_guidance(label, language)
-
-        if score < 0.45:
+        
+        # Apply confidence-based filter
+        if score < 0.35:
             return {
                 "disease_name": translate_backend_text("Image unclear or unsupported plant sample", language),
                 "confidence": f"{round(score * 100, 1)}%",
-                "treatment": translate_backend_text("Upload a close, well-lit leaf image with a plain background. Avoid blurred or distant photos.", language),
+                "treatment": translate_backend_text("Upload a close, well-lit leaf image with a plain background.", language),
                 "prevention": translate_backend_text("Use one leaf per photo and make sure the affected area is visible.", language),
                 "severity": translate_backend_text("Unknown", language),
-                "source": "local-model",
-                "raw_label": normalize_disease_label(label),
+                "source": "hf-cloud-api-low-confidence"
             }
 
+        # 4. Final response construction
         return {
             "disease_name": normalize_disease_label(label),
             "confidence": f"{round(score * 100, 1)}%",
             "treatment": guidance["treatment"],
             "prevention": guidance["prevention"],
-            "severity": guidance["severity"],
-            "source": "local-model",
+            "severity": translate_backend_text(guidance.get("severity", "Medium"), language),
+            "source": "hf-cloud-api"
         }
+
     except Exception as exc:
-        logger.error("Plant disease model error: %s", exc)
+        logger.error(f"Cloud disease detection failed: {exc}")
         return {
-            "disease_name": "Disease classification unavailable",
+            "disease_name": translate_backend_text("Detection system unavailable", language),
             "confidence": "0%",
-            "treatment": "The local plant disease model could not classify this image right now. Retry with a clear leaf image or restart the backend once.",
-            "prevention": "Keep the field monitored manually until the local model is available.",
-            "severity": "Unknown",
-            "source": "fallback",
-            "model": PLANT_DISEASE_MODEL,
+            "treatment": translate_backend_text("The AI cloud service is currently unresponsive. Please try again later.", language),
+            "prevention": translate_backend_text("Consult a local agricultural expert for confirmed diagnosis.", language),
+            "severity": translate_backend_text("Unknown", language),
+            "source": "fallback"
         }
 
 def get_weather_data(location: str) -> Dict[str, Any]:
