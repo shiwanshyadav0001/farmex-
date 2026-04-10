@@ -813,7 +813,8 @@ def detect_plant_disease_from_image(contents: bytes, crop_name: str = "", langua
         gemini_key = GEMINI_API_KEY
 
         base64_image = base64.b64encode(contents).decode('utf-8')
-        url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key={gemini_key}"
+        # Google AI API URL (v1 stable)
+        url = f"https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash:generateContent?key={gemini_key}"
         
         prompt = f"Identify the plant disease in this image of a {crop_name}. Return ONLY JSON: {{'disease_name', 'confidence', 'treatment', 'prevention', 'severity'}}."
 
