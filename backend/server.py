@@ -15,9 +15,7 @@ from openai import AsyncOpenAI
 import json
 import io
 import hashlib
-from PIL import Image
-import torch
-from transformers import AutoImageProcessor, AutoModelForImageClassification
+
 import smtplib
 from email.message import EmailMessage
 
