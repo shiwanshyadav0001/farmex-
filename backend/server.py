@@ -1249,24 +1249,25 @@ async def detect_disease(file: UploadFile = File(...), crop_name: str = Form("")
                 "crop_name": crop_name,
                 "language": language,
             },
-        # Disable cache for debugging to ensure clean results every time
-        # cached_detection = await safe_find_one("disease_detections", {"cache_key": cache_key})
-        # ... (cached logic removed)
+        )
+        
+        # [DIAGNOSTIC-V3] Force fresh scan
+        logger.info(f"Triggering fresh scan for: {image_hash}")
             
         try:
             response_data = detect_plant_disease_from_image(contents, crop_name, language)
         except Exception as e:
             logger.error(f"Detection execution error: {e}")
             response_data = {
-                "disease_name": f"Detection Engine Error: {str(e)}",
+                "disease_name": f"Engine Error (v3): {str(e)}",
                 "confidence": "0%",
-                "treatment": "Please check backend logs or try a different image.",
-                "prevention": "Ensure HUGGINGFACE_API_TOKEN is valid.",
+                "treatment": "Direct API failure. Check HuggingFace Token.",
+                "prevention": "Technical issue detected in detection pipeline.",
                 "severity": "Unknown",
                 "source": "error"
             }
         
-        # Save to database (always overwrite for now)
+        # Save to database
         detection_doc = {
             "id": str(uuid.uuid4()),
             "cache_key": cache_key,
