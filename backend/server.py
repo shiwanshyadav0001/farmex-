@@ -34,7 +34,7 @@ OPENAI_API_KEY = os.getenv("OPENAI_API_KEY", "").strip()
 HUGGINGFACE_API_TOKEN = os.getenv("HUGGINGFACE_API_TOKEN", os.getenv("HF_TOKEN", "")).strip()
 PLANT_DISEASE_MODEL = os.getenv(
     "PLANT_DISEASE_MODEL",
-    "Diginsa/Plant-Disease-Detection-Project",
+    "linkanjarad/mobilenet_v2_1.0_224-plant-disease-identification",
 ).strip()
 OPENWEATHERMAP_API_KEY = os.getenv("OPENWEATHERMAP_API_KEY", "")
 SMTP_EMAIL = os.getenv("SMTP_EMAIL", "").strip()
