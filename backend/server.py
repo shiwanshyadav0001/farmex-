@@ -881,14 +881,20 @@ def detect_plant_disease_from_image(contents: bytes, crop_name: str = "", langua
         }
 
     except Exception as exc:
-        logger.error(f"Cloud disease detection failed: {exc}")
+        error_msg = str(exc)
+        if hasattr(exc, 'response') and exc.response is not None:
+            try:
+                error_msg = f"{exc.response.status_code}: {exc.response.text}"
+            except:
+                pass
+        logger.error(f"Cloud disease detection failed: {error_msg}")
         return {
             "disease_name": translate_backend_text("Detection system unavailable", language),
             "confidence": "0%",
-            "treatment": translate_backend_text("The AI cloud service is currently unresponsive. Please try again later.", language),
+            "treatment": translate_backend_text(f"API Error: {error_msg}. Please ensure your HuggingFace API Token is correct.", language),
             "prevention": translate_backend_text("Consult a local agricultural expert for confirmed diagnosis.", language),
             "severity": translate_backend_text("Unknown", language),
-            "source": "fallback"
+            "source": "fallback-api-error"
         }
 
 def get_weather_data(location: str) -> Dict[str, Any]:
@@ -1243,28 +1249,24 @@ async def detect_disease(file: UploadFile = File(...), crop_name: str = Form("")
                 "crop_name": crop_name,
                 "language": language,
             },
-        )
-        cached_detection = await safe_find_one("disease_detections", {"cache_key": cache_key})
-        
-        # Bypass cache if it's a known failure/placeholder result
-        is_stale_failure = False
-        if cached_detection:
-            res_val = cached_detection.get("detection_result", {})
-            d_name = str(res_val.get("disease_name", "")).lower()
-            if "unavailable" in d_name or "unsupported" in d_name or "warming up" in d_name:
-                is_stale_failure = True
-                logger.info(f"Bypassing stale cached failure for image: {image_hash}")
-
-        if cached_detection and not is_stale_failure:
-            return {
-                "detection": cached_detection["detection_result"],
-                "filename": file.filename,
-                "cached": True
-            }
+        # Disable cache for debugging to ensure clean results every time
+        # cached_detection = await safe_find_one("disease_detections", {"cache_key": cache_key})
+        # ... (cached logic removed)
             
-        response = detect_plant_disease_from_image(contents, crop_name, language)
+        try:
+            response_data = detect_plant_disease_from_image(contents, crop_name, language)
+        except Exception as e:
+            logger.error(f"Detection execution error: {e}")
+            response_data = {
+                "disease_name": f"Detection Engine Error: {str(e)}",
+                "confidence": "0%",
+                "treatment": "Please check backend logs or try a different image.",
+                "prevention": "Ensure HUGGINGFACE_API_TOKEN is valid.",
+                "severity": "Unknown",
+                "source": "error"
+            }
         
-        # Save to database (overwrites or inserts new result)
+        # Save to database (always overwrite for now)
         detection_doc = {
             "id": str(uuid.uuid4()),
             "cache_key": cache_key,
