@@ -24,6 +24,18 @@ export const LANGUAGE_TO_LOCALE = {
   'Average water': { hi: 'औसत पानी', mr: 'सरासरी पाणी' },
   'Typical time': { hi: 'सामान्य समय', mr: 'नेहमीची वेळ' },
   '7-day rainfall pressure': { hi: '7-दिवसीय वर्षा का दबाव', mr: '7 दिवसांचा पावसाचा जोर' },
+  'Soil Insights': { hi: 'मिट्टी की जानकारी', mr: 'मातीची माहिती' },
+  'Crop Distribution': { hi: 'फसल वितरण', mr: 'पीक वितरण' },
+  'Acreage Analysis': { hi: 'क्षेत्रफल विश्लेषण', mr: 'क्षेत्रफळ विश्लेषण' },
+  'Acres': { hi: 'एकड़', mr: 'एकर' },
+  'Details': { hi: 'विवरण', mr: 'तपशील' },
+  'Status': { hi: 'स्थिति', mr: 'स्थिती' },
+  'Total representation across your holdings.': { hi: 'आपकी कुल जोत में कुल प्रतिनिधित्व।', mr: 'तुमच्या एकूण जमिनीतील एकूण प्रतिनिधित्व.' },
+  'Move cursor over sectors for deep-dive analysis.': { hi: 'गहन विश्लेषण के लिए सेक्टरों पर कर्सर घुमाएँ।', mr: 'सखोल विश्लेषणासाठी क्षेत्रांवर कर्सर फिरवा.' },
+  'Inspecting farm land area and yields.': { hi: 'कृषि भूमि क्षेत्र और उपज का निरीक्षण।', mr: 'शेती जमीन क्षेत्र आणि उत्पन्नाची पाहणी.' },
+  'Agricultural OS Ecosystem': { hi: 'कृषि ओएस पारिस्थितिकी तंत्र', mr: 'कृषी ओएस इकोसिस्टम' },
+  'A cinematic suite of tools designed to maximize farm yield and minimize operation risks through deep tech integration.': { hi: 'गहन तकनीक एकीकरण के माध्यम से कृषि उपज को अधिकतम करने और परिचालन जोखिमों को कम करने के लिए डिज़ाइन किया गया उपकरणों का एक सिनेमाई सुइट।', mr: 'सखोल तंत्रज्ञान एकत्रीकरणाद्वारे शेतीचे उत्पन्न वाढवण्यासाठी आणि कामकाजातील जोखीम कमी करण्यासाठी डिझाइन केलेले साधनांचा एक संच.' },
+  'Explore Module': { hi: 'मॉड्यूल देखें', mr: 'मॉड्यूल पहा' },
 };
 
 const phraseMap = {
@@ -230,6 +242,18 @@ const phraseMap = {
   'Average water': { hi: 'औसत पानी', mr: 'सरासरी पाणी' },
   'Typical time': { hi: 'सामान्य समय', mr: 'नेहमीची वेळ' },
   '7-day rainfall pressure': { hi: '7-दिवसीय वर्षा का दबाव', mr: '7 दिवसांचा पावसाचा जोर' },
+  'Soil Insights': { hi: 'मिट्टी की जानकारी', mr: 'मातीची माहिती' },
+  'Crop Distribution': { hi: 'फसल वितरण', mr: 'पीक वितरण' },
+  'Acreage Analysis': { hi: 'क्षेत्रफल विश्लेषण', mr: 'क्षेत्रफळ विश्लेषण' },
+  'Acres': { hi: 'एकड़', mr: 'एकर' },
+  'Details': { hi: 'विवरण', mr: 'तपशील' },
+  'Status': { hi: 'स्थिति', mr: 'स्थिती' },
+  'Total representation across your holdings.': { hi: 'आपकी कुल जोत में कुल प्रतिनिधित्व।', mr: 'तुमच्या एकूण जमिनीतील एकूण प्रतिनिधित्व.' },
+  'Move cursor over sectors for deep-dive analysis.': { hi: 'गहन विश्लेषण के लिए सेक्टरों पर कर्सर घुमाएँ।', mr: 'सखोल विश्लेषणासाठी क्षेत्रांवर कर्सर फिरवा.' },
+  'Inspecting farm land area and yields.': { hi: 'कृषि भूमि क्षेत्र और उपज का निरीक्षण।', mr: 'शेती जमीन क्षेत्र आणि उत्पन्नाची पाहणी.' },
+  'Agricultural OS Ecosystem': { hi: 'कृषि ओएस पारिस्थितिकी तंत्र', mr: 'कृषी ओएस इकोसिस्टम' },
+  'A cinematic suite of tools designed to maximize farm yield and minimize operation risks through deep tech integration.': { hi: 'गहन तकनीक एकीकरण के माध्यम से कृषि उपज को अधिकतम करने और परिचालन जोखिमों को कम करने के लिए डिज़ाइन किया गया उपकरणों का एक सिनेमाई सुइट।', mr: 'सखोल तंत्रज्ञान एकत्रीकरणाद्वारे शेतीचे उत्पन्न वाढवण्यासाठी आणि कामकाजातील जोखीम कमी करण्यासाठी डिझाइन केलेले साधनांचा एक संच.' },
+  'Explore Module': { hi: 'मॉड्यूल देखें', mr: 'मॉड्यूल पहा' },
 };
 
 const optionMap = {
@@ -263,6 +287,18 @@ const optionMap = {
   'Average water': { hi: 'औसत पानी', mr: 'सरासरी पाणी' },
   'Typical time': { hi: 'सामान्य समय', mr: 'नेहमीची वेळ' },
   '7-day rainfall pressure': { hi: '7-दिवसीय वर्षा का दबाव', mr: '7 दिवसांचा पावसाचा जोर' },
+  'Soil Insights': { hi: 'मिट्टी की जानकारी', mr: 'मातीची माहिती' },
+  'Crop Distribution': { hi: 'फसल वितरण', mr: 'पीक वितरण' },
+  'Acreage Analysis': { hi: 'क्षेत्रफल विश्लेषण', mr: 'क्षेत्रफळ विश्लेषण' },
+  'Acres': { hi: 'एकड़', mr: 'एकर' },
+  'Details': { hi: 'विवरण', mr: 'तपशील' },
+  'Status': { hi: 'स्थिति', mr: 'स्थिती' },
+  'Total representation across your holdings.': { hi: 'आपकी कुल जोत में कुल प्रतिनिधित्व।', mr: 'तुमच्या एकूण जमिनीतील एकूण प्रतिनिधित्व.' },
+  'Move cursor over sectors for deep-dive analysis.': { hi: 'गहन विश्लेषण के लिए सेक्टरों पर कर्सर घुमाएँ।', mr: 'सखोल विश्लेषणासाठी क्षेत्रांवर कर्सर फिरवा.' },
+  'Inspecting farm land area and yields.': { hi: 'कृषि भूमि क्षेत्र और उपज का निरीक्षण।', mr: 'शेती जमीन क्षेत्र आणि उत्पन्नाची पाहणी.' },
+  'Agricultural OS Ecosystem': { hi: 'कृषि ओएस पारिस्थितिकी तंत्र', mr: 'कृषी ओएस इकोसिस्टम' },
+  'A cinematic suite of tools designed to maximize farm yield and minimize operation risks through deep tech integration.': { hi: 'गहन तकनीक एकीकरण के माध्यम से कृषि उपज को अधिकतम करने और परिचालन जोखिमों को कम करने के लिए डिज़ाइन किया गया उपकरणों का एक सिनेमाई सुइट।', mr: 'सखोल तंत्रज्ञान एकत्रीकरणाद्वारे शेतीचे उत्पन्न वाढवण्यासाठी आणि कामकाजातील जोखीम कमी करण्यासाठी डिझाइन केलेले साधनांचा एक संच.' },
+  'Explore Module': { hi: 'मॉड्यूल देखें', mr: 'मॉड्यूल पहा' },
 };
 
 const resultLabels = {
@@ -296,6 +332,18 @@ const resultLabels = {
   'Average water': { hi: 'औसत पानी', mr: 'सरासरी पाणी' },
   'Typical time': { hi: 'सामान्य समय', mr: 'नेहमीची वेळ' },
   '7-day rainfall pressure': { hi: '7-दिवसीय वर्षा का दबाव', mr: '7 दिवसांचा पावसाचा जोर' },
+  'Soil Insights': { hi: 'मिट्टी की जानकारी', mr: 'मातीची माहिती' },
+  'Crop Distribution': { hi: 'फसल वितरण', mr: 'पीक वितरण' },
+  'Acreage Analysis': { hi: 'क्षेत्रफल विश्लेषण', mr: 'क्षेत्रफळ विश्लेषण' },
+  'Acres': { hi: 'एकड़', mr: 'एकर' },
+  'Details': { hi: 'विवरण', mr: 'तपशील' },
+  'Status': { hi: 'स्थिति', mr: 'स्थिती' },
+  'Total representation across your holdings.': { hi: 'आपकी कुल जोत में कुल प्रतिनिधित्व।', mr: 'तुमच्या एकूण जमिनीतील एकूण प्रतिनिधित्व.' },
+  'Move cursor over sectors for deep-dive analysis.': { hi: 'गहन विश्लेषण के लिए सेक्टरों पर कर्सर घुमाएँ।', mr: 'सखोल विश्लेषणासाठी क्षेत्रांवर कर्सर फिरवा.' },
+  'Inspecting farm land area and yields.': { hi: 'कृषि भूमि क्षेत्र और उपज का निरीक्षण।', mr: 'शेती जमीन क्षेत्र आणि उत्पन्नाची पाहणी.' },
+  'Agricultural OS Ecosystem': { hi: 'कृषि ओएस पारिस्थितिकी तंत्र', mr: 'कृषी ओएस इकोसिस्टम' },
+  'A cinematic suite of tools designed to maximize farm yield and minimize operation risks through deep tech integration.': { hi: 'गहन तकनीक एकीकरण के माध्यम से कृषि उपज को अधिकतम करने और परिचालन जोखिमों को कम करने के लिए डिज़ाइन किया गया उपकरणों का एक सिनेमाई सुइट।', mr: 'सखोल तंत्रज्ञान एकत्रीकरणाद्वारे शेतीचे उत्पन्न वाढवण्यासाठी आणि कामकाजातील जोखीम कमी करण्यासाठी डिझाइन केलेले साधनांचा एक संच.' },
+  'Explore Module': { hi: 'मॉड्यूल देखें', mr: 'मॉड्यूल पहा' },
 };
 
 const dynamicStrings = {
@@ -321,6 +369,18 @@ const dynamicStrings = {
   'Average water': { hi: 'औसत पानी', mr: 'सरासरी पाणी' },
   'Typical time': { hi: 'सामान्य समय', mr: 'नेहमीची वेळ' },
   '7-day rainfall pressure': { hi: '7-दिवसीय वर्षा का दबाव', mr: '7 दिवसांचा पावसाचा जोर' },
+  'Soil Insights': { hi: 'मिट्टी की जानकारी', mr: 'मातीची माहिती' },
+  'Crop Distribution': { hi: 'फसल वितरण', mr: 'पीक वितरण' },
+  'Acreage Analysis': { hi: 'क्षेत्रफल विश्लेषण', mr: 'क्षेत्रफळ विश्लेषण' },
+  'Acres': { hi: 'एकड़', mr: 'एकर' },
+  'Details': { hi: 'विवरण', mr: 'तपशील' },
+  'Status': { hi: 'स्थिति', mr: 'स्थिती' },
+  'Total representation across your holdings.': { hi: 'आपकी कुल जोत में कुल प्रतिनिधित्व।', mr: 'तुमच्या एकूण जमिनीतील एकूण प्रतिनिधित्व.' },
+  'Move cursor over sectors for deep-dive analysis.': { hi: 'गहन विश्लेषण के लिए सेक्टरों पर कर्सर घुमाएँ।', mr: 'सखोल विश्लेषणासाठी क्षेत्रांवर कर्सर फिरवा.' },
+  'Inspecting farm land area and yields.': { hi: 'कृषि भूमि क्षेत्र और उपज का निरीक्षण।', mr: 'शेती जमीन क्षेत्र आणि उत्पन्नाची पाहणी.' },
+  'Agricultural OS Ecosystem': { hi: 'कृषि ओएस पारिस्थितिकी तंत्र', mr: 'कृषी ओएस इकोसिस्टम' },
+  'A cinematic suite of tools designed to maximize farm yield and minimize operation risks through deep tech integration.': { hi: 'गहन तकनीक एकीकरण के माध्यम से कृषि उपज को अधिकतम करने और परिचालन जोखिमों को कम करने के लिए डिज़ाइन किया गया उपकरणों का एक सिनेमाई सुइट।', mr: 'सखोल तंत्रज्ञान एकत्रीकरणाद्वारे शेतीचे उत्पन्न वाढवण्यासाठी आणि कामकाजातील जोखीम कमी करण्यासाठी डिझाइन केलेले साधनांचा एक संच.' },
+  'Explore Module': { hi: 'मॉड्यूल देखें', mr: 'मॉड्यूल पहा' },
 };
 
 export function tr(language, englishText, vars = {}) {
