@@ -30,7 +30,7 @@ db = client[os.getenv("DB_NAME", "farmex")]
 
 # API Keys
 GROQ_API_KEY = os.getenv("GROQ_API_KEY", "").strip()
-GEMINI_API_KEY = "AIzaSyDAkPGd5w4OOR9lHzMCb2dT5C-B9nwzZiA"
+GEMINI_API_KEY = os.getenv("GEMINI_API_KEY", "").strip()
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY", "").strip()
 HUGGINGFACE_API_TOKEN = os.getenv("HUGGINGFACE_API_TOKEN", os.getenv("HF_TOKEN", "")).strip()
 PLANT_DISEASE_MODEL = os.getenv(
@@ -803,7 +803,7 @@ def build_disease_guidance(label: str, language: str = "en") -> Dict[str, str]:
 
 def detect_plant_disease_from_image(contents: bytes, crop_name: str = "", language: str = "en") -> Dict[str, Any]:
     """
-    AI-powered plant disease detection from image using HuggingFace Inference API.
+    AI-powered plant disease detection from image using Groq Vision API.
     This cloud-first approach avoids heavy local dependencies like torch/transformers.
     """
     try:
@@ -848,14 +848,14 @@ def detect_plant_disease_from_image(contents: bytes, crop_name: str = "", langua
         }
 
     except Exception as exc:
-        logger.error(f"Gemini error: {exc}")
+        logger.error(f"Detection error: {exc}")
         return {
             "disease_name": translate_backend_text("Detection system unavailable", language),
             "confidence": "0%",
             "treatment": translate_backend_text(f"Engine fail: {str(exc)}", language),
-            "prevention": translate_backend_text("Check your GEMINI_API_KEY in Render settings.", language),
+            "prevention": translate_backend_text("Check your GROQ_API_KEY in Render dashboard.", language),
             "severity": translate_backend_text("Unknown", language),
-            "source": "gemini-error"
+            "source": "groq-error"
         }
 
 def get_weather_data(location: str) -> Dict[str, Any]:
