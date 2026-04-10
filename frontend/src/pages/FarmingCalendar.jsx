@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useTranslation } from "@/i18n";
 import axios from 'axios';
 import { API } from '@/lib/api';
 import { Calendar, CheckCircle2, Clock } from 'lucide-react';
@@ -14,6 +15,7 @@ function priorityTone(priority = '') {
 }
 
 function FarmingCalendar() {
+  const { t, language } = useTranslation();
   const [formData, setFormData] = useState({
     crop_name: '',
     planting_date: '',
@@ -51,10 +53,10 @@ function FarmingCalendar() {
 
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
           <div className="card fade-in">
-            <h2 className="mb-6 text-2xl font-bold text-gray-800 dark:text-gray-200 dark:text-gray-100">Calendar Parameters</h2>
+            <h2 className="mb-6 text-2xl font-bold text-gray-800 dark:text-gray-200 dark:text-gray-100">{t('Calendar Parameters')}</h2>
             <form onSubmit={handleSubmit} className="space-y-5">
               <div>
-                <label className="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300 dark:text-gray-200">Crop Name</label>
+                <label className="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300 dark:text-gray-200">{t('Crop Name')}</label>
                 <input
                   type="text"
                   value={formData.crop_name}
@@ -67,7 +69,7 @@ function FarmingCalendar() {
               </div>
 
               <div>
-                <label className="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300 dark:text-gray-200">Planting Date</label>
+                <label className="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300 dark:text-gray-200">{t('Planting Date')}</label>
                 <input
                   type="date"
                   value={formData.planting_date}
@@ -79,7 +81,7 @@ function FarmingCalendar() {
               </div>
 
               <div>
-                <label className="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300 dark:text-gray-200">Farm Area (acres)</label>
+                <label className="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300 dark:text-gray-200">{t('Farm Area (acres)')}</label>
                 <input
                   type="number"
                   step="0.1"
@@ -107,7 +109,7 @@ function FarmingCalendar() {
           </div>
 
           <div className="card fade-in" data-testid="farming-calendar-display">
-            <h2 className="mb-6 text-2xl font-bold text-gray-800 dark:text-gray-200 dark:text-gray-100">Activity Timeline</h2>
+            <h2 className="mb-6 text-2xl font-bold text-gray-800 dark:text-gray-200 dark:text-gray-100">{t('Activity Timeline')}</h2>
             {loading ? (
               <div className="flex flex-col items-center justify-center py-16">
                 <Clock className="mb-4 h-16 w-16 animate-pulse text-indigo-600" />

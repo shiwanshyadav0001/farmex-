@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useTranslation } from "@/i18n";
 import axios from 'axios';
 import { API } from '@/lib/api';
 import { CheckCircle2, Droplets, Loader, Waves } from 'lucide-react';
@@ -17,6 +18,7 @@ function averageWater(schedule = []) {
 }
 
 function Irrigation() {
+  const { t, language } = useTranslation();
   const [farms, setFarms] = useState([]);
   const [formData, setFormData] = useState({
     farm_id: '',
@@ -71,7 +73,7 @@ function Irrigation() {
             <h2 className="mb-6 text-2xl font-bold text-gray-800 dark:text-gray-200 dark:text-gray-100">Irrigation Parameters</h2>
             <form onSubmit={handleSubmit} className="space-y-5">
               <div>
-                <label className="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300 dark:text-gray-200">Select Farm</label>
+                <label className="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300 dark:text-gray-200">{t('Select Farm')}</label>
                 <select
                   value={formData.farm_id}
                   onChange={(e) => setFormData({ ...formData, farm_id: e.target.value })}

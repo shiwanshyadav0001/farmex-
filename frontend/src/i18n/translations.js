@@ -116,6 +116,27 @@ const phraseMap = {
   'Current Crops:': { hi: 'वर्तमान फसलें:', mr: 'सध्याची पिके:' },
   'acres': { hi: 'एकड़', mr: 'एकर' },
   'Failed to create farm. Please try again.': { hi: 'फार्म नहीं बन सका। कृपया फिर से प्रयास करें।', mr: 'शेत तयार करता आले नाही. कृपया पुन्हा प्रयत्न करा.' },
+
+  'Soil & Rainfall Insights': { hi: 'मिट्टी और वर्षा की जानकारी', mr: 'माती आणि पर्जन्य माहिती' },
+  'Location Analysis': { hi: 'स्थान विश्लेषण', mr: 'स्थान विश्लेषण' },
+  'Regional Insights': { hi: 'क्षेत्रीय जानकारी', mr: 'प्रादेशिक माहिती' },
+  'Enter location (city or region)': { hi: 'स्थान दर्ज करें (शहर या क्षेत्र)', mr: 'ठिकाण टाका (शहर किंवा प्रदेश)' },
+  'Get Insights': { hi: 'जानकारी प्राप्त करें', mr: 'माहिती मिळवा' },
+  'Read the land before planting': { hi: 'बुवाई से पहले जमीन को समझें', mr: 'पेरणीपूर्वी जमीन समजून घ्या' },
+  'Calendar Parameters': { hi: 'कैलेंडर पैरामीटर', mr: 'कॅलेंडर पॅरामीटर्स' },
+  'Activity Timeline': { hi: 'गतिविधि समयरेखा', mr: 'कामकाजाचे वेळापत्रक' },
+  'Crop Name': { hi: 'फसल का नाम', mr: 'पिकाचे नाव' },
+  'Planting Date': { hi: 'बुवाई की तारीख', mr: 'पेरणीची तारीख' },
+  'Farm Area (acres)': { hi: 'खेत का क्षेत्रफल (एकड़)', mr: 'शेतीचे क्षेत्रफळ (एकर)' },
+  'Generate Calendar': { hi: 'कैलेंडर बनाएं', mr: 'कॅलेंडर तयार करा' },
+  'Risk Prediction Engine': { hi: 'जोखिम पूर्वानुमान इंजन', mr: 'जोखीम अंदाज इंजिन' },
+  'Select Farm': { hi: 'फार्म चुनें', mr: 'शेत निवडा' },
+  'Risk Assessment': { hi: 'जोखिम मूल्यांकन', mr: 'जोखीम मूल्यांकन' },
+  'Expense & Profit Calculator': { hi: 'खर्च और लाभ कैलकुलेटर', mr: 'खर्च आणि नफा कॅल्क्युलेटर' },
+  'Expense Details': { hi: 'खर्च विवरण', mr: 'खर्चाचा तपशील' },
+  'Financial Analysis': { hi: 'वित्तीय विश्लेषण', mr: 'आर्थिक विश्लेषण' },
+  'Enter crop name (e.g., Rice, Wheat, Corn)': { hi: 'फसल का नाम दर्ज करें', mr: 'पिकाचे नाव टाका' },
+
 };
 
 const optionMap = {

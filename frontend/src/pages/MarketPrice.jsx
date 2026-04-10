@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useTranslation } from "@/i18n";
 import axios from 'axios';
 import { API } from '@/lib/api';
 import { BarChart3, CheckCircle2, Loader, TrendingUp } from 'lucide-react';
@@ -14,6 +15,7 @@ function trendTone(trend = '') {
 }
 
 function MarketPrice() {
+  const { t, language } = useTranslation();
   const [formData, setFormData] = useState({
     crop_name: '',
     location: '',
@@ -57,12 +59,12 @@ function MarketPrice() {
             <h2 className="mb-6 text-2xl font-bold text-gray-800 dark:text-gray-200 dark:text-gray-100">Market Analysis</h2>
             <form onSubmit={handleSubmit} className="space-y-5">
               <div>
-                <label className="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300 dark:text-gray-200">Crop Name</label>
+                <label className="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300 dark:text-gray-200">{t('Crop Name')}</label>
                 <input
                   type="text"
                   value={formData.crop_name}
                   onChange={(e) => setFormData({ ...formData, crop_name: e.target.value })}
-                  placeholder="Enter crop name"
+                  placeholder={t('Enter crop name')}
                   className="input-field"
                   list="crop-suggestions"
                   required

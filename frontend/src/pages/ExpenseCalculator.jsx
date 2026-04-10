@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useTranslation } from "@/i18n";
 import axios from 'axios';
 import { API } from '@/lib/api';
 import { CheckCircle2, DollarSign, PieChart, TrendingUp } from 'lucide-react';
@@ -13,6 +14,7 @@ function formatCurrency(value) {
 }
 
 function ExpenseCalculator() {
+  const { t, language } = useTranslation();
   const [farms, setFarms] = useState([]);
   const [formData, setFormData] = useState({
     farm_id: '',
@@ -97,10 +99,10 @@ function ExpenseCalculator() {
 
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
           <div className="card fade-in">
-            <h2 className="mb-6 text-2xl font-bold text-gray-800 dark:text-gray-200 dark:text-gray-100">Expense Details</h2>
+            <h2 className="mb-6 text-2xl font-bold text-gray-800 dark:text-gray-200 dark:text-gray-100">{t('Expense Details')}</h2>
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
-                <label className="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300 dark:text-gray-200">Select Farm</label>
+                <label className="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300 dark:text-gray-200">{t('Select Farm')}</label>
                 <select
                   value={formData.farm_id}
                   onChange={(e) => setFormData({ ...formData, farm_id: e.target.value })}
@@ -118,12 +120,12 @@ function ExpenseCalculator() {
               </div>
 
               <div>
-                <label className="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300 dark:text-gray-200">Crop Name</label>
+                <label className="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300 dark:text-gray-200">{t('Crop Name')}</label>
                 <input
                   type="text"
                   value={formData.crop_name}
                   onChange={(e) => setFormData({ ...formData, crop_name: e.target.value })}
-                  placeholder="Enter crop name"
+                  placeholder={t('Enter crop name')}
                   className="input-field"
                   required
                   data-testid="expense-crop-input"
@@ -191,7 +193,7 @@ function ExpenseCalculator() {
           </div>
 
           <div className="card fade-in" data-testid="expense-analysis-display">
-            <h2 className="mb-6 text-2xl font-bold text-gray-800 dark:text-gray-200 dark:text-gray-100">Financial Analysis</h2>
+            <h2 className="mb-6 text-2xl font-bold text-gray-800 dark:text-gray-200 dark:text-gray-100">{t('Financial Analysis')}</h2>
             {loading ? (
               <div className="flex flex-col items-center justify-center py-16">
                 <TrendingUp className="mb-4 h-16 w-16 animate-pulse text-emerald-600" />

@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useTranslation } from "@/i18n";
 import axios from 'axios';
 import { API } from '@/lib/api';
 import { AlertTriangle, CheckCircle2, Shield } from 'lucide-react';
@@ -36,6 +37,7 @@ function RiskList({ title, items, tone }) {
 }
 
 function RiskAnalysis() {
+  const { t, language } = useTranslation();
   const [farms, setFarms] = useState([]);
   const [selectedFarmId, setSelectedFarmId] = useState('');
   const [riskAnalysis, setRiskAnalysis] = useState(null);
@@ -87,7 +89,7 @@ function RiskAnalysis() {
 
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
           <div className="card fade-in">
-            <h2 className="mb-6 text-2xl font-bold text-gray-800 dark:text-gray-200 dark:text-gray-100">Select Farm</h2>
+            <h2 className="mb-6 text-2xl font-bold text-gray-800 dark:text-gray-200 dark:text-gray-100">{t('Select Farm')}</h2>
             <form onSubmit={handleSubmit} className="space-y-5">
               <div>
                 <label className="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300 dark:text-gray-200">Farm</label>
@@ -133,7 +135,7 @@ function RiskAnalysis() {
           </div>
 
           <div className="card fade-in" data-testid="risk-analysis-display">
-            <h2 className="mb-6 text-2xl font-bold text-gray-800 dark:text-gray-200 dark:text-gray-100">Risk Assessment</h2>
+            <h2 className="mb-6 text-2xl font-bold text-gray-800 dark:text-gray-200 dark:text-gray-100">{t('Risk Assessment')}</h2>
             {loading ? (
               <div className="flex flex-col items-center justify-center py-16">
                 <AlertTriangle className="mb-4 h-16 w-16 animate-pulse text-orange-600" />

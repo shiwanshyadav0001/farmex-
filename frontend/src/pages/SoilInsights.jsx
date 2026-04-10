@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useTranslation } from "@/i18n";
 import axios from 'axios';
 import { API } from '@/lib/api';
 import { CheckCircle2, CloudRain, Map, MapPin } from 'lucide-react';
@@ -7,6 +8,7 @@ import LiveFeatureScene from '@/components/motion/LiveFeatureScene';
 import { EmptyFeatureState, FeaturePanel, MetricTile, StatusBadge } from '@/components/feature/InsightPrimitives';
 
 function SoilInsights() {
+  const { t, language } = useTranslation();
   const [location, setLocation] = useState('');
   const [insights, setInsights] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -40,7 +42,7 @@ function SoilInsights() {
 
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
           <div className="card fade-in">
-            <h2 className="mb-6 text-2xl font-bold text-gray-800 dark:text-gray-200 dark:text-gray-100">Location Analysis</h2>
+            <h2 className="mb-6 text-2xl font-bold text-gray-800 dark:text-gray-200 dark:text-gray-100">{t('Location Analysis')}</h2>
             <form onSubmit={handleSubmit} className="space-y-5">
               <div>
                 <label className="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300 dark:text-gray-200">Location</label>
@@ -48,7 +50,7 @@ function SoilInsights() {
                   type="text"
                   value={location}
                   onChange={(e) => setLocation(e.target.value)}
-                  placeholder="Enter location (city or region)"
+                  placeholder={t('Enter location (city or region)')}
                   className="input-field"
                   required
                   data-testid="soil-location-input"
@@ -92,7 +94,7 @@ function SoilInsights() {
           </div>
 
           <div className="card fade-in" data-testid="soil-insights-display">
-            <h2 className="mb-6 text-2xl font-bold text-gray-800 dark:text-gray-200 dark:text-gray-100">Regional Insights</h2>
+            <h2 className="mb-6 text-2xl font-bold text-gray-800 dark:text-gray-200 dark:text-gray-100">{t('Regional Insights')}</h2>
             {loading ? (
               <div className="flex flex-col items-center justify-center py-16">
                 <Map className="mb-4 h-16 w-16 animate-pulse text-amber-600" />

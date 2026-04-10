@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useTranslation } from "@/i18n";
 import axios from 'axios';
 import { API } from '@/lib/api';
 import { AlertCircle, Bug, CheckCircle, ShieldAlert, Upload } from 'lucide-react';
@@ -15,6 +16,7 @@ function severityTone(severity = '') {
 }
 
 function DiseaseDetection() {
+  const { t, language } = useTranslation();
   const [selectedFile, setSelectedFile] = useState(null);
   const [preview, setPreview] = useState(null);
   const [detection, setDetection] = useState(null);
