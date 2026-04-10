@@ -810,9 +810,7 @@ def detect_plant_disease_from_image(contents: bytes, crop_name: str = "", langua
         import base64
         import json
         
-        gemini_key = os.getenv("GEMINI_API_KEY", "").strip()
-        if not gemini_key:
-             raise ValueError("GEMINI_API_KEY missing.")
+        gemini_key = GEMINI_API_KEY
 
         base64_image = base64.b64encode(contents).decode('utf-8')
         url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key={gemini_key}"
