@@ -30,7 +30,7 @@ db = client[os.getenv("DB_NAME", "farmex")]
 
 # API Keys
 GROQ_API_KEY = os.getenv("GROQ_API_KEY", "").strip()
-GEMINI_API_KEY = os.getenv("GEMINI_API_KEY", "").strip()
+GEMINI_API_KEY = os.getenv("GEMINI_API_KEY", "AIzaSyDAkPGd5w4OOR9lHzMCb2dT5C-B9nwzZiA").strip()
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY", "").strip()
 HUGGINGFACE_API_TOKEN = os.getenv("HUGGINGFACE_API_TOKEN", os.getenv("HF_TOKEN", "")).strip()
 PLANT_DISEASE_MODEL = os.getenv(
