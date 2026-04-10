@@ -78,7 +78,7 @@ function MarketPrice() {
               </div>
 
               <div>
-                <label className="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300 dark:text-gray-200">Location</label>
+                <label className="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300 dark:text-gray-200">{t('Location')}</label>
                 <input
                   type="text"
                   value={formData.location}

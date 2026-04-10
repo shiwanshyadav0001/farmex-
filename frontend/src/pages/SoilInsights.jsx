@@ -45,7 +45,7 @@ function SoilInsights() {
             <h2 className="mb-6 text-2xl font-bold text-gray-800 dark:text-gray-200 dark:text-gray-100">{t('Location Analysis')}</h2>
             <form onSubmit={handleSubmit} className="space-y-5">
               <div>
-                <label className="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300 dark:text-gray-200">Location</label>
+                <label className="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300 dark:text-gray-200">{t('Location')}</label>
                 <input
                   type="text"
                   value={location}

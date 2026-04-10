@@ -112,7 +112,7 @@ function DiseaseDetection() {
                 data-testid="detect-disease-btn"
               >
                 <Bug className="h-5 w-5" />
-                {loading ? 'Analyzing Image...' : 'Detect Disease'}
+                {loading ? t('Analyzing Image...') : t('Detect Disease')}
               </button>
             </form>
           </div>
@@ -122,7 +122,7 @@ function DiseaseDetection() {
             {loading ? (
               <div className="flex flex-col items-center justify-center py-16">
                 <ShieldAlert className="mb-4 h-16 w-16 animate-pulse text-red-600" />
-                <p className="text-gray-600 dark:text-gray-400 dark:text-gray-300">Analyzing plant image with AI...</p>
+                <p className="text-gray-600 dark:text-gray-400 dark:text-gray-300">{t('Analyzing plant image with AI...')}</p>
               </div>
             ) : detection ? (
               <div className="space-y-6">
@@ -143,26 +143,26 @@ function DiseaseDetection() {
                 {(result.disease_name || result.confidence || result.treatment) ? (
                   <>
                     <div className="grid gap-3 md:grid-cols-3">
-                      <MetricTile tone={tone} label="Detected" value={result.disease_name || '--'} />
-                      <MetricTile tone={tone} label="Confidence" value={result.confidence || '--'} />
-                      <MetricTile tone={tone} label="Severity" value={result.severity || '--'} />
+                      <MetricTile tone={tone} label={t("Detected")} value={result.disease_name || '--'} />
+                      <MetricTile tone={tone} label={t("Confidence")} value={result.confidence || '--'} />
+                      <MetricTile tone={tone} label={t("Severity")} value={result.severity || '--'} />
                     </div>
 
                     <div className="grid gap-4">
                       {result.treatment ? (
-                        <FeaturePanel tone="rose" title="Treatment">
+                        <FeaturePanel tone="rose" title={t("Treatment")}>
                           <ResultRenderer data={result.treatment} />
                         </FeaturePanel>
                       ) : null}
 
                       {result.prevention ? (
-                        <FeaturePanel tone="amber" title="Prevention">
+                        <FeaturePanel tone="amber" title={t("Prevention")}>
                           <ResultRenderer data={result.prevention} />
                         </FeaturePanel>
                       ) : null}
 
                       {Array.isArray(result.supported_crops) && result.supported_crops.length > 0 ? (
-                        <FeaturePanel tone="slate" title="Supported crops in this model">
+                        <FeaturePanel tone="slate" title={t("Supported crops in this model")}>
                           <div className="flex flex-wrap gap-2">
                             {result.supported_crops.map((crop, index) => (
                               <StatusBadge key={`${crop}-${index}`} tone="slate">{crop}</StatusBadge>

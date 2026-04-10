@@ -142,7 +142,7 @@ function ExpenseCalculator() {
                   ['other_costs', 'Other Costs', 'expense-other-input'],
                 ].map(([key, label, testId]) => (
                   <div key={key}>
-                    <label className="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300 dark:text-gray-200">{label} (Rs)</label>
+                    <label className="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300 dark:text-gray-200">{t(`${label} (Rs)`)}</label>
                     <input
                       type="number"
                       step="0.01"
@@ -173,7 +173,7 @@ function ExpenseCalculator() {
 
               <div className="rounded-xl bg-gradient-to-br from-emerald-100 to-green-100 p-4">
                 <div className="flex items-center justify-between">
-                  <span className="text-sm font-medium text-gray-700 dark:text-gray-300 dark:text-gray-200">Total Expenses:</span>
+                  <span className="text-sm font-medium text-gray-700 dark:text-gray-300 dark:text-gray-200">{t('Total Expenses:')}</span>
                   <span className="text-2xl font-bold text-emerald-700 dark:text-emerald-400">{formatCurrency(totalExpenses)}</span>
                 </div>
               </div>
@@ -187,7 +187,7 @@ function ExpenseCalculator() {
                 data-testid="calculate-expense-btn"
               >
                 <PieChart className="h-5 w-5" />
-                {loading ? 'Calculating...' : 'Calculate Profit'}
+                {loading ? t('Calculating...') : t('Calculate Profit')}
               </button>
             </form>
           </div>
@@ -197,7 +197,7 @@ function ExpenseCalculator() {
             {loading ? (
               <div className="flex flex-col items-center justify-center py-16">
                 <TrendingUp className="mb-4 h-16 w-16 animate-pulse text-emerald-600" />
-                <p className="text-gray-600 dark:text-gray-400 dark:text-gray-300">Analyzing financial projections...</p>
+                <p className="text-gray-600 dark:text-gray-400 dark:text-gray-300">{t('Analyzing financial projections...')}</p>
               </div>
             ) : analysis ? (
               <div className="space-y-6">
@@ -218,12 +218,12 @@ function ExpenseCalculator() {
                 {(finance.price_per_quintal || finance.total_revenue || finance.profit) ? (
                   <>
                     <div className="grid gap-3 md:grid-cols-2">
-                      <MetricTile tone="emerald" label="Total expenses" value={formatCurrency(analysis.total_expenses)} />
-                      <MetricTile tone="emerald" label="Price per quintal" value={finance.price_per_quintal || '--'} />
-                      <MetricTile tone="emerald" label="Total revenue" value={finance.total_revenue || '--'} />
-                      <MetricTile tone={String(finance.profit || '').includes('-') ? 'orange' : 'emerald'} label="Profit" value={finance.profit || '--'} />
-                      <MetricTile tone="emerald" label="Profit margin" value={finance.profit_margin || '--'} />
-                      <MetricTile tone="emerald" label="ROI" value={finance.roi || '--'} />
+                      <MetricTile tone="emerald" label={t("Total expenses")} value={formatCurrency(analysis.total_expenses)} />
+                      <MetricTile tone="emerald" label={t("Price per quintal")} value={finance.price_per_quintal || '--'} />
+                      <MetricTile tone="emerald" label={t("Total revenue")} value={finance.total_revenue || '--'} />
+                      <MetricTile tone={String(finance.profit || '').includes('-') ? 'orange' : 'emerald'} label={t("Profit")} value={finance.profit || '--'} />
+                      <MetricTile tone="emerald" label={t("Profit margin")} value={finance.profit_margin || '--'} />
+                      <MetricTile tone="emerald" label={t("ROI")} value={finance.roi || '--'} />
                     </div>
 
                     <FeaturePanel tone="emerald" title="Cost stack" subtitle="Your live input costs are shown as a real breakdown instead of disappearing behind the result box.">

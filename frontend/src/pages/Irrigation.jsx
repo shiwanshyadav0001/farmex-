@@ -114,12 +114,12 @@ function Irrigation() {
                 {loading ? (
                   <>
                     <Loader className="h-5 w-5 animate-spin" />
-                    Generating Plan...
+                    {t('Generating Plan...')}
                   </>
                 ) : (
                   <>
                     <Droplets className="h-5 w-5" />
-                    Generate Irrigation Plan
+                    {t('Generate Irrigation Plan')}
                   </>
                 )}
               </button>
@@ -127,11 +127,11 @@ function Irrigation() {
           </div>
 
           <div className="card fade-in" data-testid="irrigation-plan-display">
-            <h2 className="mb-6 text-2xl font-bold text-gray-800 dark:text-gray-200 dark:text-gray-100">Irrigation Schedule</h2>
+            <h2 className="mb-6 text-2xl font-bold text-gray-800 dark:text-gray-200 dark:text-gray-100">{t('Irrigation Schedule')}</h2>
             {loading ? (
               <div className="flex flex-col items-center justify-center py-16">
                 <Loader className="mb-4 h-16 w-16 animate-spin text-cyan-600" />
-                <p className="text-gray-600 dark:text-gray-400 dark:text-gray-300">Creating optimal irrigation schedule...</p>
+                <p className="text-gray-600 dark:text-gray-400 dark:text-gray-300">{t('Creating optimal irrigation schedule...')}</p>
               </div>
             ) : irrigationPlan ? (
               <div className="space-y-6">
@@ -152,9 +152,9 @@ function Irrigation() {
                 {schedule.length > 0 ? (
                   <>
                     <div className="grid gap-3 md:grid-cols-3">
-                      <MetricTile tone="cyan" label="Irrigation days" value={`${irrigatingDays} / ${schedule.length}`} hint="Days that need watering" />
-                      <MetricTile tone="cyan" label="Average water" value={averageWater(schedule)} hint="Across recommended sessions" />
-                      <MetricTile tone="cyan" label="Typical time" value={schedule.find((day) => day?.time)?.time || '--'} hint="Best application window" />
+                      <MetricTile tone="cyan" label={t("Irrigation days")} value={`${irrigatingDays} / ${schedule.length}`} hint="Days that need watering" />
+                      <MetricTile tone="cyan" label={t("Average water")} value={averageWater(schedule)} hint="Across recommended sessions" />
+                      <MetricTile tone="cyan" label={t("Typical time")} value={schedule.find((day) => day?.time)?.time || '--'} hint="Best application window" />
                     </div>
 
                     <div className="grid gap-4">
@@ -187,7 +187,7 @@ function Irrigation() {
                 )}
 
                 {irrigationPlan.weather_forecast && irrigationPlan.weather_forecast.length > 0 && (
-                  <FeaturePanel tone="cyan" title="7-day rainfall pressure" subtitle="The planner uses this forecast to reduce overwatering and react to incoming rain.">
+                  <FeaturePanel tone="cyan" title={t("7-day rainfall pressure")} subtitle="The planner uses this forecast to reduce overwatering and react to incoming rain.">
                     <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-4">
                       {irrigationPlan.weather_forecast.slice(0, 8).map((day, index) => (
                         <div key={index} className="rounded-2xl border border-cyan-100 bg-white dark:bg-slate-900 px-4 py-4">
