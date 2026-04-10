@@ -1245,14 +1245,26 @@ async def detect_disease(file: UploadFile = File(...), crop_name: str = Form("")
             },
         )
         cached_detection = await safe_find_one("disease_detections", {"cache_key": cache_key})
+        
+        # Bypass cache if it's a known failure/placeholder result
+        is_stale_failure = False
         if cached_detection:
+            res_val = cached_detection.get("detection_result", {})
+            d_name = str(res_val.get("disease_name", "")).lower()
+            if "unavailable" in d_name or "unsupported" in d_name or "warming up" in d_name:
+                is_stale_failure = True
+                logger.info(f"Bypassing stale cached failure for image: {image_hash}")
+
+        if cached_detection and not is_stale_failure:
             return {
                 "detection": cached_detection["detection_result"],
                 "filename": file.filename,
+                "cached": True
             }
+            
         response = detect_plant_disease_from_image(contents, crop_name, language)
         
-        # Save to database
+        # Save to database (overwrites or inserts new result)
         detection_doc = {
             "id": str(uuid.uuid4()),
             "cache_key": cache_key,
