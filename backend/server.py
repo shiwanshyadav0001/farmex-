@@ -1272,13 +1272,13 @@ async def detect_disease(file: UploadFile = File(...), crop_name: str = Form("")
             "cache_key": cache_key,
             "filename": file.filename,
             "crop_name": crop_name,
-            "detection_result": response,
+            "detection_result": response_data,
             "timestamp": datetime.now(timezone.utc).isoformat()
         }
         await safe_insert("disease_detections", detection_doc)
         
         return {
-            "detection": response,
+            "detection": response_data,
             "filename": file.filename
         }
     except Exception as e:
