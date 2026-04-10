@@ -15,6 +15,7 @@ from openai import AsyncOpenAI
 import json
 import io
 import hashlib
+import time
 
 import smtplib
 from email.message import EmailMessage
@@ -806,32 +807,61 @@ def detect_plant_disease_from_image(contents: bytes, crop_name: str = "", langua
     AI-powered plant disease detection from image using HuggingFace Inference API.
     This cloud-first approach avoids heavy local dependencies like torch/transformers.
     """
-    url = f"https://api-inference.huggingface.co/models/{PLANT_DISEASE_MODEL}"
-    headers = {}
-    
-    # Use existing HUGGINGFACE_API_TOKEN if configured in .env
-    hf_token = os.getenv("HUGGINGFACE_API_TOKEN") or os.getenv("HF_TOKEN")
-    if hf_token:
-        headers["Authorization"] = f"Bearer {hf_token}"
-
     try:
-        # 1. Call HuggingFace Inference API
-        response = requests.post(url, headers=headers, data=contents, timeout=30)
+        from PIL import Image
+        import io
         
-        # Handle model loading state (503 Service Unavailable is common when HF is starting the model)
-        if response.status_code == 503:
-            logger.warning("HuggingFace model is loading. Returning warming-up state.")
-            return {
-                "disease_name": translate_backend_text("AI model is starting up", language),
-                "confidence": "...",
-                "treatment": translate_backend_text("The detection system is warming up. Please try again in 30 seconds.", language),
-                "prevention": translate_backend_text("This happens occasionally on the first request of the day.", language),
-                "severity": translate_backend_text("Low", language),
-                "source": "hf-cloud-api-warming"
-            }
+        # 0. Pre-process image to ensure standard format (JPEG)
+        # This helps avoid IncompleteRead errors with unusual formats like .webp
+        img = Image.open(io.BytesIO(contents)).convert("RGB")
+        out_buf = io.BytesIO()
+        img.save(out_buf, format="JPEG", quality=85)
+        processed_contents = out_buf.getvalue()
 
-        response.raise_for_status()
-        predictions = response.json()
+        # 1. Prepare Request
+        url = f"https://api-inference.huggingface.co/models/{PLANT_DISEASE_MODEL}"
+        headers = {
+            "Content-Type": "application/octet-stream",
+            "Accept": "application/json"
+        }
+        
+        # Use existing HUGGINGFACE_API_TOKEN if configured in .env
+        hf_token = os.getenv("HUGGINGFACE_API_TOKEN") or os.getenv("HF_TOKEN")
+        if hf_token:
+            headers["Authorization"] = f"Bearer {hf_token}"
+
+        # 2. Call HuggingFace Inference API with Retries
+        last_exc = None
+        for attempt in range(3):
+            try:
+                logger.info(f"HF API Attempt {attempt+1} for model: {PLANT_DISEASE_MODEL}")
+                response = requests.post(url, headers=headers, data=processed_contents, timeout=45)
+                
+                # Handle model loading state (503 Service Unavailable)
+                if response.status_code == 503:
+                    logger.warning(f"HF model loading (attempt {attempt+1})...")
+                    if attempt < 2:
+                        continue # Retry
+                    
+                    return {
+                        "disease_name": translate_backend_text("AI model is starting up", language),
+                        "confidence": "...",
+                        "treatment": translate_backend_text("The detection system is warming up. Please try again in 30 seconds.", language),
+                        "prevention": translate_backend_text("This happens occasionally on the first request of the day.", language),
+                        "severity": translate_backend_text("Low", language),
+                        "source": "hf-cloud-api-warming"
+                    }
+
+                response.raise_for_status()
+                predictions = response.json()
+                break # Success!
+            except Exception as e:
+                last_exc = e
+                logger.warning(f"HF API Attempt {attempt+1} failed: {e}")
+                if attempt < 2:
+                    time.sleep(1) # Wait before retry
+                    continue
+                raise last_exc
 
         if not isinstance(predictions, list) or not predictions:
             raise ValueError("Invalid response format from HF API")
