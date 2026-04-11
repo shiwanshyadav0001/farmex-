@@ -15,6 +15,73 @@ function severityTone(severity = '') {
   return 'emerald';
 }
 
+const DEMO_SAMPLES = [
+  {
+    id: 'corn',
+    name: 'Corn Tar Spot',
+    img: '/assets/demo/corn.png',
+    detection: {
+      filename: 'corn_sample.png',
+      detection: {
+        disease_name: 'Tar Spot (Phyllachora maydis)',
+        confidence: '98.2%',
+        severity: 'Moderate',
+        treatment: 'Apply fungicides containing strobilurins or triazoles between VT and R3 growth stages. Ensure thorough canopy coverage.',
+        prevention: 'Select resistant hybrids, manage crop residue through tillage where practical, and practice crop rotation with non-grass crops.',
+        supported_crops: ['Corn', 'Maize']
+      }
+    }
+  },
+  {
+    id: 'wheat',
+    name: 'Wheat Blast',
+    img: '/assets/demo/wheat.png',
+    detection: {
+      filename: 'wheat_sample.png',
+      detection: {
+        disease_name: 'Wheat Blast (Magnaporthe oryzae)',
+        confidence: '95.8%',
+        severity: 'High (Critical Risk)',
+        treatment: 'Immediate preventative fungicide application (triazoles + strobilurins) is necessary if conditions favor spread. Burn infected stubble.',
+        prevention: 'Use certified disease-free seeds. Adjust sowing dates to avoid high humidity during flowering. Rotate with non-grass crops.',
+        supported_crops: ['Wheat', 'Triticale', 'Barley']
+      }
+    }
+  },
+  {
+    id: 'potato',
+    name: 'Potato Late Blight',
+    img: '/assets/demo/potato.png',
+    detection: {
+      filename: 'potato_sample.png',
+      detection: {
+        disease_name: 'Late Blight (Phytophthora infestans)',
+        confidence: '97.4%',
+        severity: 'Severe',
+        treatment: 'Apply systemic fungicides (e.g., metalaxyl or mefenoxam). Destroy infected cull piles and volunteers immediately.',
+        prevention: 'Plant only certified disease-free seed tubers. Improve air circulation and avoid overhead irrigation. Monitor blight forecasts.',
+        supported_crops: ['Potato', 'Tomato']
+      }
+    }
+  },
+  {
+    id: 'tomato',
+    name: 'Tomato Anthracnose',
+    img: '/assets/demo/tomato.png',
+    detection: {
+      filename: 'tomato_sample.png',
+      detection: {
+        disease_name: 'Tomato Anthracnose (Colletotrichum)',
+        confidence: '94.1%',
+        severity: 'Moderate',
+        treatment: 'Apply chlorothalonil or mancozeb based fungicides starting at first fruit set. Harvest fruit promptly as it ripens.',
+        prevention: 'Practice 3-year crop rotation. Stake plants to keep fruit off soil. Use drip irrigation. Mulch to prevent soil splashing.',
+        supported_crops: ['Tomato', 'Pepper', 'Eggplant']
+      }
+    }
+  }
+];
+
 function DiseaseDetection() {
   const { t, language } = useTranslation();
   const [selectedFile, setSelectedFile] = useState(null);
@@ -22,6 +89,7 @@ function DiseaseDetection() {
   const [detection, setDetection] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const [isDemo, setIsDemo] = useState(false);
 
   const handleFileChange = (e) => {
     const file = e.target.files[0];
@@ -30,7 +98,20 @@ function DiseaseDetection() {
       setPreview(URL.createObjectURL(file));
       setDetection(null);
       setError('');
+      setIsDemo(false);
     }
+  };
+
+  const handleDemoSelect = (sample) => {
+    setPreview(sample.img);
+    setSelectedFile({ name: sample.id }); // Mock file
+    setDetection(null);
+    setError('');
+    setIsDemo(true);
+    
+    // Auto-scroll to form
+    const formElement = document.getElementById('detect-form');
+    if (formElement) formElement.scrollIntoView({ behavior: 'smooth' });
   };
 
   const handleSubmit = async (e) => {
@@ -42,6 +123,20 @@ function DiseaseDetection() {
 
     setLoading(true);
     setError('');
+
+    if (isDemo) {
+      // Simulate detection for demo images
+      setTimeout(() => {
+        const demoData = DEMO_SAMPLES.find(s => s.id === selectedFile.name);
+        if (demoData) {
+          setDetection(demoData.detection);
+        } else {
+          setError(t('Demo sample not found'));
+        }
+        setLoading(false);
+      }, 1500); // Realistic delay
+      return;
+    }
 
     const formData = new FormData();
     formData.append('file', selectedFile);
@@ -70,8 +165,36 @@ function DiseaseDetection() {
           <LiveFeatureScene type="disease" preview={preview} detection={detection} loading={loading} />
         </div>
 
+        {/* Demo Samples Section */}
+        <div className="mb-10 fade-in">
+          <div className="flex items-center gap-3 mb-6">
+            <ShieldAlert className="h-6 w-6 text-rose-500" />
+            <h2 className="text-xl font-bold tracking-tight text-white/90 uppercase">{t("Diagnostic Training Samples")}</h2>
+          </div>
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+            {DEMO_SAMPLES.map((sample) => (
+              <button
+                key={sample.id}
+                onClick={() => handleDemoSelect(sample)}
+                className={`group relative overflow-hidden rounded-2xl border transition-all ${
+                  isDemo && selectedFile?.name === sample.id 
+                    ? 'border-rose-500 ring-2 ring-rose-500/20' 
+                    : 'border-white/10 hover:border-white/30'
+                }`}
+              >
+                <div className="aspect-video w-full overflow-hidden">
+                  <img src={sample.img} alt={sample.name} className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110" />
+                </div>
+                <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 to-transparent p-3 pt-8">
+                  <div className="text-xs font-bold text-rose-200 uppercase tracking-wider">{sample.name}</div>
+                </div>
+              </button>
+            ))}
+          </div>
+        </div>
+
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
-          <div className="card fade-in">
+          <div className="card fade-in" id="detect-form">
             <h2 className="mb-6 text-2xl font-bold text-gray-800 dark:text-gray-200 dark:text-gray-100">{t('Upload Plant Image')}</h2>
             <form onSubmit={handleSubmit} className="space-y-5">
               <div className="rounded-xl border-2 border-dashed border-gray-300 p-8 text-center transition-colors hover:border-green-500">
@@ -130,10 +253,10 @@ function DiseaseDetection() {
                 <FeaturePanel
                   tone={tone}
                   title={t("Analysis complete")}
-                  subtitle={t("Same image now returns the same disease result, which keeps the diagnosis stable while you review treatment steps.")}
+                  subtitle={isDemo ? t("Pre-defined training sample result loaded.") : t("Same image now returns the same disease result, which keeps the diagnosis stable while you review treatment steps.")}
                 >
                   <div className="flex flex-wrap items-center gap-3">
-                    <StatusBadge tone={tone}>{t("Stable output")}</StatusBadge>
+                    <StatusBadge tone={tone}>{isDemo ? t("Sample Active") : t("Stable output")}</StatusBadge>
                     <div className="flex items-center gap-2 text-sm font-medium text-slate-600">
                       <CheckCircle className="h-4 w-4 text-rose-600" />
                       {t("File")}: {detection.filename}
