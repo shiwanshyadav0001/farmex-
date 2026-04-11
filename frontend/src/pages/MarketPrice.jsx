@@ -128,7 +128,7 @@ function MarketPrice() {
           </div>
 
           <div className="card fade-in" data-testid="market-prediction-display">
-            <h2 className="mb-6 text-2xl font-bold text-gray-800 dark:text-gray-200 dark:text-gray-100">{t('Price Forecast')}</h2>
+            <h2 className="mb-6 text-2xl font-bold text-gray-800 dark:text-gray-100">{t('Price Forecast')}</h2>
             {loading ? (
               <div className="flex flex-col items-center justify-center py-16">
                 <Loader className="mb-4 h-16 w-16 animate-spin text-purple-600" />
@@ -154,7 +154,7 @@ function MarketPrice() {
                   <>
                     <div className="grid gap-3 md:grid-cols-3">
                       <MetricTile tone="violet" label={t("Current range")} value={market.current_price_range || '--'} hint={t("Estimated mandi range")} />
-                      <MetricTile tone={tone} label={t("Trend")} value={t(market.trend) || '--'} hint={t("Near-term outlook")} />
+                      <MetricTile tone={tone} label={t("Trend")} value={t(market?.trend || 'stable')} hint={t("Near-term outlook")} />
                       <MetricTile tone="violet" label={t("Best action")} value={market.recommendation ? t('Decision ready') : '--'} hint={formData.location || t('Waiting for location')} />
                     </div>
 
@@ -163,8 +163,8 @@ function MarketPrice() {
                         <div className="grid gap-4 md:grid-cols-3">
                           {forecast.map((item, index) => (
                             <div key={`${item.month}-${index}`} className="rounded-[28px] border border-violet-100 bg-white dark:bg-slate-900 p-5 shadow-[0_18px_55px_rgba(15,23,42,0.08)]">
-                              <StatusBadge tone={trendTone(item.trend)}>{t(item.trend) || t('stable')}</StatusBadge>
-                              <h3 className="mt-3 text-2xl font-black text-slate-900 dark:text-slate-50">{t(item.month)}</h3>
+                              <StatusBadge tone={trendTone(item?.trend)}>{t(item?.trend) || t('stable')}</StatusBadge>
+                              <h3 className="mt-3 text-2xl font-black text-slate-900 dark:text-slate-50">{t(item?.month || '')}</h3>
                               <div className="mt-3 text-lg font-bold text-slate-700 dark:text-slate-300">{renderValue(item.price_range) || '--'}</div>
                             </div>
                           ))}

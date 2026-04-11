@@ -394,7 +394,8 @@ function ExpenseScene({ totalExpenses, formData, analysis }) {
       </div>
       <div className="absolute right-6 top-6 grid w-[220px] gap-3">
         <DataChip icon={TrendingUp} label="Crop" value={formData.crop_name || 'Waiting'} />
-        <DataChip icon={TrendingUp} label="Expenses" value={`Rs ${totalExpenses.toFixed(2)}`} />
+        <DataChip icon={TrendingUp} label="Expenses" value={`Rs ${(totalExpenses || 0).toFixed(2)}`} />
+
         <DataChip icon={TrendingUp} label="Analysis" value={analysis ? 'Projection ready' : 'Waiting for calculation'} />
       </div>
     </SceneShell>

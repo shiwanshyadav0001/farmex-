@@ -389,9 +389,16 @@ const dynamicStrings = {
 };
 
 export function tr(language, englishText, vars = {}) {
-  const translated = language === 'en' ? englishText : phraseMap[englishText]?.[language] || englishText;
+  if (englishText === null || englishText === undefined) return '';
+  
+  const text = String(englishText);
+  const translated = language === 'en' ? text : phraseMap[text]?.[language] || text;
+  
+  if (typeof translated !== 'string') return String(translated);
+  
   return translated.replace(/\{(\w+)\}/g, (_, key) => vars[key] ?? '');
 }
+
 
 export function translateOptionValue(value, language) {
   return language === 'en' ? value : optionMap[value]?.[language] || value;
