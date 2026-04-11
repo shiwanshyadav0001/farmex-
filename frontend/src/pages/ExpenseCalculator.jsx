@@ -110,7 +110,7 @@ function ExpenseCalculator() {
                   data-testid="expense-farm-select"
                 >
                   <option value="">{t('Choose a farm')}</option>
-                  {farms.map((farm) => (
+                  {(farms || []).map((farm) => (
                     <option key={farm.id} value={farm.id}>
                       {farm.user_name} - {farm.location}
                     </option>
@@ -199,7 +199,10 @@ function ExpenseCalculator() {
                 <p className="text-gray-600 dark:text-gray-400 dark:text-gray-300">{t("Analyzing financial projections...")}</p>
               </div>
             ) : analysis ? (
-              <div className="space-y-6">
+              (() => {
+                const finance = analysis?.analysis || {};
+                return (
+                  <div className="space-y-6">
                 <FeaturePanel
                   tone="emerald"
                   title={t("Financial projection complete")}
@@ -272,8 +275,10 @@ function ExpenseCalculator() {
                   </FeaturePanel>
                 )}
               </div>
-            ) : (
-              <EmptyFeatureState
+            );
+          })()
+        ) : (
+          <EmptyFeatureState
                 icon={DollarSign}
                 title={t("Turn costs into a profit view")}
                 description={t("Enter expenses and expected yield to see revenue, margin, ROI, break-even, and action recommendations in a clearer finance layout.")}
